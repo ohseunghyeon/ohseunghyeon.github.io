@@ -1,4 +1,320 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Wed, 04 Sep 2019 13:40:46 GMT</lastBuildDate><item><title><![CDATA[APIs: The Good, The Bad, The Ugly]]></title><description><![CDATA[APIs에 대하여 documentation, URLs, Payloads, Authentication, Authorization, Errors, Caching를 주제로 각각의 The good, The bad, The ugly…]]></description><link>https://ohseunghyeon.github.io/study/APIs-The-Good-The-Bad-The-Ugly/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/study/APIs-The-Good-The-Bad-The-Ugly/</guid><pubDate>Wed, 04 Sep 2019 09:20:08 GMT</pubDate><content:encoded>&lt;p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Thu, 05 Sep 2019 05:37:48 GMT</lastBuildDate><item><title><![CDATA[[번역] SSL Pinning]]></title><description><![CDATA[HTTPS 연결에는 두 가지 요소가 있는데, 핸드셰이킹 시 서버가 제시하는 와 데이터 전달 시 데이터 암호화에 사용되는 이다. 증명서는 반드시 필요한 요소이고, 이는 서버 스스로를 증명하는 역할을 한다. 유효한 증명서란 Certificate…]]></description><link>https://ohseunghyeon.github.io/study/ssl-pinning/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/study/ssl-pinning/</guid><pubDate>Thu, 05 Sep 2019 03:40:10 GMT</pubDate><content:encoded>&lt;p&gt;HTTPS 연결에는 두 가지 요소가 있는데, 핸드셰이킹 시 서버가 제시하는 &lt;code class=&quot;language-text&quot;&gt;유효한 증명서(certificate)&lt;/code&gt;와 데이터 전달 시 데이터 암호화에 사용되는 &lt;code class=&quot;language-text&quot;&gt;암호화 스위트(Cipher suite)&lt;/code&gt;이다. 증명서는 반드시 필요한 요소이고, 이는 서버 스스로를 증명하는 역할을 한다. 유효한 증명서란 Certificate Authorities(CA) 중 하나에 의해 서명된 경우를 말하며, 클라이언트는 서버가 유효한 증명서를 제시할 때만 이를 신뢰하고 통신을 할 것이다. (CA는 클라이언트 쪽에 미리 설치된다)&lt;/p&gt;
+&lt;p&gt;공격자는 이런 방식을 악용할 수 있는데, 클라이언트 쪽에 악의적인 CA 증명서를 심어, 공격자가 서명한 어떤 증명서든 신뢰하게 만들 수 있고, 심지어 CA를 무력화 할 수 있다. 그러므로 서버가 클라이언트에게 제시하는 증명서는 서버의 진위성을 판단하기에 부족할 수 있으며, 잠재적인 중간자 공격에 대한 취약성을 갖고 있다.&lt;/p&gt;
+&lt;p&gt;SSL Pinning은 클라이언트 측에서 사용하는 기법으로, SSL 핸드셰이킹 이후에도 서버의 증명서를 다시 확인하여 중간자 공격을 피할 수 있다. 개발자는 개발 시 클라이언트 측에 신뢰할 수 있는 증명서들을 embed or pin 하고, 이는 이후 실제 통신 과정에서 서버가 제공하는 증명서와 비교하는 데 사용된다. 만약 이 과정에서 미리 저장된 증명서와 서버가 제시한 증명서가 일치하지 않는다면, 연결은 중단될 것이고, 유저의 정보가 서버로 전송되지 않을 것이다. 이러한 강제로 인해 클라이언트는 원래의 서버와 통신할 수 있도록 보증됩니다.&lt;/p&gt;
+&lt;p&gt;그러나 개발자는 SSL Pinning에 대해 각별히 주의해야 하는 경우가 있는데, 클라이언트 측에 미리 저장된 증명서가 만기되거나, 서버 측에서 새로운 증명서를 갖게 되어 클라이언트 측의 저장된 증명서와 다르게 될 경우에 클라이언트는 더 이상 서버를 믿을 수 없고, 연결을 끊게 되며, 어플리케이션(클라이언트)은 그냥 벽돌이 된다(고장난다). 그러므로 이런 상황을 피하기 위해서 릴리즈 이전에 클라이언트 어플리케이션에 미래의 증명서를 저장하는 것(pinning)을 권장한다.&lt;/p&gt;
+&lt;p&gt;클라이언트 어플리케이션에서 SSL Pinning을 하는 방식엔 주로 두 가지가 있다. 하나는 완전한 증명서를 저장하는 것이고 하나는 해쉬된 공개키(hashed public key)를 저장하는 것이다. 해쉬된 공개키를 저장하는 접근법은 더욱 선호되는데, 하나의 개인키(private key)가 업데이트할 증명서를 사인하는 데 사용될 수 있고, 이에 따라 새로운 증명서를 만들 때 새로운 해쉬된 공개키를 만들 필요가 없고, 앱이 벽돌이 되는 위험을 낮출 수 있다.&lt;/p&gt;
+&lt;h3&gt;Codes In Action&lt;/h3&gt;
+&lt;p&gt;나는 www.google.com과 통신하는 간단한 안드로이드 어플리케이션을 만들고, Charles proxy를 중간자 공격 서버로 사용할 것이다. 그리고 SSL Pinning이 어떻게 중간자 공격을 막을 수 잇는지 보여주겠다.&lt;/p&gt;
+&lt;p&gt;다음 코드는 교육의 목적으로 만들어졌으며, production에서 사용하라는 뜻이 아니다. 부디 &lt;a href=&quot;https://square.github.io/okhttp/3.x/okhttp/okhttp3/CertificatePinner.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;okhttp&lt;/a&gt; 같은 유명한 라이브러리를 사용하여 더욱 성숙한 해결법을 사용하는 걸 고려해라.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;kotlin&quot;&gt;&lt;pre class=&quot;language-kotlin&quot;&gt;&lt;code class=&quot;language-kotlin&quot;&gt;  &lt;span class=&quot;token comment&quot;&gt;// Read the pinned certificate from local (i.e., assets folder)&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; inputStream &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; context&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;assets&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;google.crt&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; pinnedCertificate &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; CertificateFactory&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;getInstance&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;X.509&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;generateCertificate&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;inputStream&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// Create a request to www.google.com&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; url &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;URL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;https://www.google.com&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; httpsUrlConnection &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; url&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;openConnection&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;as&lt;/span&gt; HttpsURLConnection
+
+  &lt;span class=&quot;token comment&quot;&gt;// Establish the connection&lt;/span&gt;
+  httpsUrlConnection&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;connect&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// Check the certificates and see if one of the server certificates &lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// matches the pinned certificate&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;httpsUrlConnection&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;serverCertificates&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;contains&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;pinnedCertificate&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// Open stream&lt;/span&gt;
+      httpsUrlConnection&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;inputStream
+      Log&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Pinning&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Server certificates validation successful&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      Log&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;d&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Pinning&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Server certificates validation failed&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;SSLException&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;Server certificates validation failed for google.com&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;위의 코드는 딱 보면 알 수 있다. &lt;code class=&quot;language-text&quot;&gt;HttpsUrlConnection&lt;/code&gt;로부터 받은 서버 증명서는 로컬에 pinned 증명서에 의해 체크되고, 증명서가 일치하면 connection input stream은 열리고, 아니면 &lt;code class=&quot;language-text&quot;&gt;SSLException&lt;/code&gt;이 발생할 것이다.&lt;/p&gt;
+&lt;p&gt;나는 www.google.com 증명서를 다운받기 위해 openssl command를 사용하고, 이 증명서는 assets 폴더에 저장한다. 그냥 이 코드를 실행하면 &lt;code class=&quot;language-text&quot;&gt;Server certificates validation successful&lt;/code&gt; 메시지를 로그에서 확인할 수 있다.&lt;/p&gt;
+&lt;p&gt;이제 Charles를 실행하고, Charles 루트 증명서(root certificate)를 테스트할 기기에 설치한 후, 기기의 proxy 세팅을 Charles service의 IP로 설정한다. Charles 루트 증명서가 신뢰된 CA로서 설치된 상태로, Charles는 이제 중간자가 된다. 그리고 Charles에 의해 서명된 모든 증명서는 클라이언트 시스템에 의해 기본적으로 신뢰받게 된다 (Android 7.0 버전 이상을 제외, 이에 대한 자세한 정보는 &lt;a href=&quot;https://developer.android.com/about/versions/nougat/android-7.0.html#default_trusted_ca&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;여기&lt;/a&gt;로). 그러나 우리는 미리 www.google.com의 증명서를 pin 해놨기 때문에, 이 경우 서버의 증명서를 확인하는 과정은 실패하게 된다.&lt;/p&gt;
+&lt;p&gt;Charles proxy를 실행한 상태로 테스트 어플리케이션을 실행하면, 예상한대로 로그에서 &lt;code class=&quot;language-text&quot;&gt;SSLException&lt;/code&gt;과 에러메시지 &lt;code class=&quot;language-text&quot;&gt;Server certificates validation failed for google.com&lt;/code&gt;를 보게 될 것이다.&lt;/p&gt;
+&lt;h2&gt;Further reading&lt;/h2&gt;
+&lt;p&gt;이 포스트의 목적은 SSL Pinning 기법에 대한 입문 레벨의 정보를 제공하는 것이며, 페이팔 엔지니어링 팀에서 &lt;a href=&quot;https://www.paypal-engineering.com/2015/10/14/key-pinning-in-mobile-applications/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;처음 제안한 문서&lt;/a&gt;를 읽을 수도 있고, 자바/안드로이드 상에서의 효과적이지 않은 SSL Pinning에 의한 &lt;a href=&quot;https://www.synopsys.com/blogs/software-security/ineffective-certificate-pinning-implementations/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;버그&lt;/a&gt;에 대해서도 배울 수 있다.&lt;/p&gt;
+&lt;p&gt;출처: &lt;a href=&quot;https://medium.com/@zhangqichuan/explain-ssl-pinning-with-simple-codes-eaee95b70507&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Explain SSL Pinning with simple codes - Zhang QiChuan
+&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;참고자료&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/HTTP_Public_Key_Pinning&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;위키피디아&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://www.thesslstore.com/blog/an-introduction-to-pinning/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;An Introduction to SSL Pinning&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://medium.com/@zhangqichuan/explain-ssl-pinning-with-simple-codes-eaee95b70507&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Explain SSL Pinning with simple codes&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://rsec.kr/?p=455&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;SSL TLS에서 사용되는 암호화 스위트 (Cipher Suite) 란 무엇일까?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://medium.com/@appmattus/android-security-ssl-pinning-1db8acb6621e&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Android Security: SSL Pinning written by Matthew Dolan&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;사족&lt;/h2&gt;
+&lt;p&gt;번역에 대한 허락을 받지 않았습니다.&lt;/p&gt;
+&lt;p&gt;전 아마 잡혀갈 겁니다..&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Utopian Tree]]></title><description><![CDATA[Problem The Utopian Tree goes through 2 cycles of growth every year. Each spring, it doubles in height. Each summer, its height increases by…]]></description><link>https://ohseunghyeon.github.io/algorithm/hackerrank/Utopian-Tree/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/hackerrank/Utopian-Tree/</guid><pubDate>Thu, 05 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Author dheeraj
+Difficulty Easy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Problem&lt;/h2&gt;
+&lt;p&gt;The Utopian Tree goes through 2 cycles of growth every year. Each spring, it doubles in height. Each summer, its height increases by 1 meter.&lt;/p&gt;
+&lt;p&gt;Laura plants a Utopian Tree sapling with a height of 1 meter at the onset of spring. How tall will her tree be after &lt;code class=&quot;language-text&quot;&gt;n&lt;/code&gt; growth cycles?&lt;/p&gt;
+&lt;p&gt;For example, if the number of growth cycles is &lt;code class=&quot;language-text&quot;&gt;n = 5&lt;/code&gt;, the calculations are as follows:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Period&lt;/th&gt;
+&lt;th&gt;Height&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;Function Description&lt;/h3&gt;
+&lt;p&gt;Complete the utopianTree function in the editor below. It should return the integer height of the tree after the input number of growth cycles.&lt;/p&gt;
+&lt;p&gt;utopianTree has the following parameter(s):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;n: an integer, the number of growth cycles to simulate&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;Input Format&lt;/h3&gt;
+&lt;p&gt;The first line contains an integer, &lt;code class=&quot;language-text&quot;&gt;t&lt;/code&gt;, the number of test cases.
+&lt;code class=&quot;language-text&quot;&gt;t&lt;/code&gt; subsequent lines each contain an integer, &lt;code class=&quot;language-text&quot;&gt;n&lt;/code&gt;, denoting the number of cycles for that test case.&lt;/p&gt;
+&lt;h3&gt;Constraints&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;1 &amp;lt;= t &amp;lt;= 10
+0 &amp;lt;= n &amp;lt;= 60&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Output Format&lt;/h3&gt;
+&lt;p&gt;For each test case, print the height of the Utopian Tree after  cycles. Each height must be printed on a new line.&lt;/p&gt;
+&lt;h3&gt;Sample Input&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;3
+0
+1
+4&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h3&gt;Sample Output&lt;/h3&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;1
+2
+7&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Explanation&lt;/p&gt;
+&lt;p&gt;There are 3 test cases.&lt;/p&gt;
+&lt;p&gt;In the first case (&lt;code class=&quot;language-text&quot;&gt;n = 0&lt;/code&gt;), the initial height (&lt;code class=&quot;language-text&quot;&gt;H = 1&lt;/code&gt;) of the tree remains unchanged.&lt;/p&gt;
+&lt;p&gt;In the second case (&lt;code class=&quot;language-text&quot;&gt;n = 1&lt;/code&gt;), the tree doubles in height and is &lt;code class=&quot;language-text&quot;&gt;2&lt;/code&gt; meters tall after the spring cycle.&lt;/p&gt;
+&lt;p&gt;In the third case (&lt;code class=&quot;language-text&quot;&gt;n = 4&lt;/code&gt;), the tree doubles its height in spring (&lt;code class=&quot;language-text&quot;&gt;n = 1&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;H = 2&lt;/code&gt;), then grows a meter in summer (&lt;code class=&quot;language-text&quot;&gt;n = 2&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;H = 3&lt;/code&gt;), then doubles after the next spring (&lt;code class=&quot;language-text&quot;&gt;n = 3&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;H = 6&lt;/code&gt;), and grows another meter after summer (&lt;code class=&quot;language-text&quot;&gt;n = 4&lt;/code&gt;, &lt;code class=&quot;language-text&quot;&gt;H = 7&lt;/code&gt;). Thus, at the end of 4 cycles, its height is &lt;code class=&quot;language-text&quot;&gt;7&lt;/code&gt; meters.&lt;/p&gt;
+&lt;h2&gt;풀이&lt;/h2&gt;
+&lt;p&gt;간단한 문제다.&lt;/p&gt;
+&lt;p&gt;인자로 들어오는 n는 싸이클의 횟수.&lt;/p&gt;
+&lt;p&gt;그리고 싸이클은 봄-여름-봄-여름 이렇게 반복된다.&lt;/p&gt;
+&lt;p&gt;처음 봄으로 시작해서 싸이클마다 봄이면 &lt;code class=&quot;language-text&quot;&gt;* 2&lt;/code&gt;, 여름이면 &lt;code class=&quot;language-text&quot;&gt;+ 1&lt;/code&gt; 하면 된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;  &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;utopianTree&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; h &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+      &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; n&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        i &lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; h&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; h &lt;span class=&quot;token operator&quot;&gt;*=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; h&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[쇠막대기]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</guid><pubDate>Thu, 05 Sep 2019 01:15:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;여러 개의 쇠막대기를 레이저로 절단하려고 합니다. 효율적인 작업을 위해서 쇠막대기를 아래에서 위로 겹쳐 놓고, 레이저를 위에서 수직으로 발사하여 쇠막대기들을 자릅니다. 쇠막대기와 레이저의 배치는 다음 조건을 만족합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;쇠막대기는 자신보다 긴 쇠막대기 위에만 놓일 수 있습니다.&lt;/li&gt;
+&lt;li&gt;쇠막대기를 다른 쇠막대기 위에 놓는 경우 완전히 포함되도록 놓되, 끝점은 겹치지 않도록 놓습니다.&lt;/li&gt;
+&lt;li&gt;각 쇠막대기를 자르는 레이저는 적어도 하나 존재합니다.&lt;/li&gt;
+&lt;li&gt;레이저는 어떤 쇠막대기의 양 끝점과도 겹치지 않습니다.
+아래 그림은 위 조건을 만족하는 예를 보여줍니다. 수평으로 그려진 굵은 실선은 쇠막대기이고, 점은 레이저의 위치, 수직으로 그려진 점선 화살표는 레이저의 발사 방향입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;span
+      class=&quot;gatsby-resp-image-wrapper&quot;
+      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 512px;&quot;
+    &gt;
+      &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/745c46cd264c109c2ce14534179dcc1b/c5a17/example.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+    &lt;span
+    class=&quot;gatsby-resp-image-background-image&quot;
+    style=&quot;padding-bottom: 55.46875%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABlElEQVQoz52SR49iQQyE3///KQghLiQh0oEwgAQ3JDKInHMGL1/tNtrR3MaSn7vL3fXKdnur1cqm06nN53NbLBY/fDab/cgtl0th3CMPB/F0OpnX7XatVqsZsdfrydvttrxeryuSazQaijg451qtlvLNZlO+3W7N63Q6IsSez6ddr1fL5XJS8vVVNGdg+/3eTsejZbNZYY/HQzGfz4sM8y6Xi202G5GxxriIHQ6H9/el3G63E3a/31QiZPycyP52u+mcB8hhR4iSYDBo8Xjc/H6/SqFEn89nyWTyfXZr6/X6TXwXCYQIYv+N0MmHdDgcChsMBp+S+/3+P8Wmyxh3IXE/+BC6+iuVipRFo1FLpVIWiUQsnU5rHQ6HtU4kEhYIBKxarUoEREzdkYsQydjx3fDxeKzpTSYTlctweCKUDcbzYH0+nz/q4cBer9ffoZBk0rFYzDKZjNQ4VezxUCgkDKcCnKf0f38R5DEhVEGKgtFoZKVSSe+sXC5/HjcYPaW/xWJRGD2FpFAoCFfJfFyTnSH9t/YHwnEwZls+WZIAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+  &gt;&lt;/span&gt;
+  &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        alt=&quot;satisfied cut example&quot;
+        title=&quot;satisfied cut example&quot;
+        src=&quot;/static/745c46cd264c109c2ce14534179dcc1b/c5a17/example.png&quot;
+        srcset=&quot;/static/745c46cd264c109c2ce14534179dcc1b/cf440/example.png 148w,
+/static/745c46cd264c109c2ce14534179dcc1b/d2d38/example.png 295w,
+/static/745c46cd264c109c2ce14534179dcc1b/c5a17/example.png 512w&quot;
+        sizes=&quot;(max-width: 512px) 100vw, 512px&quot;
+        loading=&quot;lazy&quot;
+      /&gt;
+  &lt;/a&gt;
+    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;이러한 레이저와 쇠막대기의 배치는 다음과 같이 괄호를 이용하여 왼쪽부터 순서대로 표현할 수 있습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(a) 레이저는 여는 괄호와 닫는 괄호의 인접한 쌍 ’()‘으로 표현합니다. 또한 모든 ’()‘는 반드시 레이저를 표현합니다.&lt;/li&gt;
+&lt;li&gt;(b) 쇠막대기의 왼쪽 끝은 여는 괄호 ’(‘로, 오른쪽 끝은 닫힌 괄호 ’)‘로 표현됩니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;위 예의 괄호 표현은 그림 위에 주어져 있습니다.&lt;/p&gt;
+&lt;p&gt;쇠막대기는 레이저에 의해 몇 개의 조각으로 잘리는데, 위 예에서 가장 위에 있는 두 개의 쇠막대기는 각각 3개와 2개의 조각으로 잘리고, 이와 같은 방식으로 주어진 쇠막대기들은 총 17개의 조각으로 잘립니다.&lt;/p&gt;
+&lt;p&gt;쇠막대기와 레이저의 배치를 표현한 문자열 arrangement가 매개변수로 주어질 때, 잘린 쇠막대기 조각의 총 개수를 return 하도록 solution 함수를 작성해주세요.&lt;/p&gt;
+&lt;p&gt;제한사항
+arrangement의 길이는 최대 100,000입니다.
+arrangement의 여는 괄호와 닫는 괄호는 항상 쌍을 이룹니다.
+입출력 예&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;arrangement&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;()(((()())(())()))(())&lt;/td&gt;
+&lt;td&gt;17&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;입출력 예 설명
+문제에 나온 예와 같습니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.digitalculture.or.kr/koi/selectOlymPiadDissentList.do&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;출처&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;풀이&lt;/h2&gt;
+&lt;p&gt;arrangement를 첫 번째부터 마지막까지 순회하면서 레이저와 막대기를 구분한다.&lt;/p&gt;
+&lt;p&gt;가져야 할 변수는&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;현재 막대기 수&lt;/li&gt;
+&lt;li&gt;잘려나온 막대기 수&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;로직은&lt;/p&gt;
+&lt;p&gt;레이저가 나올 경우 현재 막대기 수만큼 잘려나온 막대기 수를 더한다.
+그리고 막대기 수가 줄어들면 그 수만큼 잘려나온 막대기 수에 더한다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;  &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;arrangement&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; cutStick &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        stick &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        lastA&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+        a&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+      &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; arrangement&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length &lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;arrangement&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+              lastA &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; arrangement&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              a &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; arrangement&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+              &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;lastA &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;(&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; a &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;(&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                  &lt;span class=&quot;token comment&quot;&gt;// 스틱 하나 추가&lt;/span&gt;
+                  stick&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;lastA &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;(&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; a &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;)&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                  &lt;span class=&quot;token comment&quot;&gt;// 레이저, 잘린 스틱 stick 만큼 추가&lt;/span&gt;
+                  cutStick &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; stick&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;lastA &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;)&apos;&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; a &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;)&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                  &lt;span class=&quot;token comment&quot;&gt;// 잘린 스틱 하나 추가&lt;/span&gt;
+                  stick&lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                  cutStick&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+          &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; cutStick&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;(if 문을 중첩하면 가독성이 안 좋아서 그냥 둠)&lt;/p&gt;
+&lt;p&gt;소요 시간: 20분 내&lt;/p&gt;
+&lt;h2&gt;다른 사람 풀이&lt;/h2&gt;
+&lt;p&gt;다른 사람 풀이 중 가장 괜찮아 보여서 가져옴&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;arrangement&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; answer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; aTemp &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; arrangement&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;()&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;+&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; nTemp &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; aTemp&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;switch&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;aTemp&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;(&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+                nTemp&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                answer&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;)&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+                nTemp&lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;+&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+                answer &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; nTemp&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; answer&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+출처&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 민종희&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[기능개발]]></title><description><![CDATA[문제 설명 프로그래머스 팀에서는 기능 개선 작업을 수행 중입니다. 각 기능은 진도가 10…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/기능개발/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/기능개발/</guid><pubDate>Thu, 05 Sep 2019 01:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;프로그래머스 팀에서는 기능 개선 작업을 수행 중입니다. 각 기능은 진도가 100%일 때 서비스에 반영할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;또, 각 기능의 개발속도는 모두 다르기 때문에 뒤에 있는 기능이 앞에 있는 기능보다 먼저 개발될 수 있고, 이때 뒤에 있는 기능은 앞에 있는 기능이 배포될 때 함께 배포됩니다.&lt;/p&gt;
+&lt;p&gt;먼저 배포되어야 하는 순서대로 작업의 진도가 적힌 정수 배열 progresses와 각 작업의 개발 속도가 적힌 정수 배열 speeds가 주어질 때 각 배포마다 몇 개의 기능이 배포되는지를 return 하도록 solution 함수를 완성하세요.&lt;/p&gt;
+&lt;h3&gt;제한 사항&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;작업의 개수(progresses, speeds배열의 길이)는 100개 이하입니다.&lt;/li&gt;
+&lt;li&gt;작업 진도는 100 미만의 자연수입니다.&lt;/li&gt;
+&lt;li&gt;작업 속도는 100 이하의 자연수입니다.&lt;/li&gt;
+&lt;li&gt;배포는 하루에 한 번만 할 수 있으며, 하루의 끝에 이루어진다고 가정합니다. 예를 들어 진도율이 95%인 작업의 개발 속도가 하루에 4%라면 배포는 2일 뒤에 이루어집니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;입출력 예&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;progresses&lt;/th&gt;
+&lt;th&gt;speeds&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[93,30,55]&lt;/td&gt;
+&lt;td&gt;[1,30,5]&lt;/td&gt;
+&lt;td&gt;[2,1]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3&gt;입출력 예 설명&lt;/h3&gt;
+&lt;p&gt;첫 번째 기능은 93% 완료되어 있고 하루에 1%씩 작업이 가능하므로 7일간 작업 후 배포가 가능합니다.&lt;/p&gt;
+&lt;p&gt;두 번째 기능은 30%가 완료되어 있고 하루에 30%씩 작업이 가능하므로 3일간 작업 후 배포가 가능합니다. 하지만 이전 첫 번째 기능이 아직 완성된 상태가 아니기 때문에 첫 번째 기능이 배포되는 7일째 배포됩니다.&lt;/p&gt;
+&lt;p&gt;세 번째 기능은 55%가 완료되어 있고 하루에 5%씩 작업이 가능하므로 9일간 작업 후 배포가 가능합니다.&lt;/p&gt;
+&lt;p&gt;따라서 7일째에 2개의 기능, 9일째에 1개의 기능이 배포됩니다.&lt;/p&gt;
+&lt;h2&gt;풀이&lt;/h2&gt;
+&lt;p&gt;마지막 배포일을 두고 첫 작업부터 마지막 작업까지 돌면서&lt;/p&gt;
+&lt;p&gt;마지막 배포일에 포함될 경우와
+마지막 배포일을 갱신하게 되는 경우로 나눠&lt;/p&gt;
+&lt;p&gt;각 배포일에 배포되는 수를 더함. 이 때 배포일이 언제인지 계산하지는 않음&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;  &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;progresses&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; speeds&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; answer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; lastDeployDay &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; progresses&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; requiredDays &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Math&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;ceil&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;100&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; progresses&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; speeds&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      
+      &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;requiredDays &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; lastDeployDay&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// 배포일을 갱신&lt;/span&gt;
+        lastDeployDay &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; requiredDays&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        answer&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// 이전 작업과 배포일이 같음&lt;/span&gt;
+        answer&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;answer&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; answer&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;소요 시간: 10분 내&lt;/p&gt;</content:encoded></item><item><title><![CDATA[APIs: The Good, The Bad, The Ugly]]></title><description><![CDATA[APIs에 대하여 documentation, URLs, Payloads, Authentication, Authorization, Errors, Caching를 주제로 각각의 The good, The bad, The ugly…]]></description><link>https://ohseunghyeon.github.io/study/APIs-The-Good-The-Bad-The-Ugly/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/study/APIs-The-Good-The-Bad-The-Ugly/</guid><pubDate>Wed, 04 Sep 2019 09:20:08 GMT</pubDate><content:encoded>&lt;p&gt;
           &lt;div
             class=&quot;gatsby-resp-iframe-wrapper&quot;
             style=&quot;padding-bottom: 56.42857142857143%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
@@ -275,7 +591,7 @@
 &lt;li&gt;&lt;a href=&quot;https://blog.outsider.ne.kr/1412&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Outsider - GitHub Actions 소개&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://css-tricks.com/introducing-github-actions/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;css tricks - Introducing GitHub Actions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://heowc.dev/2019/02/03/deploy-gh-page-with-github-action/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;허원철의 개발 블로그 - GitHub Action을 활용한 GitHub Page 배포&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[탑]]></title><description><![CDATA[출처 프로그래머스 문제 설명 수평 직선에 탑 N…]]></description><link>https://ohseunghyeon.github.io/algorithm/탑/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/탑/</guid><pubDate>Wed, 04 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;p&gt;출처 &lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42588&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;프로그래머스&lt;/a&gt;&lt;/p&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[탑]]></title><description><![CDATA[출처 프로그래머스 문제 설명 수평 직선에 탑 N…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/탑/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/탑/</guid><pubDate>Wed, 04 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;p&gt;출처 &lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42588&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;프로그래머스&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;수평 직선에 탑 N대를 세웠습니다. 모든 탑의 꼭대기에는 신호를 송/수신하는 장치를 설치했습니다. 발사한 신호는 신호를 보낸 탑보다 높은 탑에서만 수신합니다. 또한, 한 번 수신된 신호는 다른 탑으로 송신되지 않습니다.&lt;/p&gt;
 &lt;p&gt;예를 들어 높이가 6, 9, 5, 7, 4인 다섯 탑이 왼쪽으로 동시에 레이저 신호를 발사합니다. 그러면, 탑은 다음과 같이 신호를 주고받습니다. 높이가 4인 다섯 번째 탑에서 발사한 신호는 높이가 7인 네 번째 탑이 수신하고, 높이가 7인 네 번째 탑의 신호는 높이가 9인 두 번째 탑이, 높이가 5인 세 번째 탑의 신호도 높이가 9인 두 번째 탑이 수신합니다. 높이가 9인 두 번째 탑과 높이가 6인 첫 번째 탑이 보낸 레이저 신호는 어떤 탑에서도 수신할 수 없습니다.&lt;/p&gt;
@@ -376,7 +692,7 @@
 &lt;p&gt;그래서 나는 고치고 싶은 부분들을 리스트로 정리해서 하나하나 하기로 했다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; emoji 적용하기 &lt;img class=&quot;emoji-icon&quot; alt=&quot;emoji-cat&quot; data-icon=&quot;emoji-cat&quot; style=&quot;display: inline; margin: 0; margin-top: 1px; position: relative; top: 5px; width: 25px&quot; src=&quot;data:image/png;base64, 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&quot; title=&quot;emoji-cat&quot;&gt; - &lt;a href=&quot;https://www.gatsbyjs.org/packages/gatsby-remark-emojis/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;gatsby-remark-emojis&lt;/a&gt; 2019.9.3&lt;/li&gt;
-&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; &lt;a href=&quot;/%EB%B8%94%EB%A1%9C%EA%B9%85/Github-pages%EB%A5%BC-github-actions%EB%A1%9C-%EC%9E%90%EB%8F%99-%EB%B0%B0%ED%8F%AC%ED%95%98%EA%B8%B0/&quot;&gt;github actions로 자동 배포하기&lt;/a&gt; 2019.9.4~&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; &lt;a href=&quot;/blogging/deploying-github-pages-with-github-actions/&quot;&gt;github actions로 자동 배포하기&lt;/a&gt; 2019.9.4~&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 글 리스트&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 카테고리 넣기&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; Dark Theme 넣기&lt;/li&gt;
@@ -390,7 +706,7 @@
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 코드들의 스타일이 없다?&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 글 내의 목차&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[124 나라의 숫자]]></title><description><![CDATA[출처 프로그래머스 문제 설명 124 나라가 있습니다. 124 나라에서는 10진법이 아닌 다음과 같은 자신들만의 규칙으로 수를 표현합니다. 124 나라에는 자연수만 존재합니다.
-124 나라에는 모든 수를 표현할 때 1, 2,…]]></description><link>https://ohseunghyeon.github.io/algorithm/124-나라의-숫자/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/124-나라의-숫자/</guid><pubDate>Tue, 03 Sep 2019 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;출처 &lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/12899&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;프로그래머스&lt;/a&gt;&lt;/p&gt;
+124 나라에는 모든 수를 표현할 때 1, 2,…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/124-나라의-숫자/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/124-나라의-숫자/</guid><pubDate>Tue, 03 Sep 2019 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;출처 &lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/12899&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;프로그래머스&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;124 나라가 있습니다. 124 나라에서는 10진법이 아닌 다음과 같은 자신들만의 규칙으로 수를 표현합니다.&lt;/p&gt;
 &lt;p&gt;124 나라에는 자연수만 존재합니다.
