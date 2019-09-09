@@ -1,4 +1,140 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 09 Sep 2019 05:31:34 GMT</lastBuildDate><item><title><![CDATA[스킬트리]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/스킬트리/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/스킬트리/</guid><pubDate>Fri, 06 Sep 2019 01:30:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 09 Sep 2019 13:23:53 GMT</lastBuildDate><item><title><![CDATA[다리를 지나는 트럭]]></title><description><![CDATA[문제 설명 트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/다리를-지나는-트럭/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/다리를-지나는-트럭/</guid><pubDate>Fri, 06 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length이고 다리는 무게 weight까지 견딥니다.&lt;/p&gt;
+&lt;p&gt;※ 트럭이 다리에 완전히 오르지 않은 경우, 이 트럭의 무게는 고려하지 않습니다.&lt;/p&gt;
+&lt;p&gt;예를 들어, 길이가 2이고 10kg 무게를 견디는 다리가 있습니다. 무게가 [7, 4, 5, 6]kg인 트럭이 순서대로 최단 시간 안에 다리를 건너려면 다음과 같이 건너야 합니다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;경과 시간&lt;/th&gt;
+&lt;th&gt;다리를 지난 트럭&lt;/th&gt;
+&lt;th&gt;다리를 건너는 트럭&lt;/th&gt;
+&lt;th&gt;대기 트럭&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;td&gt;[7,4,5,6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1~2&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;td&gt;[7]&lt;/td&gt;
+&lt;td&gt;[4,5,6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;[7]&lt;/td&gt;
+&lt;td&gt;[4]&lt;/td&gt;
+&lt;td&gt;[5,6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;[7]&lt;/td&gt;
+&lt;td&gt;[4,5]&lt;/td&gt;
+&lt;td&gt;[6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;[7,4]&lt;/td&gt;
+&lt;td&gt;[5]&lt;/td&gt;
+&lt;td&gt;[6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6~7&lt;/td&gt;
+&lt;td&gt;[7,4,5]&lt;/td&gt;
+&lt;td&gt;[6]&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;[7,4,5,6]&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;따라서, 모든 트럭이 다리를 지나려면 최소 8초가 걸립니다.&lt;/p&gt;
+&lt;p&gt;solution 함수의 매개변수로 다리 길이 bridgelength, 다리가 견딜 수 있는 무게 weight, 트럭별 무게 truckweights가 주어집니다. 이때 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 return 하도록 solution 함수를 완성하세요.&lt;/p&gt;
+&lt;h2&gt;제한 조건&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;bridge_length는 1 이상 10,000 이하입니다.&lt;/li&gt;
+&lt;li&gt;weight는 1 이상 10,000 이하입니다.&lt;/li&gt;
+&lt;li&gt;truck_weights의 길이는 1 이상 10,000 이하입니다.&lt;/li&gt;
+&lt;li&gt;모든 트럭의 무게는 1 이상 weight 이하입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;입출력 예&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;bridge_length&lt;/th&gt;
+&lt;th&gt;weight&lt;/th&gt;
+&lt;th&gt;truck_weights&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;[7,4,5,6]&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;td&gt;[10]&lt;/td&gt;
+&lt;td&gt;101&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;td&gt;[10,10,10,10,10,10,10,10,10,10]&lt;/td&gt;
+&lt;td&gt;110&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&quot;http://icpckorea.org/2016/ONLINE/problem.pdf&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;출처&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;풀이&lt;/h2&gt;
+&lt;p&gt;나의 풀이는 매 초를 세며 트럭을 올리고 다리를 건너게 하는 방법이다.
+나는 이게 정말 답일까? 라는 생각을 계속 했고, 한 30분은 고민한 것 같다.
+더 좋은 방법이 없을까..&lt;/p&gt;
+&lt;p&gt;답을 제출했고, 모든 사람들이 똑같은 방법으로 풀었다.
+문제는, javascript로 푼 사람들의 답만 보여서 다른 방법은 보지 못했다는 점.
+어쩌면 C나 파이썬에 가면 기발한 풀이가 있지 않을까 하는 생각이 들었기 때문이다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;    &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;bridge_length&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; weight&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; truck_weights&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; seconds &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; totalWeight &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; trucksOnBridge &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;truck_weights&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; trucksOnBridge&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            seconds&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;token comment&quot;&gt;// 지나간 트럭 제거&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;trucksOnBridge&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; trucksOnBridge&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;secondsLeft &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; passedTrucks &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; trucksOnBridge&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                totalWeight &lt;span class=&quot;token operator&quot;&gt;-=&lt;/span&gt; passedTrucks&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;weight&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;token comment&quot;&gt;// 다리에 트럭 올리기&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;weight &lt;span class=&quot;token operator&quot;&gt;&gt;=&lt;/span&gt; totalWeight &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; truck_weights&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; truck &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; truck_weights&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;shift&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                totalWeight &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; truck&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                trucksOnBridge&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                    secondsLeft&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; bridge_length&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                    weight&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; truck
+                &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;token comment&quot;&gt;// 트럭 초 빼기&lt;/span&gt;
+            trucksOnBridge&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; t&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;secondsLeft&lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; seconds&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[스킬트리]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/스킬트리/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/스킬트리/</guid><pubDate>Fri, 06 Sep 2019 01:30:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다.&lt;/p&gt;
 &lt;p&gt;예를 들어 선행 스킬 순서가 &lt;code class=&quot;language-text&quot;&gt;스파크 → 라이트닝 볼트 → 썬더&lt;/code&gt;일때, 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고, 라이트닝 볼트를 배우려면 먼저 스파크를 배워야 합니다.&lt;/p&gt;
 &lt;p&gt;위 순서에 없는 다른 스킬(힐링 등)은 순서에 상관없이 배울 수 있습니다. 따라서 &lt;code class=&quot;language-text&quot;&gt;스파크 → 힐링 → 라이트닝 볼트 → 썬더&lt;/code&gt;와 같은 스킬트리는 가능하지만, &lt;code class=&quot;language-text&quot;&gt;썬더 → 스파크&lt;/code&gt;나 &lt;code class=&quot;language-text&quot;&gt;라이트닝 볼트 → 스파크 → 힐링 → 썬더&lt;/code&gt;와 같은 스킬트리는 불가능합니다.&lt;/p&gt;
@@ -112,9 +248,9 @@ D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&l
 &lt;li&gt;정규표현식으로 선행 스킬과 관련이 없는 스킬은 지우고&lt;/li&gt;
 &lt;li&gt;선행 스킬과 관련된 애들만 가지고 그 순서를 indexOf로 체크한다&lt;/li&gt;
 &lt;/ol&gt;</content:encoded></item><item><title><![CDATA[github 저장소에 now 적용기]]></title><description><![CDATA[발단 난 블로그를 이쁘게 만들고 싶다. 그래서 남의 것들을 훔치려고 돌아다니고 있다.
-그러다가 Dan Abramov의 블로그 overreacted.io 깃헙 저장소를 보게 됐다. 그리고 발견했다. 훔칠 거.  now 라는 bot…]]></description><link>https://ohseunghyeon.github.io/blogging/now/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/now/</guid><pubDate>Thu, 05 Sep 2019 07:34:55 GMT</pubDate><content:encoded>&lt;h2&gt;발단&lt;/h2&gt;
+그러다가 Dan Abramov의 블로그 overreacted.io 깃헙 저장소를 보게 됐다.  now 라는 bot이 쓴 댓글를 보면 Now…]]></description><link>https://ohseunghyeon.github.io/blogging/now/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/now/</guid><pubDate>Thu, 05 Sep 2019 07:34:55 GMT</pubDate><content:encoded>&lt;h2&gt;발단&lt;/h2&gt;
 &lt;p&gt;난 블로그를 이쁘게 만들고 싶다. 그래서 남의 것들을 훔치려고 돌아다니고 있다.
-그러다가 Dan Abramov의 블로그 &lt;a href=&quot;https://overreacted.io/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;overreacted.io&lt;/a&gt; &lt;a href=&quot;https://github.com/gaearon/overreacted.io&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;깃헙 저장소&lt;/a&gt;를 보게 됐다. 그리고 발견했다. 훔칠 거.&lt;/p&gt;
+그러다가 Dan Abramov의 블로그 &lt;a href=&quot;https://overreacted.io/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;overreacted.io&lt;/a&gt; &lt;a href=&quot;https://github.com/gaearon/overreacted.io&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;깃헙 저장소&lt;/a&gt;를 보게 됐다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
@@ -145,9 +281,8 @@ D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&l
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;now 라는 bot이 쓴 댓글를 보면 Now가 이 풀 리퀘스트를 자동으로 배포했고, 밑에 링크로 가면 해당 브랜치의 배포판이 있다.&lt;/p&gt;
-&lt;p&gt;나도 갖고 싶어.&lt;/p&gt;
-&lt;h2&gt;출동&lt;/h2&gt;
-&lt;p&gt;&lt;a href=&quot;https://zeit.co/login&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;now 서비스&lt;/a&gt;를 찾아간다.&lt;/p&gt;
+&lt;h2&gt;본론&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://zeit.co/login&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;now 서비스&lt;/a&gt;에 접속&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 341px;&quot;
@@ -176,8 +311,7 @@ D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&l
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;사이트 메인에 도달하니 ZEIT에 로그인 하란다. 나는 github으로 로그인 했다.&lt;/p&gt;
-&lt;p&gt;그리고 프로파일을 설정하라고 한다.&lt;/p&gt;
+&lt;p&gt;사이트 메인에 접속하니 ZEIT에 로그인을 요구한다. 나는 github으로 로그인 했다. 그리고 프로파일을 설정하라고 한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
@@ -208,7 +342,6 @@ D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&l
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;응 대충 한다.&lt;/p&gt;
 &lt;p&gt;깃헙에 Now를 세팅하라고 한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
@@ -267,7 +400,6 @@ D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&l
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;응 인스톨 한다.&lt;/p&gt;
 &lt;p&gt;나는 Only select repositories에 체크해서 &lt;code class=&quot;language-text&quot;&gt;Gatsby-blog&lt;/code&gt; 라는 내 정적 파일 생성기 저장소에 설치했다.&lt;/p&gt;
 &lt;p&gt;그리고 프로젝트를 만들라고 한다.&lt;/p&gt;
 &lt;p&gt;&lt;span
@@ -307,7 +439,6 @@ D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&l
 &lt;/ul&gt;
 &lt;p&gt;From a template은 저장소를 새로 만드는 것 같다.
 나는 From your exsting code에서 &lt;code class=&quot;language-text&quot;&gt;Gatsby-blog&lt;/code&gt; 저장소를 선택했다.&lt;/p&gt;
-&lt;p&gt;그랬더니&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
@@ -338,7 +469,7 @@ D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&l
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;알아서 빌드를 하고 배포를 해줬다…?&lt;/p&gt;
+&lt;p&gt;그랬더니 알아서 빌드를 하고 배포를 해줬다…?!&lt;/p&gt;
 &lt;p&gt;저 노란 서클은 배포가 완료되면 초록색으로 바뀐다.&lt;/p&gt;
 &lt;p&gt;그리고 해당 프로젝트를 선택하게 되면 아래와 같은 화면이 나온다.&lt;/p&gt;
 &lt;p&gt;&lt;span
@@ -403,10 +534,10 @@ D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&l
       /&gt;
   &lt;/a&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;그래그래..&lt;/p&gt;
-&lt;p&gt;이제 풀 리퀘스트를 했을 때 어떻게 되는지 보고 싶어.&lt;/p&gt;
+&lt;p&gt;좋다.&lt;/p&gt;
+&lt;p&gt;이제 풀 리퀘스트를 했을 때 어떻게 되는지 보고 싶다.&lt;/p&gt;
 &lt;p&gt;그래서 풀 리퀘스트를 만들어 봤다.&lt;/p&gt;
-&lt;p&gt;그랬더니 now가 배포중이라고 밑에 달린다.&lt;/p&gt;
+&lt;p&gt;now가 배포중이라고 밑에 달린다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
       style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 590px;&quot;
@@ -496,11 +627,7 @@ D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&l
         loading=&quot;lazy&quot;
       /&gt;
   &lt;/a&gt;
-    &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;멋져&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;신기해&lt;/p&gt;
-&lt;p&gt;내가 촌놈이 된 기분이야&lt;/p&gt;</content:encoded></item><item><title><![CDATA[[번역] SSL Pinning]]></title><description><![CDATA[원글: Explain SSL Pinning with simple codes - Zhang QiChuan HTTPS…]]></description><link>https://ohseunghyeon.github.io/study/ssl-pinning/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/study/ssl-pinning/</guid><pubDate>Thu, 05 Sep 2019 03:40:10 GMT</pubDate><content:encoded>&lt;p&gt;원글: &lt;a href=&quot;https://medium.com/@zhangqichuan/explain-ssl-pinning-with-simple-codes-eaee95b70507&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Explain SSL Pinning with simple codes - Zhang QiChuan&lt;/a&gt;&lt;/p&gt;
+    &lt;/span&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[[번역] SSL Pinning]]></title><description><![CDATA[원글: Explain SSL Pinning with simple codes - Zhang QiChuan HTTPS…]]></description><link>https://ohseunghyeon.github.io/study/ssl-pinning/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/study/ssl-pinning/</guid><pubDate>Thu, 05 Sep 2019 03:40:10 GMT</pubDate><content:encoded>&lt;p&gt;원글: &lt;a href=&quot;https://medium.com/@zhangqichuan/explain-ssl-pinning-with-simple-codes-eaee95b70507&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Explain SSL Pinning with simple codes - Zhang QiChuan&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;HTTPS 연결에는 두 가지 요소가 있는데, 핸드셰이킹 시 서버가 제시하는 &lt;code class=&quot;language-text&quot;&gt;유효한 증명서(certificate)&lt;/code&gt;와 데이터 전달 시 데이터 암호화에 사용되는 &lt;code class=&quot;language-text&quot;&gt;암호화 스위트(Cipher suite)&lt;/code&gt;이다. 증명서는 반드시 필요한 요소이고, 이는 서버 스스로를 증명하는 역할을 한다. 유효한 증명서란 Certificate Authorities(CA) 중 하나에 의해 서명된 경우를 말하며, 클라이언트는 서버가 유효한 증명서를 제시할 때만 이를 신뢰하고 통신을 할 것이다. (CA는 클라이언트 쪽에 미리 설치된다)&lt;/p&gt;
 &lt;p&gt;공격자는 이런 방식을 악용할 수 있는데, 클라이언트 쪽에 악의적인 CA 증명서를 심어, 공격자가 서명한 어떤 증명서든 신뢰하게 만들 수 있고, 심지어 CA를 무력화 할 수 있다. 그러므로 서버가 클라이언트에게 제시하는 증명서는 서버의 진위성을 판단하기에 부족할 수 있으며, 잠재적인 중간자 공격에 대한 취약성을 갖고 있다.&lt;/p&gt;
 &lt;p&gt;SSL Pinning은 클라이언트 측에서 사용하는 기법으로, SSL 핸드셰이킹 이후에도 서버의 증명서를 다시 확인하여 중간자 공격을 피할 수 있다. 개발자는 개발 시 클라이언트 측에 신뢰할 수 있는 증명서들을 저장(embed or pin)하고, 이는 이후 실제 통신 과정에서 서버가 제공하는 증명서와 비교하는 데 사용된다. 만약 이 과정에서 &lt;code class=&quot;language-text&quot;&gt;미리 저장된 증명서&lt;/code&gt;와 &lt;code class=&quot;language-text&quot;&gt;서버가 제시한 증명서&lt;/code&gt;가 일치하지 않는다면, 연결은 중단될 것이고, 유저의 정보가 서버로 전송되지 않을 것이다. 이런 강제로 인해 클라이언트는 원래의 서버와 통신할 수 있도록 보장된다.&lt;/p&gt;
@@ -625,106 +752,7 @@ Difficulty Easy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
       &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; h&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[다리를 지나는 트럭]]></title><description><![CDATA[문제 설명 트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/다리를-지나는-트럭/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/다리를-지나는-트럭/</guid><pubDate>Thu, 05 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
-&lt;p&gt;트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length이고 다리는 무게 weight까지 견딥니다.&lt;/p&gt;
-&lt;p&gt;※ 트럭이 다리에 완전히 오르지 않은 경우, 이 트럭의 무게는 고려하지 않습니다.&lt;/p&gt;
-&lt;p&gt;예를 들어, 길이가 2이고 10kg 무게를 견디는 다리가 있습니다. 무게가 [7, 4, 5, 6]kg인 트럭이 순서대로 최단 시간 안에 다리를 건너려면 다음과 같이 건너야 합니다.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;경과 시간&lt;/th&gt;
-&lt;th&gt;다리를 지난 트럭&lt;/th&gt;
-&lt;th&gt;다리를 건너는 트럭&lt;/th&gt;
-&lt;th&gt;대기 트럭&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;0&lt;/td&gt;
-&lt;td&gt;[]&lt;/td&gt;
-&lt;td&gt;[]&lt;/td&gt;
-&lt;td&gt;[7,4,5,6]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;1~2&lt;/td&gt;
-&lt;td&gt;[]&lt;/td&gt;
-&lt;td&gt;[7]&lt;/td&gt;
-&lt;td&gt;[4,5,6]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;3&lt;/td&gt;
-&lt;td&gt;[7]&lt;/td&gt;
-&lt;td&gt;[4]&lt;/td&gt;
-&lt;td&gt;[5,6]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;4&lt;/td&gt;
-&lt;td&gt;[7]&lt;/td&gt;
-&lt;td&gt;[4,5]&lt;/td&gt;
-&lt;td&gt;[6]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;5&lt;/td&gt;
-&lt;td&gt;[7,4]&lt;/td&gt;
-&lt;td&gt;[5]&lt;/td&gt;
-&lt;td&gt;[6]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;6~7&lt;/td&gt;
-&lt;td&gt;[7,4,5]&lt;/td&gt;
-&lt;td&gt;[6]&lt;/td&gt;
-&lt;td&gt;[]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;8&lt;/td&gt;
-&lt;td&gt;[7,4,5,6]&lt;/td&gt;
-&lt;td&gt;[]&lt;/td&gt;
-&lt;td&gt;[]&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;따라서, 모든 트럭이 다리를 지나려면 최소 8초가 걸립니다.&lt;/p&gt;
-&lt;p&gt;solution 함수의 매개변수로 다리 길이 bridgelength, 다리가 견딜 수 있는 무게 weight, 트럭별 무게 truckweights가 주어집니다. 이때 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 return 하도록 solution 함수를 완성하세요.&lt;/p&gt;
-&lt;h2&gt;제한 조건&lt;/h2&gt;
-&lt;ul&gt;
-&lt;li&gt;bridge_length는 1 이상 10,000 이하입니다.&lt;/li&gt;
-&lt;li&gt;weight는 1 이상 10,000 이하입니다.&lt;/li&gt;
-&lt;li&gt;truck_weights의 길이는 1 이상 10,000 이하입니다.&lt;/li&gt;
-&lt;li&gt;모든 트럭의 무게는 1 이상 weight 이하입니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;입출력 예&lt;/h2&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;bridge_length&lt;/th&gt;
-&lt;th&gt;weight&lt;/th&gt;
-&lt;th&gt;truck_weights&lt;/th&gt;
-&lt;th&gt;return&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;2&lt;/td&gt;
-&lt;td&gt;10&lt;/td&gt;
-&lt;td&gt;[7,4,5,6]&lt;/td&gt;
-&lt;td&gt;8&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;100&lt;/td&gt;
-&lt;td&gt;100&lt;/td&gt;
-&lt;td&gt;[10]&lt;/td&gt;
-&lt;td&gt;101&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;100&lt;/td&gt;
-&lt;td&gt;100&lt;/td&gt;
-&lt;td&gt;[10,10,10,10,10,10,10,10,10,10]&lt;/td&gt;
-&lt;td&gt;110&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;a href=&quot;http://icpckorea.org/2016/ONLINE/problem.pdf&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;출처&lt;/a&gt;&lt;/p&gt;
-&lt;h2&gt;풀이&lt;/h2&gt;</content:encoded></item><item><title><![CDATA[쇠막대기]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</guid><pubDate>Thu, 05 Sep 2019 01:15:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[쇠막대기]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</guid><pubDate>Thu, 05 Sep 2019 01:15:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;여러 개의 쇠막대기를 레이저로 절단하려고 합니다. 효율적인 작업을 위해서 쇠막대기를 아래에서 위로 겹쳐 놓고, 레이저를 위에서 수직으로 발사하여 쇠막대기들을 자릅니다. 쇠막대기와 레이저의 배치는 다음 조건을 만족합니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;쇠막대기는 자신보다 긴 쇠막대기 위에만 놓일 수 있습니다.&lt;/li&gt;
@@ -1287,7 +1315,7 @@ arrangement의 여는 괄호와 닫는 괄호는 항상 쌍을 이룹니다.
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 글 리스트&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 카테고리 넣기&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; Dark Theme 넣기&lt;/li&gt;
-&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; font 가독성 좋게 바꾸기&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; font 가독성 좋게 바꾸기&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 새로운 게시글을 만드는 script 생성&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; about 페이지 만들기&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 댓글 달기&lt;/li&gt;
@@ -1296,6 +1324,9 @@ arrangement의 여는 괄호와 닫는 괄호는 항상 쌍을 이룹니다.
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 글 목록 lazy load&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 코드들의 스타일이 없다?&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 글 내의 목차&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; now 연동해서 풀 리퀘스트 자동 배포하기&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; &lt;a href=&quot;https://www.gatsbyjs.org/packages/gatsby-remark-prismjs/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;code block theme 설정&lt;/a&gt; - gatsby-browser.js - import “prismjs/themes/prism-tomorrow.css”&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; excluding draft blog on build&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[124 나라의 숫자]]></title><description><![CDATA[출처 프로그래머스 문제 설명 124 나라가 있습니다. 124 나라에서는 10진법이 아닌 다음과 같은 자신들만의 규칙으로 수를 표현합니다. 124 나라에는 자연수만 존재합니다.
 124 나라에는 모든 수를 표현할 때 1, 2,…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/124-나라의-숫자/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/124-나라의-숫자/</guid><pubDate>Tue, 03 Sep 2019 01:00:00 GMT</pubDate><content:encoded>&lt;p&gt;출처 &lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/12899&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;프로그래머스&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;문제 설명&lt;/h2&gt;
