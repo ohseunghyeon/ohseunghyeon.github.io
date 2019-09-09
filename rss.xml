@@ -1,4 +1,117 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Thu, 05 Sep 2019 08:57:54 GMT</lastBuildDate><item><title><![CDATA[github 저장소에 now 적용기]]></title><description><![CDATA[발단 난 블로그를 이쁘게 만들고 싶다. 그래서 남의 것들을 훔치려고 돌아다니고 있다.
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 09 Sep 2019 05:31:34 GMT</lastBuildDate><item><title><![CDATA[스킬트리]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/스킬트리/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/스킬트리/</guid><pubDate>Fri, 06 Sep 2019 01:30:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;선행 스킬이란 어떤 스킬을 배우기 전에 먼저 배워야 하는 스킬을 뜻합니다.&lt;/p&gt;
+&lt;p&gt;예를 들어 선행 스킬 순서가 &lt;code class=&quot;language-text&quot;&gt;스파크 → 라이트닝 볼트 → 썬더&lt;/code&gt;일때, 썬더를 배우려면 먼저 라이트닝 볼트를 배워야 하고, 라이트닝 볼트를 배우려면 먼저 스파크를 배워야 합니다.&lt;/p&gt;
+&lt;p&gt;위 순서에 없는 다른 스킬(힐링 등)은 순서에 상관없이 배울 수 있습니다. 따라서 &lt;code class=&quot;language-text&quot;&gt;스파크 → 힐링 → 라이트닝 볼트 → 썬더&lt;/code&gt;와 같은 스킬트리는 가능하지만, &lt;code class=&quot;language-text&quot;&gt;썬더 → 스파크&lt;/code&gt;나 &lt;code class=&quot;language-text&quot;&gt;라이트닝 볼트 → 스파크 → 힐링 → 썬더&lt;/code&gt;와 같은 스킬트리는 불가능합니다.&lt;/p&gt;
+&lt;p&gt;선행 스킬 순서 skill과 유저들이 만든 스킬트리( 유저가 스킬을 배울 순서)를 담은 배열 skill_trees가 매개변수로 주어질 때, 가능한 스킬트리 개수를 return 하는 solution 함수를 작성해주세요.&lt;/p&gt;
+&lt;h2&gt;제한 조건&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;스킬은 알파벳 대문자로 표기하며, 모든 문자열은 알파벳 대문자로만 이루어져 있습니다.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;스킬 순서와 스킬트리는 문자열로 표기합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;예를 들어, &lt;code class=&quot;language-text&quot;&gt;C → B → D&lt;/code&gt; 라면 CBD로 표기합니다&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;선행 스킬 순서 skill의 길이는 1 이상 26 이하이며, 스킬은 중복해 주어지지 않습니다.&lt;/li&gt;
+&lt;li&gt;skill_trees는 길이 1 이상 20 이하인 배열입니다.&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;skill_trees의 원소는 스킬을 나타내는 문자열입니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;skill_trees의 원소는 길이가 2 이상 26 이하인 문자열이며, 스킬이 중복해 주어지지 않습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;입출력 예&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;skill&lt;/th&gt;
+&lt;th&gt;skill_trees&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;“CBD”&lt;/td&gt;
+&lt;td&gt;[“BACDE”, “CBADF”, “AECB”, “BDA”]&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;입출력 예 설명&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;BACDE: B 스킬을 배우기 전에 C 스킬을 먼저 배워야 합니다. 불가능한 스킬트립니다.&lt;/li&gt;
+&lt;li&gt;CBADF: 가능한 스킬트리입니다.&lt;/li&gt;
+&lt;li&gt;AECB: 가능한 스킬트리입니다.&lt;/li&gt;
+&lt;li&gt;BDA: B 스킬을 배우기 전에 C 스킬을 먼저 배워야 합니다. 불가능한 스킬트리입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;풀이&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;선행 스킬의 맵을 만든다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;skill 이 CBD의 경우&lt;/p&gt;
+&lt;p&gt;{
+“B”: “C”,
+“D”: “B”
+}&lt;/p&gt;
+&lt;p&gt;이처럼 B를 익히려면 C가 필요하고
+D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&lt;/p&gt;
+&lt;p&gt;skill_tress에 있는 유저들의 스킬트리를 각각 체크한다.&lt;/p&gt;
+&lt;p&gt;순서대로 하나 하나 스킬을 익혀가는데, 이 때 선행 스킬이 필요하면 선행 스킬을 익혔는지 확인하고, 필요하지 않으면 그냥 익힌다.&lt;/p&gt;
+&lt;p&gt;선행 스킬이 필요한데 익히지 않은 경우는 세지 않으면 된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;  &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;skill&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; skill_trees&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      
+      &lt;span class=&quot;token comment&quot;&gt;// 미리 익혀야 하는 스킬의 맵&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; prerequisite &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; skill&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; skillNeeded &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; skill&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; skillToLearn &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; skill&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          
+          prerequisite&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;skillToLearn&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; skillNeeded&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      
+      &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; cnt &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; skill_trees&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;cnt&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; cur&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; tree &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          
+          &lt;span class=&quot;token comment&quot;&gt;// 스킬 트리를 순회하며 스킬 익혀보기&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; cur&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; skill &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; cur&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              
+              &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;prerequisite&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;skill&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                  &lt;span class=&quot;token comment&quot;&gt;// 선행 스킬이 필요&lt;/span&gt;
+                  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;tree&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;prerequisite&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;skill&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                      &lt;span class=&quot;token comment&quot;&gt;// 선행 스킬을 익힌 경우&lt;/span&gt;
+                      tree&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;skill&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; cnt&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+                  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                  &lt;span class=&quot;token comment&quot;&gt;// 그냥 익혀도 됨&lt;/span&gt;
+                  tree&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;skill&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+              &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+          &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+          
+          &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; cnt &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; cnt&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;다른 사람 풀이&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;  &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;skill&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; skill_trees&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; regex &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;RegExp&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token template-string&quot;&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;[^&lt;/span&gt;&lt;span class=&quot;token interpolation&quot;&gt;&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;${&lt;/span&gt;skill&lt;span class=&quot;token interpolation-punctuation punctuation&quot;&gt;}&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token template-punctuation string&quot;&gt;`&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;g&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; skill_trees
+          &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; x&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;regex&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+          &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;filter&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+              &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; skill&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;indexOf&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+          &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;스킬 트리를 순회하며&lt;/li&gt;
+&lt;li&gt;정규표현식으로 선행 스킬과 관련이 없는 스킬은 지우고&lt;/li&gt;
+&lt;li&gt;선행 스킬과 관련된 애들만 가지고 그 순서를 indexOf로 체크한다&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[github 저장소에 now 적용기]]></title><description><![CDATA[발단 난 블로그를 이쁘게 만들고 싶다. 그래서 남의 것들을 훔치려고 돌아다니고 있다.
 그러다가 Dan Abramov의 블로그 overreacted.io 깃헙 저장소를 보게 됐다. 그리고 발견했다. 훔칠 거.  now 라는 bot…]]></description><link>https://ohseunghyeon.github.io/blogging/now/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/now/</guid><pubDate>Thu, 05 Sep 2019 07:34:55 GMT</pubDate><content:encoded>&lt;h2&gt;발단&lt;/h2&gt;
 &lt;p&gt;난 블로그를 이쁘게 만들고 싶다. 그래서 남의 것들을 훔치려고 돌아다니고 있다.
 그러다가 Dan Abramov의 블로그 &lt;a href=&quot;https://overreacted.io/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;overreacted.io&lt;/a&gt; &lt;a href=&quot;https://github.com/gaearon/overreacted.io&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;깃헙 저장소&lt;/a&gt;를 보게 됐다. 그리고 발견했다. 훔칠 거.&lt;/p&gt;
@@ -431,10 +544,7 @@
 &lt;li&gt;&lt;a href=&quot;https://medium.com/@zhangqichuan/explain-ssl-pinning-with-simple-codes-eaee95b70507&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Explain SSL Pinning with simple codes&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://rsec.kr/?p=455&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;SSL TLS에서 사용되는 암호화 스위트 (Cipher Suite) 란 무엇일까?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://medium.com/@appmattus/android-security-ssl-pinning-1db8acb6621e&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Android Security: SSL Pinning written by Matthew Dolan&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2&gt;사족&lt;/h2&gt;
-&lt;p&gt;번역에 대한 허락을 받지 않았습니다.&lt;/p&gt;
-&lt;p&gt;전 아마 잡혀갈 겁니다..&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Utopian Tree]]></title><description><![CDATA[Problem The Utopian Tree goes through 2 cycles of growth every year. Each spring, it doubles in height. Each summer, its height increases by…]]></description><link>https://ohseunghyeon.github.io/algorithm/hackerrank/Utopian-Tree/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/hackerrank/Utopian-Tree/</guid><pubDate>Thu, 05 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Author dheeraj
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[Utopian Tree]]></title><description><![CDATA[Problem The Utopian Tree goes through 2 cycles of growth every year. Each spring, it doubles in height. Each summer, its height increases by…]]></description><link>https://ohseunghyeon.github.io/algorithm/hackerrank/Utopian-Tree/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/hackerrank/Utopian-Tree/</guid><pubDate>Thu, 05 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;Author dheeraj
 Difficulty Easy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Problem&lt;/h2&gt;
 &lt;p&gt;The Utopian Tree goes through 2 cycles of growth every year. Each spring, it doubles in height. Each summer, its height increases by 1 meter.&lt;/p&gt;
@@ -515,7 +625,106 @@ Difficulty Easy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
       &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; h&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[쇠막대기]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</guid><pubDate>Thu, 05 Sep 2019 01:15:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[다리를 지나는 트럭]]></title><description><![CDATA[문제 설명 트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/다리를-지나는-트럭/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/다리를-지나는-트럭/</guid><pubDate>Thu, 05 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length이고 다리는 무게 weight까지 견딥니다.&lt;/p&gt;
+&lt;p&gt;※ 트럭이 다리에 완전히 오르지 않은 경우, 이 트럭의 무게는 고려하지 않습니다.&lt;/p&gt;
+&lt;p&gt;예를 들어, 길이가 2이고 10kg 무게를 견디는 다리가 있습니다. 무게가 [7, 4, 5, 6]kg인 트럭이 순서대로 최단 시간 안에 다리를 건너려면 다음과 같이 건너야 합니다.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;경과 시간&lt;/th&gt;
+&lt;th&gt;다리를 지난 트럭&lt;/th&gt;
+&lt;th&gt;다리를 건너는 트럭&lt;/th&gt;
+&lt;th&gt;대기 트럭&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;td&gt;[7,4,5,6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;1~2&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;td&gt;[7]&lt;/td&gt;
+&lt;td&gt;[4,5,6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;td&gt;[7]&lt;/td&gt;
+&lt;td&gt;[4]&lt;/td&gt;
+&lt;td&gt;[5,6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;4&lt;/td&gt;
+&lt;td&gt;[7]&lt;/td&gt;
+&lt;td&gt;[4,5]&lt;/td&gt;
+&lt;td&gt;[6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;5&lt;/td&gt;
+&lt;td&gt;[7,4]&lt;/td&gt;
+&lt;td&gt;[5]&lt;/td&gt;
+&lt;td&gt;[6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6~7&lt;/td&gt;
+&lt;td&gt;[7,4,5]&lt;/td&gt;
+&lt;td&gt;[6]&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;[7,4,5,6]&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;td&gt;[]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;따라서, 모든 트럭이 다리를 지나려면 최소 8초가 걸립니다.&lt;/p&gt;
+&lt;p&gt;solution 함수의 매개변수로 다리 길이 bridgelength, 다리가 견딜 수 있는 무게 weight, 트럭별 무게 truckweights가 주어집니다. 이때 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 return 하도록 solution 함수를 완성하세요.&lt;/p&gt;
+&lt;h2&gt;제한 조건&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;bridge_length는 1 이상 10,000 이하입니다.&lt;/li&gt;
+&lt;li&gt;weight는 1 이상 10,000 이하입니다.&lt;/li&gt;
+&lt;li&gt;truck_weights의 길이는 1 이상 10,000 이하입니다.&lt;/li&gt;
+&lt;li&gt;모든 트럭의 무게는 1 이상 weight 이하입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;입출력 예&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;bridge_length&lt;/th&gt;
+&lt;th&gt;weight&lt;/th&gt;
+&lt;th&gt;truck_weights&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;[7,4,5,6]&lt;/td&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;td&gt;[10]&lt;/td&gt;
+&lt;td&gt;101&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;td&gt;100&lt;/td&gt;
+&lt;td&gt;[10,10,10,10,10,10,10,10,10,10]&lt;/td&gt;
+&lt;td&gt;110&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&quot;http://icpckorea.org/2016/ONLINE/problem.pdf&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;출처&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;풀이&lt;/h2&gt;</content:encoded></item><item><title><![CDATA[쇠막대기]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</guid><pubDate>Thu, 05 Sep 2019 01:15:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;여러 개의 쇠막대기를 레이저로 절단하려고 합니다. 효율적인 작업을 위해서 쇠막대기를 아래에서 위로 겹쳐 놓고, 레이저를 위에서 수직으로 발사하여 쇠막대기들을 자릅니다. 쇠막대기와 레이저의 배치는 다음 조건을 만족합니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;쇠막대기는 자신보다 긴 쇠막대기 위에만 놓일 수 있습니다.&lt;/li&gt;
@@ -618,10 +827,8 @@ arrangement의 여는 괄호와 닫는 괄호는 항상 쌍을 이룹니다.
       
       &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; cutStick&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;(if 문을 중첩하면 가독성이 안 좋아서 그냥 둠)&lt;/p&gt;
-&lt;p&gt;소요 시간: 20분 내&lt;/p&gt;
+&lt;p&gt;if 문을 중첩하면 코드 수를 줄일 수 있지만, 가독성이 안 좋을 것 같다&lt;/p&gt;
 &lt;h2&gt;다른 사람 풀이&lt;/h2&gt;
-&lt;p&gt;다른 사람 풀이 중 가장 괜찮아 보여서 가져옴&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;arrangement&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; answer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; aTemp &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; arrangement&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;split&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;()&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;join&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;+&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -642,9 +849,11 @@ arrangement의 여는 괄호와 닫는 괄호는 항상 쌍을 이룹니다.
         &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
     &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; answer&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
-
-출처&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; 민종희&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[기능개발]]></title><description><![CDATA[문제 설명 프로그래머스 팀에서는 기능 개선 작업을 수행 중입니다. 각 기능은 진도가 10…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/기능개발/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/기능개발/</guid><pubDate>Thu, 05 Sep 2019 01:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;레이저를 걸러내고&lt;/li&gt;
+&lt;li&gt;남은 막대만 가지고 경우마다 계산한다.&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[기능개발]]></title><description><![CDATA[문제 설명 프로그래머스 팀에서는 기능 개선 작업을 수행 중입니다. 각 기능은 진도가 10…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/기능개발/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/기능개발/</guid><pubDate>Thu, 05 Sep 2019 01:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;프로그래머스 팀에서는 기능 개선 작업을 수행 중입니다. 각 기능은 진도가 100%일 때 서비스에 반영할 수 있습니다.&lt;/p&gt;
 &lt;p&gt;또, 각 기능의 개발속도는 모두 다르기 때문에 뒤에 있는 기능이 앞에 있는 기능보다 먼저 개발될 수 있고, 이때 뒤에 있는 기능은 앞에 있는 기능이 배포될 때 함께 배포됩니다.&lt;/p&gt;
 &lt;p&gt;먼저 배포되어야 하는 순서대로 작업의 진도가 적힌 정수 배열 progresses와 각 작업의 개발 속도가 적힌 정수 배열 speeds가 주어질 때 각 배포마다 몇 개의 기능이 배포되는지를 return 하도록 solution 함수를 완성하세요.&lt;/p&gt;
@@ -701,8 +910,7 @@ arrangement의 여는 괄호와 닫는 괄호는 항상 쌍을 이룹니다.
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
     
     &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; answer&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;소요 시간: 10분 내&lt;/p&gt;</content:encoded></item><item><title><![CDATA[APIs: The Good, The Bad, The Ugly]]></title><description><![CDATA[APIs에 대하여 documentation, URLs, Payloads, Authentication, Authorization, Errors, Caching를 주제로 각각의 The good, The bad, The ugly…]]></description><link>https://ohseunghyeon.github.io/study/APIs-The-Good-The-Bad-The-Ugly/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/study/APIs-The-Good-The-Bad-The-Ugly/</guid><pubDate>Wed, 04 Sep 2019 09:20:08 GMT</pubDate><content:encoded>&lt;p&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[APIs: The Good, The Bad, The Ugly]]></title><description><![CDATA[APIs에 대하여 documentation, URLs, Payloads, Authentication, Authorization, Errors, Caching를 주제로 각각의 The good, The bad, The ugly…]]></description><link>https://ohseunghyeon.github.io/study/APIs-The-Good-The-Bad-The-Ugly/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/study/APIs-The-Good-The-Bad-The-Ugly/</guid><pubDate>Wed, 04 Sep 2019 09:20:08 GMT</pubDate><content:encoded>&lt;p&gt;
           &lt;div
             class=&quot;gatsby-resp-iframe-wrapper&quot;
             style=&quot;padding-bottom: 56.42857142857143%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
@@ -1069,12 +1277,7 @@ arrangement의 여는 괄호와 닫는 괄호는 항상 쌍을 이룹니다.
         &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
         
         &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; result&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이 경우 루프가 중첩되어 빅오 표기법 상 시간 복잡도는 O(n^2). 이를 O(n)으로 줄일 수 있지 않을까 하는 생각에 조금 더 고민하기로 했다. &lt;/p&gt;
-&lt;p&gt;한참 고민했는데 모르겠다. 아무래도 시간 복잡도를 여기서 더 줄이는 건 무리인가.&lt;/p&gt;
-&lt;p&gt;혹시나 싶어 다른 사람들의 풀이를 쭉 둘러봐도 더 나은 시간 복잡도는 없어 보인다.&lt;/p&gt;
-&lt;p&gt;끝&lt;/p&gt;
-&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;소요한 시간: 40분&lt;/code&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Blog 꾸미기]]></title><description><![CDATA[본격적인 일기를 쓰기 위해서 블로그를 새로 만들었다. 블로그를 만들기 위해서 사용한 도구는 Gatsby이다. Gatsby는 이고, React를 기반으로 작동한다. 최근에 React…]]></description><link>https://ohseunghyeon.github.io/blogging/blog-todo-list/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/blog-todo-list/</guid><pubDate>Tue, 03 Sep 2019 09:19:59 GMT</pubDate><content:encoded>&lt;p&gt;본격적인 일기를 쓰기 위해서 블로그를 새로 만들었다.&lt;/p&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Blog 꾸미기]]></title><description><![CDATA[본격적인 일기를 쓰기 위해서 블로그를 새로 만들었다. 블로그를 만들기 위해서 사용한 도구는 Gatsby이다. Gatsby는 이고, React를 기반으로 작동한다. 최근에 React…]]></description><link>https://ohseunghyeon.github.io/blogging/blog-todo-list/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/blog-todo-list/</guid><pubDate>Tue, 03 Sep 2019 09:19:59 GMT</pubDate><content:encoded>&lt;p&gt;본격적인 일기를 쓰기 위해서 블로그를 새로 만들었다.&lt;/p&gt;
 &lt;p&gt;블로그를 만들기 위해서 사용한 도구는 Gatsby이다. Gatsby는 &lt;code class=&quot;language-text&quot;&gt;정적 사이트 생성기&lt;/code&gt;이고, React를 기반으로 작동한다. 최근에 React를 공부하고 있기 떄문에, 이 도구를 쓰는 게 도움이 되지 않을까 생각했다.&lt;/p&gt;
 &lt;p&gt;블로그를 생성하기 위한 기본 틀은 &lt;a href=&quot;https://www.gatsbyjs.org/starters/gatsbyjs/gatsby-starter-blog/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;gatsby-starter-blog&lt;/a&gt;를 사용했다. gatsby에서 제공하는 템플릿인데, starter라는 이름에 맞게 레이아웃이나 스타일이 정말 기본적이고, 아무것도 없다.&lt;/p&gt;
 &lt;p&gt;그래서 나는 고치고 싶은 부분들을 리스트로 정리해서 하나하나 하기로 했다.&lt;/p&gt;
