@@ -1,4 +1,157 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Mon, 09 Sep 2019 13:23:53 GMT</lastBuildDate><item><title><![CDATA[다리를 지나는 트럭]]></title><description><![CDATA[문제 설명 트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/다리를-지나는-트럭/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/다리를-지나는-트럭/</guid><pubDate>Fri, 06 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 10 Sep 2019 03:41:02 GMT</lastBuildDate><item><title><![CDATA[완주하지 못한 선수]]></title><description><![CDATA[문제 설명 전화번호부에 적힌 전화번호 중, 한 번호가 다른 번호의 접두어인 경우가 있는지 확인하려 합니다. 전화번호가 다음과 같을 경우, 구조대 전화번호는 영석이의 전화번호의 접두사입니다. 구조대 : 119 박준영 : 97 674 22…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/전화번호-목록/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/전화번호-목록/</guid><pubDate>Tue, 10 Sep 2019 02:30:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;전화번호부에 적힌 전화번호 중, 한 번호가 다른 번호의 접두어인 경우가 있는지 확인하려 합니다.&lt;br&gt;
+전화번호가 다음과 같을 경우, 구조대 전화번호는 영석이의 전화번호의 접두사입니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;구조대 : 119&lt;/li&gt;
+&lt;li&gt;박준영 : 97 674 223&lt;/li&gt;
+&lt;li&gt;지영석 : 11 9552 4421&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;전화번호부에 적힌 전화번호를 담은 배열 phone_book 이 solution 함수의 매개변수로 주어질 때, 어떤 번호가 다른 번호의 접두어인 경우가 있으면 false를 그렇지 않으면 true를 return 하도록 solution 함수를 작성해주세요.&lt;/p&gt;
+&lt;h2&gt;제한 사항&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;phone_book의 길이는 1 이상 1,000,000 이하입니다.&lt;/li&gt;
+&lt;li&gt;각 전화번호의 길이는 1 이상 20 이하입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;입출력 예제&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;phone_book&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[“119”,“97674223”,“1195524421”]&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[“123”,“456”,“789”]&lt;/td&gt;
+&lt;td&gt;true&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[“12”,“123”,“1235”,“567”,“88”]&lt;/td&gt;
+&lt;td&gt;false&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;입출력 예 설명&lt;/h2&gt;
+&lt;p&gt;입출력 예 #1&lt;br&gt;
+앞에서 설명한 예와 같습니다.&lt;/p&gt;
+&lt;p&gt;입출력 예 #2&lt;br&gt;
+한 번호가 다른 번호의 접두사인 경우가 없으므로, 답은 true입니다.&lt;/p&gt;
+&lt;p&gt;입출력 예 #3&lt;br&gt;
+첫 번째 전화번호, “12”가 두 번째 전화번호 “123”의 접두사입니다. 따라서 답은 false입니다.&lt;/p&gt;
+&lt;h2&gt;알림&lt;/h2&gt;
+&lt;p&gt;2019년 5월 13일, 테스트 케이스가 변경되었습니다. 이로 인해 이전에 통과하던 코드가 더 이상 통과하지 않을 수 있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://ncpc.idi.ntnu.no/ncpc2007/ncpc2007problems.pdf&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;출처&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;나의 풀이&lt;/h2&gt;
+&lt;p&gt;나는 처음에 아래와 같이 전화번호부를 ‘길이’로 정렬하여 비교할 생각을 했다. 아마 문제가 풀리기는 했겠지만 효율성은 떨어질 것이다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;phonebook &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; phonebook&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;a&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; a&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; length &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; i&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; j &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; i &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; j &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; length &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;사실 나의 풀이에서 sort는 거의 필요 없다고 볼 수 있다. 아마 무의미한 짓일 것이다. length로 비교해서 얻는 이득이 크지 않으니까.&lt;/p&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;a.length - b.length&lt;/code&gt; 보다는 &lt;code class=&quot;language-text&quot;&gt;a - b&lt;/code&gt; 가 훨씬 나았을 것이다. 그냥 오름차순으로 정렬하는 게 substring을 비교했을 때 가까이에 나올 확률이 더 높으니까&lt;/p&gt;
+&lt;p&gt;다른 사람들의 답을 보던 중 다음을 발견했다.  &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;c++&quot;&gt;&lt;pre class=&quot;language-c++&quot;&gt;&lt;code class=&quot;language-c++&quot;&gt;#include &amp;lt;string&amp;gt;
+#include &amp;lt;vector&amp;gt;
+#include &amp;lt;algorithm&amp;gt;
+#include &amp;lt;iostream&amp;gt;
+using namespace std;
+
+bool solution(vector&amp;lt;string&amp;gt; phoneBook) {
+    bool answer = true;
+
+    sort(phoneBook.begin(), phoneBook.end());
+
+    for ( int i = 0 ; i &amp;lt; phoneBook.size() - 1 ; i++ )
+    {
+        if ( phoneBook[i] == phoneBook[i+1].substr(0, phoneBook[i].size()) )
+        {
+            answer = false;
+            break;
+        }
+    }
+
+    return answer;
+}&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 코드의 경우엔 전화번호를 오름차순으로 정렬하고 각각의 전화번호부를 딱 한 번 순회한다. 그렇다. 문자열 오름차순으로 정렬하면 그저 현재 번호가 다음 번호의 substring이 될 수 있는지만 따져보면 된다.&lt;/p&gt;
+&lt;p&gt;시간복잡도를 따져보면 나의 코드는 중첩 루프에 의해 &lt;code class=&quot;language-text&quot;&gt;O(n^2)&lt;/code&gt; 이지만, 위의 경우 loop에 의한 건 n에 정렬 알고리즘에 의해 &lt;code class=&quot;language-text&quot;&gt;O(nlogn)&lt;/code&gt;이 나온다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[완주하지 못한 선수]]></title><description><![CDATA[문제 설명 수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다. 마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/완주하지-못한-선수/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/완주하지-못한-선수/</guid><pubDate>Tue, 10 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;수많은 마라톤 선수들이 마라톤에 참여하였습니다. 단 한 명의 선수를 제외하고는 모든 선수가 마라톤을 완주하였습니다.&lt;/p&gt;
+&lt;p&gt;마라톤에 참여한 선수들의 이름이 담긴 배열 participant와 완주한 선수들의 이름이 담긴 배열 completion이 주어질 때, 완주하지 못한 선수의 이름을 return 하도록 solution 함수를 작성해주세요.&lt;/p&gt;
+&lt;h2&gt;제한사항&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;마라톤 경기에 참여한 선수의 수는 1명 이상 100,000명 이하입니다.&lt;/li&gt;
+&lt;li&gt;completion의 길이는 participant의 길이보다 1 작습니다.&lt;/li&gt;
+&lt;li&gt;참가자의 이름은 1개 이상 20개 이하의 알파벳 소문자로 이루어져 있습니다.&lt;/li&gt;
+&lt;li&gt;참가자 중에는 동명이인이 있을 수 있습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;입출력 예&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;participant&lt;/th&gt;
+&lt;th&gt;completion&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[leo, kiki, eden]&lt;/td&gt;
+&lt;td&gt;[eden, kiki]&lt;/td&gt;
+&lt;td&gt;leo&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[marina, josipa, nikola, vinko, filipa]&lt;/td&gt;
+&lt;td&gt;[josipa, filipa, marina, nikola]&lt;/td&gt;
+&lt;td&gt;vinko&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[mislav, stanko, mislav, ana]&lt;/td&gt;
+&lt;td&gt;[stanko, ana, mislav]&lt;/td&gt;
+&lt;td&gt;mislav&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;입출력 예 설명&lt;/h2&gt;
+&lt;p&gt;예제 #1&lt;br&gt;
+leo는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문에 완주하지 못했습니다.&lt;/p&gt;
+&lt;p&gt;예제 #2&lt;br&gt;
+vinko는 참여자 명단에는 있지만, 완주자 명단에는 없기 때문에 완주하지 못했습니다.&lt;/p&gt;
+&lt;p&gt;예제 #3&lt;br&gt;
+mislav는 참여자 명단에는 두 명이 있지만, 완주자 명단에는 한 명밖에 없기 때문에 한명은 완주하지 못했습니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://hsin.hr/coci/archive/2014_2015/contest2_tasks.pdf&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;출처&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;풀이&lt;/h2&gt;
+&lt;p&gt;참가자 배열에서 딱 하나의 엘리먼트가 빠졌을 때 그 엘리먼트가 뭔지 찾아내는 문제&lt;/p&gt;
+&lt;p&gt;나는 참가자를 해쉬테이블에 모두 담고, 완주한 사람들을 해쉬테이블에서 제거한 후, 해쉬테이블에서 단 하나 남은 키를 리턴했다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;participant&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; completion&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; participantHashmap &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;token class-name&quot;&gt;Map&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  participant&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;p&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;participantHashmap&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;p&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; participantHashmap&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;p&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      participantHashmap&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;p&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  completion&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;c&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      participantHashmap&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;c&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;--&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;participantHashmap&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;c&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;delete&lt;/span&gt; participantHashmap&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;c&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; Object&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;participantHashmap&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;다른 사람들의 풀이 중 내 풀이보다 빠른 것을 발견했다.&lt;br&gt;
+이 경우에는 참가자가 아닌 완주한 사람을 먼저 해쉬테이블에 담고, 이 해쉬테이블에서 참가자를 빼는 경우였다. 이 경우 참가자를 모두 빼야하는 시나리오에서는 내 풀이와 비슷한 속도가 나오겠지만, 중간에 완료하지 못한 사람을 찾아서 리턴할 수 있기 때문에 어떤 시나리오에서는 내 것의 반절의 속도가 나올 수 있게 된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;  &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;participant&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; completion&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; dic &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; completion&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;reduce&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;obj&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; t&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;obj&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; obj&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; obj&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; obj&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; participant&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;dic&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; dic&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; dic&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;t&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+          &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token boolean&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[다리를 지나는 트럭]]></title><description><![CDATA[문제 설명 트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/다리를-지나는-트럭/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/다리를-지나는-트럭/</guid><pubDate>Fri, 06 Sep 2019 02:00:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;트럭 여러 대가 강을 가로지르는 일 차선 다리를 정해진 순으로 건너려 합니다. 모든 트럭이 다리를 건너려면 최소 몇 초가 걸리는지 알아내야 합니다. 트럭은 1초에 1만큼 움직이며, 다리 길이는 bridge_length이고 다리는 무게 weight까지 견딥니다.&lt;/p&gt;
 &lt;p&gt;※ 트럭이 다리에 완전히 오르지 않은 경우, 이 트럭의 무게는 고려하지 않습니다.&lt;/p&gt;
 &lt;p&gt;예를 들어, 길이가 2이고 10kg 무게를 견디는 다리가 있습니다. 무게가 [7, 4, 5, 6]kg인 트럭이 순서대로 최단 시간 안에 다리를 건너려면 다음과 같이 건너야 합니다.&lt;/p&gt;

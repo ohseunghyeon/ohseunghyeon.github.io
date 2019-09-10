@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{200:function(e,n,t){"use strict";t.r(n);var a=t(0),l=t.n(a);n.default=function(){return l.a.createElement("main",null,l.a.createElement("h1",null,"Oh SeungHyeon"),l.a.createElement("p",null,"안녕하세요"))}}}]);
+//# sourceMappingURL=component---src-pages-about-js-01b6c9a72efde9d11164.js.map
