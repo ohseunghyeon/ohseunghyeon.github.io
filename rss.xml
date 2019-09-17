@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 17 Sep 2019 08:20:54 GMT</lastBuildDate><item><title><![CDATA[Github pages를 github actions로 자동 배포하기]]></title><description><![CDATA[나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다. 수동으로 블로그를 배포하기 위해서 블로그의 정적 파일들을 생성하고, 이를 username.github.io…]]></description><link>https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</guid><pubDate>Tue, 17 Sep 2019 07:35:27 GMT</pubDate><content:encoded>&lt;p&gt;나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 17 Sep 2019 09:02:13 GMT</lastBuildDate><item><title><![CDATA[Github pages를 github actions로 자동 배포하기]]></title><description><![CDATA[나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다. 수동으로 블로그를 배포하기 위해서 블로그의 정적 파일들을 생성하고, 이를 username.github.io…]]></description><link>https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</guid><pubDate>Tue, 17 Sep 2019 07:35:27 GMT</pubDate><content:encoded>&lt;p&gt;나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;- username.github.io 저장소 (static files)
 - 블로그 생성기 저장소 (gatsby - static site generater)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;수동으로 블로그를 배포하기 위해서 블로그의 정적 파일들을 생성하고, 이를 &lt;strong&gt;username.github.io&lt;/strong&gt; 저장소에 푸쉬해 왔다.&lt;br&gt;
@@ -83,17 +83,125 @@
         loading=&quot;lazy&quot;
       /&gt;
     &lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;위와 같이 깃허브 저장소에 가면 Actions 버튼이 있다. 이는 Github Actions Beta를 신청하여 승인 이메일을 받은 경우에만 활성화된다.&lt;/p&gt;
-&lt;p&gt;Actions 버튼을 누르면 Workflow 파일을 생성할 수 있는 페이지가 나온다. 해당 페이지에서 &lt;code class=&quot;language-text&quot;&gt;Add a new workflow&lt;/code&gt;를 눌러서 workflow 파일을 GUI 상에서 생성해도 되고, 직접 파일을 만들어도 된다. 나의 경우 직접 만들어서 진행하겠다.&lt;/p&gt;
+&lt;p&gt;위와 같이 깃허브 저장소에 가면 Actions 버튼이 있다.&lt;br&gt;
+(Github Actions Beta를 신청하여 승인 이메일을 받은 경우에만 활성화된다.)&lt;/p&gt;
+&lt;p&gt;Actions 버튼을 누르면 Workflow 파일을 생성할 수 있는 페이지가 나온다. 해당 페이지에서 &lt;strong&gt;Add a new workflow&lt;/strong&gt; 버튼을 눌러서 workflow 파일을 GUI 상에서 생성해도 되고, 직접 파일을 만들어도 된다. 나의 경우 직접 만들어서 진행하겠다.&lt;/p&gt;
 &lt;h3&gt;Workflow 파일 생성&lt;/h3&gt;
 &lt;p&gt;Workflow 파일은 저장소의 root에서 &lt;strong&gt;.github/workflows&lt;/strong&gt; 디렉토리를 생성한 후 그 내부에 &lt;code class=&quot;language-text&quot;&gt;.yml&lt;/code&gt; 또는 &lt;code class=&quot;language-text&quot;&gt;.yaml&lt;/code&gt;로 생성한다. 내 경우 blog deploy를 위해 다음과 같이 만들겠다. yml 파일의 이름은 아무렇게나 해도 되는 것 같다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;/.github/workflows/continuous-deployment-workflow.yml&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;아래는 배포를 위해 만든 workflow 파일이다&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;yml&quot;&gt;&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Blog Deployment
+
+&lt;span class=&quot;token key atrule&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;push&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;token key atrule&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Deploying
+    &lt;span class=&quot;token key atrule&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; ubuntu&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;latest &lt;span class=&quot;token comment&quot;&gt;# 가상 환경으로 ubuntu, linux, macOs 등을 설정할 수 있다.&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; clone gatsby&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;blog
+      &lt;span class=&quot;token key atrule&quot;&gt;uses&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; actions/checkout@master
+      &lt;span class=&quot;token key atrule&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;token key atrule&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;static-site-generator&apos;&lt;/span&gt;
+
+    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; git config
+      &lt;span class=&quot;token key atrule&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;token key atrule&quot;&gt;USER_NAME&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; github.event.pusher.name &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token key atrule&quot;&gt;USER_EMAIL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; github.event.pusher.email &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+        git config --global user.email &quot;$USER_EMAIL&quot;
+        git config --global user.name &quot;$USER_NAME&quot;&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;# 참고: https://cupfullofcode.com/blog/2018/12/21/deploying-hugo-with-github-actions/&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; make deploy keys
+      &lt;span class=&quot;token key atrule&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+        &lt;span class=&quot;token key atrule&quot;&gt;GH_ACTION_DEPLOY_KEY&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; secrets.GH_ACTION_DEPLOY_KEY &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+        mkdir -p ~/.ssh/
+        echo &quot;$GH_ACTION_DEPLOY_KEY&quot; &gt; ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com &gt;&gt; ~/.ssh/known_hosts&lt;/span&gt;
+
+    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; clone static_site_repo
+      &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+        cd ..
+        git clone git@github.com:ohseunghyeon/ohseunghyeon.github.io.git static_site_repo&lt;/span&gt;
+
+
+    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; install dependencies &amp;amp; build
+      &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+        yarn
+        yarn build&lt;/span&gt;
+
+    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; move build files to static files repo
+      &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+        rm -rf ../static_site_repo/*
+        mv ./public/* ../static_site_repo&lt;/span&gt;
+
+    &lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; push changed files
+      &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+        cd ../static_site_repo
+        git add .
+        git commit -m &quot;$(git -C ../static-site-generator/ log --format=%B -n 1)&quot;
+        git push origin master&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;먼저 최상위에 정의된 name, on, jobs를 살펴보자&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;yml&quot;&gt;&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; Blog Deployment
+
+&lt;span class=&quot;token key atrule&quot;&gt;on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;push&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+
+&lt;span class=&quot;token key atrule&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;name&lt;/code&gt;: Workflow의 이름&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;on&lt;/code&gt;: 여기에 기술된 이벤트에 의해 이 workflow가 작동한다. 특정 동작일 수도 있고, schedule이 될 수도 있다. 나의 경우 해당 브랜치에서 push가 발생할 때 이 workflow를 실행한다. 특정 브랜치, 특정 파일에 의한 trigger도 지정 가능하다. 자세한 내용은 &lt;a href=&quot;https://help.github.com/en/articles/events-that-trigger-workflows&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Event Trigger&lt;/a&gt;를 참고하라.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;jobs&lt;/code&gt;: job이란 workflow에서 실행할 작업의 단위이다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;다음으로 내가 설정한 job을 보자&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;yml&quot;&gt;&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;jobs&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; build
+    &lt;span class=&quot;token key atrule&quot;&gt;runs-on&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; ubuntu&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt;latest
+    &lt;span class=&quot;token key atrule&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;jobs&lt;/code&gt; 아래에 위치한 &lt;strong&gt;build&lt;/strong&gt;는 job이다. 해당 job 엔 name, runs-on, steps가 있다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;name&lt;/code&gt;: job의 이름. 생략 가능하다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;runs-on&lt;/code&gt;: 해당 job을 실행할 가상 환경으로 ubuntu, linux, macOs 로 설정할 수 있다.&lt;/li&gt;
+&lt;li&gt;&lt;code class=&quot;language-text&quot;&gt;steps&lt;/code&gt;: step은 Job이 실행되는 하나의 가상 환경에서 이루어질 일련의 작업이다. job이 추상적인 단위라면 step은 좀 더 실질적인 단위로, command나 action을 실행할 수 있다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;개념이 너무 많아서 헷갈릴 수 있다. 일단 끝까지 읽고 또 읽든지 다른 참고 자료를 찾아서 공부하는 게 좋다&lt;/p&gt;
+&lt;p&gt;다음은 각각의 step들을 하나씩 살펴보자&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;yml&quot;&gt;&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; install dependencies &amp;amp; build
+  &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+    yarn
+    yarn build&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;name&lt;/code&gt;과 &lt;code class=&quot;language-text&quot;&gt;run&lt;/code&gt;이 있다. name은 생략 가능하며 이 때 name은 알아서 정해진다. 그리고 run은 command를 실행한다. command는 다음과 같이 한 줄 또는 여러줄로 생성 가능하다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;yml&quot;&gt;&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;# single line&lt;/span&gt;
+&lt;span class=&quot;token key atrule&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; yarn
+
+&lt;span class=&quot;token comment&quot;&gt;# multiple lines&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+  yarn
+  yarn build
+  ...&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;다른 step을 살펴보자&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;yml&quot;&gt;&lt;pre class=&quot;language-yml&quot;&gt;&lt;code class=&quot;language-yml&quot;&gt;&lt;span class=&quot;token key atrule&quot;&gt;steps&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;token key atrule&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; git config
+  &lt;span class=&quot;token key atrule&quot;&gt;env&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;USER_NAME&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; github.event.pusher.name &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token key atrule&quot;&gt;USER_EMAIL&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; $&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; github.event.pusher.email &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token key atrule&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;token scalar string&quot;&gt;
+    echo &quot;$USER_EMAIL&quot;
+    git config --global user.email &quot;$USER_EMAIL&quot;
+    git config --global user.name &quot;$USER_NAME&quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code class=&quot;language-text&quot;&gt;env&lt;/code&gt;가 있다. 아무 값이나 넣어서 설정할 수 있다. 그런데 &lt;code class=&quot;language-text&quot;&gt;${{ github.event.pusher.name }}&lt;/code&gt;는 뭘까? 이건 actions에서 제공하는 context를 사용하는 방법이다. github이라는 context 아래에 있는 event.pusher.name를 환경변수 USER&lt;em&gt;NAME과 USER&lt;/em&gt;EMAIL로 각각 설정하는 것이다.&lt;/p&gt;
 &lt;h2&gt;참고&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;yml에 대해 빠르게 알고 싶다면 &lt;a href=&quot;https://www.codeproject.com/Articles/1214409/Learn-YAML-in-five-minutes&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Learn YAML in five minutes!&lt;/a&gt;을 참고하라.&lt;/li&gt;
 &lt;li&gt;Github Actions가 나온 당시에는 HCL syntax라는 것을 사용했지만 2019년 9월 30일 이후로 deprecated 된다. 조금 오래된 자료를 찾아보면 yml이 아닌 특이한 syntax를 가진 workflow 또는 action 파일을 찾을 수 있는데 이는 모두 곧 쓸모 없어진다.&lt;/li&gt;
 &lt;li&gt;workflow 작성법을 알고 싶다면 &lt;a href=&quot;https://help.github.com/en/articles/configuring-a-workflow&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Configuring a workflow&lt;/a&gt;와 &lt;a href=&quot;https://help.github.com/en/articles/workflow-syntax-for-github-actions&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Workflow syntax for Github Actions&lt;/a&gt;를 참고하길 바란다.&lt;/li&gt;
-&lt;li&gt;List of &lt;a href=&quot;https://help.github.com/en/articles/events-that-trigger-workflows&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Event Trigger&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;List of &lt;/li&gt;
 &lt;li&gt;매 액션은 경로를 그 repo로 갖고 시작한다.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;a href=&quot;https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line&lt;/a&gt;&lt;/p&gt;

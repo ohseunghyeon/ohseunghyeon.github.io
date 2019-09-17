@@ -83,17 +83,125 @@
         loading="lazy"
       />
     </span></p>
-<p>위와 같이 깃허브 저장소에 가면 Actions 버튼이 있다. 이는 Github Actions Beta를 신청하여 승인 이메일을 받은 경우에만 활성화된다.</p>
-<p>Actions 버튼을 누르면 Workflow 파일을 생성할 수 있는 페이지가 나온다. 해당 페이지에서 <code class="language-text">Add a new workflow</code>를 눌러서 workflow 파일을 GUI 상에서 생성해도 되고, 직접 파일을 만들어도 된다. 나의 경우 직접 만들어서 진행하겠다.</p>
+<p>위와 같이 깃허브 저장소에 가면 Actions 버튼이 있다.<br>
+(Github Actions Beta를 신청하여 승인 이메일을 받은 경우에만 활성화된다.)</p>
+<p>Actions 버튼을 누르면 Workflow 파일을 생성할 수 있는 페이지가 나온다. 해당 페이지에서 <strong>Add a new workflow</strong> 버튼을 눌러서 workflow 파일을 GUI 상에서 생성해도 되고, 직접 파일을 만들어도 된다. 나의 경우 직접 만들어서 진행하겠다.</p>
 <h3>Workflow 파일 생성</h3>
 <p>Workflow 파일은 저장소의 root에서 <strong>.github/workflows</strong> 디렉토리를 생성한 후 그 내부에 <code class="language-text">.yml</code> 또는 <code class="language-text">.yaml</code>로 생성한다. 내 경우 blog deploy를 위해 다음과 같이 만들겠다. yml 파일의 이름은 아무렇게나 해도 되는 것 같다.</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">/.github/workflows/continuous-deployment-workflow.yml</code></pre></div>
+<p>아래는 배포를 위해 만든 workflow 파일이다</p>
+<div class="gatsby-highlight" data-language="yml"><pre class="language-yml"><code class="language-yml"><span class="token key atrule">name</span><span class="token punctuation">:</span> Blog Deployment
+
+<span class="token key atrule">on</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>push<span class="token punctuation">]</span>
+
+<span class="token key atrule">jobs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">build</span><span class="token punctuation">:</span>
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> Deploying
+    <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest <span class="token comment"># 가상 환경으로 ubuntu, linux, macOs 등을 설정할 수 있다.</span>
+    <span class="token key atrule">steps</span><span class="token punctuation">:</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> clone gatsby<span class="token punctuation">-</span>blog
+      <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@master
+      <span class="token key atrule">with</span><span class="token punctuation">:</span>
+        <span class="token key atrule">path</span><span class="token punctuation">:</span> <span class="token string">'static-site-generator'</span>
+
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> git config
+      <span class="token key atrule">env</span><span class="token punctuation">:</span>
+        <span class="token key atrule">USER_NAME</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> github.event.pusher.name <span class="token punctuation">}</span><span class="token punctuation">}</span>
+        <span class="token key atrule">USER_EMAIL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> github.event.pusher.email <span class="token punctuation">}</span><span class="token punctuation">}</span>
+      <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+        git config --global user.email "$USER_EMAIL"
+        git config --global user.name "$USER_NAME"</span>
+
+    <span class="token comment"># 참고: https://cupfullofcode.com/blog/2018/12/21/deploying-hugo-with-github-actions/</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> make deploy keys
+      <span class="token key atrule">env</span><span class="token punctuation">:</span>
+        <span class="token key atrule">GH_ACTION_DEPLOY_KEY</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> secrets.GH_ACTION_DEPLOY_KEY <span class="token punctuation">}</span><span class="token punctuation">}</span>
+      <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+        mkdir -p ~/.ssh/
+        echo "$GH_ACTION_DEPLOY_KEY" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts</span>
+
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> clone static_site_repo
+      <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+        cd ..
+        git clone git@github.com:ohseunghyeon/ohseunghyeon.github.io.git static_site_repo</span>
+
+
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> install dependencies &amp; build
+      <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+        yarn
+        yarn build</span>
+
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> move build files to static files repo
+      <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+        rm -rf ../static_site_repo/*
+        mv ./public/* ../static_site_repo</span>
+
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> push changed files
+      <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+        cd ../static_site_repo
+        git add .
+        git commit -m "$(git -C ../static-site-generator/ log --format=%B -n 1)"
+        git push origin master</span></code></pre></div>
+<p>먼저 최상위에 정의된 name, on, jobs를 살펴보자</p>
+<div class="gatsby-highlight" data-language="yml"><pre class="language-yml"><code class="language-yml"><span class="token key atrule">name</span><span class="token punctuation">:</span> Blog Deployment
+
+<span class="token key atrule">on</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>push<span class="token punctuation">]</span>
+
+<span class="token key atrule">jobs</span><span class="token punctuation">:</span> <span class="token punctuation">...</span></code></pre></div>
+<ul>
+<li><code class="language-text">name</code>: Workflow의 이름</li>
+<li><code class="language-text">on</code>: 여기에 기술된 이벤트에 의해 이 workflow가 작동한다. 특정 동작일 수도 있고, schedule이 될 수도 있다. 나의 경우 해당 브랜치에서 push가 발생할 때 이 workflow를 실행한다. 특정 브랜치, 특정 파일에 의한 trigger도 지정 가능하다. 자세한 내용은 <a href="https://help.github.com/en/articles/events-that-trigger-workflows" target="_blank" rel="nofollow noopener noreferrer">Event Trigger</a>를 참고하라.</li>
+<li><code class="language-text">jobs</code>: job이란 workflow에서 실행할 작업의 단위이다.</li>
+</ul>
+<p>다음으로 내가 설정한 job을 보자</p>
+<div class="gatsby-highlight" data-language="yml"><pre class="language-yml"><code class="language-yml"><span class="token key atrule">jobs</span><span class="token punctuation">:</span>
+  <span class="token key atrule">build</span><span class="token punctuation">:</span>
+    <span class="token key atrule">name</span><span class="token punctuation">:</span> build
+    <span class="token key atrule">runs-on</span><span class="token punctuation">:</span> ubuntu<span class="token punctuation">-</span>latest
+    <span class="token key atrule">steps</span><span class="token punctuation">:</span>
+      <span class="token punctuation">...</span></code></pre></div>
+<p><code class="language-text">jobs</code> 아래에 위치한 <strong>build</strong>는 job이다. 해당 job 엔 name, runs-on, steps가 있다.</p>
+<ul>
+<li><code class="language-text">name</code>: job의 이름. 생략 가능하다.</li>
+<li><code class="language-text">runs-on</code>: 해당 job을 실행할 가상 환경으로 ubuntu, linux, macOs 로 설정할 수 있다.</li>
+<li><code class="language-text">steps</code>: step은 Job이 실행되는 하나의 가상 환경에서 이루어질 일련의 작업이다. job이 추상적인 단위라면 step은 좀 더 실질적인 단위로, command나 action을 실행할 수 있다.</li>
+</ul>
+<p>개념이 너무 많아서 헷갈릴 수 있다. 일단 끝까지 읽고 또 읽든지 다른 참고 자료를 찾아서 공부하는 게 좋다</p>
+<p>다음은 각각의 step들을 하나씩 살펴보자</p>
+<div class="gatsby-highlight" data-language="yml"><pre class="language-yml"><code class="language-yml"><span class="token key atrule">steps</span><span class="token punctuation">:</span>
+<span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> install dependencies &amp; build
+  <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+    yarn
+    yarn build</span></code></pre></div>
+<p><code class="language-text">name</code>과 <code class="language-text">run</code>이 있다. name은 생략 가능하며 이 때 name은 알아서 정해진다. 그리고 run은 command를 실행한다. command는 다음과 같이 한 줄 또는 여러줄로 생성 가능하다.</p>
+<div class="gatsby-highlight" data-language="yml"><pre class="language-yml"><code class="language-yml"><span class="token comment"># single line</span>
+<span class="token key atrule">steps</span><span class="token punctuation">:</span>
+<span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> yarn
+
+<span class="token comment"># multiple lines</span>
+<span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+  yarn
+  yarn build
+  ...</span></code></pre></div>
+<p>다른 step을 살펴보자</p>
+<div class="gatsby-highlight" data-language="yml"><pre class="language-yml"><code class="language-yml"><span class="token key atrule">steps</span><span class="token punctuation">:</span>
+<span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> git config
+  <span class="token key atrule">env</span><span class="token punctuation">:</span>
+    <span class="token key atrule">USER_NAME</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> github.event.pusher.name <span class="token punctuation">}</span><span class="token punctuation">}</span>
+    <span class="token key atrule">USER_EMAIL</span><span class="token punctuation">:</span> $<span class="token punctuation">{</span><span class="token punctuation">{</span> github.event.pusher.email <span class="token punctuation">}</span><span class="token punctuation">}</span>
+  <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string">
+    echo "$USER_EMAIL"
+    git config --global user.email "$USER_EMAIL"
+    git config --global user.name "$USER_NAME"</span></code></pre></div>
+<p><code class="language-text">env</code>가 있다. 아무 값이나 넣어서 설정할 수 있다. 그런데 <code class="language-text">${{ github.event.pusher.name }}</code>는 뭘까? 이건 actions에서 제공하는 context를 사용하는 방법이다. github이라는 context 아래에 있는 event.pusher.name를 환경변수 USER<em>NAME과 USER</em>EMAIL로 각각 설정하는 것이다.</p>
 <h2>참고</h2>
 <ul>
 <li>yml에 대해 빠르게 알고 싶다면 <a href="https://www.codeproject.com/Articles/1214409/Learn-YAML-in-five-minutes" target="_blank" rel="nofollow noopener noreferrer">Learn YAML in five minutes!</a>을 참고하라.</li>
 <li>Github Actions가 나온 당시에는 HCL syntax라는 것을 사용했지만 2019년 9월 30일 이후로 deprecated 된다. 조금 오래된 자료를 찾아보면 yml이 아닌 특이한 syntax를 가진 workflow 또는 action 파일을 찾을 수 있는데 이는 모두 곧 쓸모 없어진다.</li>
 <li>workflow 작성법을 알고 싶다면 <a href="https://help.github.com/en/articles/configuring-a-workflow" target="_blank" rel="nofollow noopener noreferrer">Configuring a workflow</a>와 <a href="https://help.github.com/en/articles/workflow-syntax-for-github-actions" target="_blank" rel="nofollow noopener noreferrer">Workflow syntax for Github Actions</a>를 참고하길 바란다.</li>
-<li>List of <a href="https://help.github.com/en/articles/events-that-trigger-workflows" target="_blank" rel="nofollow noopener noreferrer">Event Trigger</a></li>
+<li>List of </li>
 <li>매 액션은 경로를 그 repo로 갖고 시작한다.</li>
 </ul>
 <p><a href="https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line" target="_blank" rel="nofollow noopener noreferrer">https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line</a></p>
