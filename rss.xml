@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 17 Sep 2019 10:24:39 GMT</lastBuildDate><item><title><![CDATA[Github pages를 github actions로 자동 배포하기]]></title><description><![CDATA[나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다. 수동으로 블로그를 배포하기 위해서 블로그의 정적 파일들을 생성하고, 이를 username.github.io…]]></description><link>https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</guid><pubDate>Tue, 17 Sep 2019 10:22:37 GMT</pubDate><content:encoded>&lt;p&gt;나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Cat, Lazy]]></description><link>https://ohseunghyeon.github.io</link><generator>RSS for Node</generator><lastBuildDate>Tue, 17 Sep 2019 10:29:00 GMT</lastBuildDate><item><title><![CDATA[Github pages를 github actions로 자동 배포하기]]></title><description><![CDATA[나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다. 수동으로 블로그를 배포하기 위해서 블로그의 정적 파일들을 생성하고, 이를 username.github.io…]]></description><link>https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</guid><pubDate>Tue, 17 Sep 2019 10:22:37 GMT</pubDate><content:encoded>&lt;p&gt;나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;- username.github.io 저장소 (static files)
 - 블로그 생성기 저장소 (gatsby - static site generater)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;수동으로 블로그를 배포하기 위해서 블로그의 정적 파일들을 생성하고, 이를 &lt;strong&gt;username.github.io&lt;/strong&gt; 저장소에 푸쉬해 왔다.&lt;br&gt;
@@ -328,6 +328,8 @@
 &lt;p&gt;이렇게 키까지 모두 세팅하면 저장소를 push할 때마다 자동으로 배포가 실행된다.&lt;/p&gt;
 &lt;h3&gt;Github Actions 용어 정리&lt;/h3&gt;
 &lt;p&gt;아래 용어들은 &lt;a href=&quot;https://help.github.com/en/articles/about-github-actions#workflow&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;About GitHub Actions&lt;/a&gt;의 번역본입니다.&lt;/p&gt;
+&lt;details&gt;
+&lt;summary&gt;여기를 눌러서 보기&lt;/summary&gt;
 &lt;h4&gt;Workflow&lt;/h4&gt;
 &lt;p&gt;설정 가능한 자동화된 프로세스. 깃허브에 있는 프로젝트를 빌드, 테스트, 패키지, 릴리즈, 배포를 하기 위해서 저장소 내에 셋업할 수 있다. Workflow는 하나 이상의 job들로 이루어져 있으며, 스케쥴 또는 이벤트에 의해 활성화될 수 있다.&lt;/p&gt;
 &lt;h4&gt;Workflow run&lt;/h4&gt;
@@ -352,6 +354,7 @@
 &lt;p&gt;workflow run을 유발하는 특정 동작. 예를 들어 누군가 저장소에 커밋을 푸쉬하거나 이슈 또는 풀리퀘스트가 생성되는 행위.  또한 repository dispatch webhook을 사용한 외부 이벤트 발생을 이벤트로 설정할 수 있다.&lt;/p&gt;
 &lt;h4&gt;Artifact&lt;/h4&gt;
 &lt;p&gt;빌드나 코드를 테스트할 때 생성되는 파일. 예를 들어, 바이너리나 패키지 파일, 테스트 결과, 스크린샷, 로그 파일 등이 이에 해당한다. workflow에서 생성된 artifact는 해당 workflow와 관련이 있고, 다른 job에 의해 사용되거나 배포될 수 있다.&lt;/p&gt;
+&lt;/details&gt;
 &lt;h2&gt;참고 자료&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&quot;https://blog.outsider.ne.kr/1412&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Outsider - GitHub Actions 소개&lt;/a&gt;&lt;/li&gt;
