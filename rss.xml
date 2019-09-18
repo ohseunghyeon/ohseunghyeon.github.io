@@ -1,4 +1,96 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 18 Sep 2019 04:22:07 GMT</lastBuildDate><item><title><![CDATA[Github pages를 github actions로 자동 배포하기]]></title><description><![CDATA[나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다. 수동으로 블로그를 배포하기 위해서 블로그의 정적 파일들을 생성하고, 이를 username.github.io…]]></description><link>https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</guid><pubDate>Tue, 17 Sep 2019 10:22:37 GMT</pubDate><content:encoded>&lt;p&gt;나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다.&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 18 Sep 2019 05:25:16 GMT</lastBuildDate><item><title><![CDATA[베스트앨범]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/베스트앨범/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/베스트앨범/</guid><pubDate>Wed, 18 Sep 2019 04:35:53 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42579&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;스트리밍 사이트에서 장르 별로 가장 많이 재생된 노래를 두 개씩 모아 베스트 앨범을 출시하려 합니다. 노래는 고유 번호로 구분하며, 노래를 수록하는 기준은 다음과 같습니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;속한 노래가 많이 재생된 장르를 먼저 수록합니다.&lt;/li&gt;
+&lt;li&gt;장르 내에서 많이 재생된 노래를 먼저 수록합니다.&lt;/li&gt;
+&lt;li&gt;장르 내에서 재생 횟수가 같은 노래 중에서는 고유 번호가 낮은 노래를 먼저 수록합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;노래의 장르를 나타내는 문자열 배열 genres와 노래별 재생 횟수를 나타내는 정수 배열 plays가 주어질 때, 베스트 앨범에 들어갈 노래의 고유 번호를 순서대로 return 하도록 solution 함수를 완성하세요.&lt;/p&gt;
+&lt;h2&gt;제한사항&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;genres[i]는 고유번호가 i인 노래의 장르입니다.&lt;/li&gt;
+&lt;li&gt;plays[i]는 고유번호가 i인 노래가 재생된 횟수입니다.&lt;/li&gt;
+&lt;li&gt;genres와 plays의 길이는 같으며, 이는 1 이상 10,000 이하입니다.&lt;/li&gt;
+&lt;li&gt;장르 종류는 100개 미만입니다.&lt;/li&gt;
+&lt;li&gt;장르에 속한 곡이 하나라면, 하나의 곡만 선택합니다.&lt;/li&gt;
+&lt;li&gt;모든 장르는 재생된 횟수가 다릅니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;입출력 예&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;genres&lt;/th&gt;
+&lt;th&gt;plays&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[classic, pop, classic, classic, pop]&lt;/td&gt;
+&lt;td&gt;[500, 600, 150, 800, 2500]&lt;/td&gt;
+&lt;td&gt;[4, 1, 3, 0]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;입출력 예 설명&lt;/h2&gt;
+&lt;p&gt;classic 장르는 1,450회 재생되었으며, classic 노래는 다음과 같습니다.&lt;/p&gt;
+&lt;p&gt;-고유 번호 3: 800회 재생
+-고유 번호 0: 500회 재생
+-고유 번호 2: 150회 재생&lt;/p&gt;
+&lt;p&gt;pop 장르는 3,100회 재생되었으며, pop 노래는 다음과 같습니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;고유 번호 4: 2,500회 재생&lt;/li&gt;
+&lt;li&gt;고유 번호 1: 600회 재생&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;따라서 pop 장르의 [4, 1]번 노래를 먼저, classic 장르의 [3, 0]번 노래를 그다음에 수록합니다.&lt;/p&gt;
+&lt;h2&gt;풀이&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;genres&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; plays&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; answer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; playsByGenres &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token comment&quot;&gt;// 장르와 플레이의 배열을 순회하며 각 장르의 합과 1, 2 번째로 많이 재생된 곡을 걸러낸다.&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; genre&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; play&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; temp&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    genres&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;g&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; i&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;playsByGenres&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;g&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            playsByGenres&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;g&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                sum&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                first&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;
+                second&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+        genre &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; playsByGenres&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;g&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        play &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; plays&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;sum &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; plays&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;i&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;first &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; plays&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;first&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; play&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            temp &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;first&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;first &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; i&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;second &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; plays&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;second&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; plays&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;temp&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;second &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; temp&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;second &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; plays&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;second&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; play&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;second &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; i&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    Object&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;keys&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;playsByGenres&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// 장르 별로 정렬한 후에&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;a&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; playsByGenres&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;b&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;sum &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; playsByGenres&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;a&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;sum&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// 장르별 첫 번째와 두 번째 곡을 결과에 담는다.&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;g&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            genre &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; playsByGenres&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;g&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            answer&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;first&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token comment&quot;&gt;// 한 장르에 곡이 하나일 수도 있다.&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;second &lt;span class=&quot;token operator&quot;&gt;!==&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                answer&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;genre&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;second&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; answer&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[Github pages를 github actions로 자동 배포하기]]></title><description><![CDATA[나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다. 수동으로 블로그를 배포하기 위해서 블로그의 정적 파일들을 생성하고, 이를 username.github.io…]]></description><link>https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/deploying-github-pages-with-github-actions/</guid><pubDate>Tue, 17 Sep 2019 10:22:37 GMT</pubDate><content:encoded>&lt;p&gt;나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;- username.github.io 저장소 (static files)
 - 블로그 생성기 저장소 (gatsby - static site generater)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;수동으로 블로그를 배포하기 위해서 블로그의 정적 파일들을 생성하고, 이를 &lt;strong&gt;username.github.io&lt;/strong&gt; 저장소에 푸쉬해 왔다.&lt;br&gt;
