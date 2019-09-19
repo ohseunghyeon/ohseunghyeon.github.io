@@ -1,4 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 19 Sep 2019 05:16:33 GMT</lastBuildDate><item><title><![CDATA[프린터]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/프린터/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/프린터/</guid><pubDate>Thu, 19 Sep 2019 04:14:26 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 19 Sep 2019 11:41:34 GMT</lastBuildDate><item><title><![CDATA[Gatsby 블로그에 Draft 기능 추가하기]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/blogging/add-draft-feature/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/add-draft-feature/</guid><pubDate>Thu, 19 Sep 2019 11:39:03 GMT</pubDate><content:encoded>&lt;h2&gt;발단&lt;/h2&gt;
+&lt;p&gt;어떤 주제에 대한 글을 쓰려고 폴더와 파일을 만들어 놓고 ‘나중에 써야지’ 생각했다. 나중에 기분 좋고, 시간 많을 때 조금 더 조사해서 써야지 생각했는데, 파일은 만들어놓고 싶었다.&lt;/p&gt;
+&lt;p&gt;파일을 만들어 놓는 건 내가 해오던 일종의 습관인데, 대학에 다니던 시절에도 과제가 생기면 일단 파일을 만들어뒀었다. 그리고 어떤 방향으로 갈지, 어떤 내용을 적을지 생각하고 메모하고, 한 번에 다 하지 않고 조금씩 조금씩 나눠서 적었었다.&lt;/p&gt;
+&lt;p&gt;블로그 글도 그렇게 하려다 보니까 폴더랑 index.md를 만들어 놓고 그냥 뒀다. 그랬더니 빌드할 때 얘가 포함이 된다. 그래서 파일은 일단 지워두고 폴더만 내버려뒀다. 하지만 그런 것도 언제까지 할 텐가? draft 플래그를 넣고 걔네는 빌드가 안 되면 되지.&lt;/p&gt;
+&lt;h2&gt;시도&lt;/h2&gt;
+&lt;p&gt;gatsby-node.js 파일을 보면 graphql query가 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;graphql&quot;&gt;&lt;pre class=&quot;language-graphql&quot;&gt;&lt;code class=&quot;language-graphql&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  allMarkdownRemark&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+    &lt;span class=&quot;token attr-name&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;fields&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;frontmatter___date&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token attr-name&quot;&gt;order&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token constant&quot;&gt;DESC&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token attr-name&quot;&gt;limit&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1000&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    edges &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      node &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        fields &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          slug
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        frontmatter &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+          title
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;filter를 넣어서 frontmatter에 draft가 true면 글을 가져오지 않게 했다. 그랬더니 index 페이지에 글 목록에선 남아 있고 글을 누르면 빈 화면이 나온다.&lt;/p&gt;
+&lt;p&gt;아, index 페이지에서도 없애야 하는구나. gatsby-node에서는 페이지를 만드는 부분이구나. 그래서 &lt;strong&gt;/src/pages/index.js&lt;/strong&gt;에도 filter를 위와 같이 넣었다. 그랬더니 글이 더 이상 나오지 않는다!&lt;/p&gt;
+&lt;p&gt;내가 제대로 한 걸까? 내가 한 것과 같은 기능을 구현한 사람들은 어떻게 했는지 검색을 했다. 그리고 &lt;a href=&quot;https://dev.to/cole_ruche/implementing-a-draft-feature-in-a-gatsby-blog-1m7o&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;이 글&lt;/a&gt;을 찾았다.&lt;/p&gt;
+&lt;p&gt;기본적으로는 똑같이 구현을 했네. 그런데 이 사람은 RSS feed에 대해서 언급을 해놨다. 아, RSS에서도 없애야겠구나? 그런데 내 블로그엔 sitemap도 있는데? 그리고 앞으로 카테고리 페이지를 넣으면 그 쪽에도 동일한 로직이 들어갈 거고. 중복이 너무 많다.&lt;/p&gt;
+&lt;p&gt;draft가 true이면 글을 포함하지 않는 로직을 최소 4군데 이상 넣고 앞으로도 다른 곳에 넣을지도 모른다. 아무래도 query를 실행하는 시점이 아닌 블로그 글들을 가져오는 부분에서 먼저 걸러내야겠다고 생각했다.&lt;/p&gt;
+&lt;p&gt;그래서 gatsby-config.js에서 gatsby-source-filesystem 부분을 확인하고 이 플러그인의 doc을 참고했다. 그런데 딱히 내가 원하는 기능을 구현할 수 있을 것 같지 않다.&lt;/p&gt;
+&lt;h2&gt;안 하기로 했다&lt;/h2&gt;
+&lt;p&gt;Gatsby 문서를 계속 읽을 생각인데, 앞으로 좋은 방법이 보이면 그 방법을 취할 것이다. 그러나 그 전에는 이 작업을 하지 않기로 했다.&lt;/p&gt;
+&lt;p&gt;왜냐면 draft를 걸러내는 로직을 여기저기 넣는 건 중복이 너무 많다. 더군다나 그 많은 일을 하고도 내가 draft인지 아닌지를 적고 지우는 작업은 여전히 해야한다.&lt;/p&gt;
+&lt;p&gt;가만 생각해보니 md 파일을 만들고 확장자만 잠시 바꿔두면 될 일이다. 왜 진즉에 이 생각을 못 했을까? 그저 파일을 만들거나 지워놓는 생각만 했다.&lt;/p&gt;
+&lt;p&gt;그냥 확장자 명을 draft 정도로 하고 다시 복귀하는 방향으로 가야겠다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[프린터]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/프린터/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/프린터/</guid><pubDate>Thu, 19 Sep 2019 04:14:26 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42587&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;일반적인 프린터는 인쇄 요청이 들어온 순서대로 인쇄합니다. 그렇기 때문에 중요한 문서가 나중에 인쇄될 수 있습니다. 이런 문제를 보완하기 위해 중요도가 높은 문서를 먼저 인쇄하는 프린터를 개발했습니다. 이 새롭게 개발한 프린터는 아래와 같은 방식으로 인쇄 작업을 수행합니다.&lt;/p&gt;
 &lt;ol&gt;
@@ -540,7 +573,21 @@
 &lt;li&gt;&lt;a href=&quot;https://css-tricks.com/introducing-github-actions/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;css tricks - Introducing GitHub Actions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://heowc.dev/2019/02/03/deploy-gh-page-with-github-action/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;허원철의 개발 블로그 - GitHub Action을 활용한 GitHub Page 배포&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://lannonbr.com/blog/2019-08-17-gh-actions-js-actions/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;GitHub Actions v2: JS Actions&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 3째주]]></title><description><![CDATA[https://lqez.github.io/blog/hangul-typo-on-web.html]]></description><link>https://ohseunghyeon.github.io/weekly-read/2019-9-3/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/weekly-read/2019-9-3/</guid><pubDate>Mon, 16 Sep 2019 07:16:07 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://lqez.github.io/blog/hangul-typo-on-web.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://lqez.github.io/blog/hangul-typo-on-web.html&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[위장]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/위장/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/위장/</guid><pubDate>Mon, 16 Sep 2019 03:39:32 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 3째주]]></title><description><![CDATA[웹 사이트들의 한글 타이포그래피, 2018.9.…]]></description><link>https://ohseunghyeon.github.io/weekly-read/2019-9-3/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/weekly-read/2019-9-3/</guid><pubDate>Mon, 16 Sep 2019 07:16:07 GMT</pubDate><content:encoded>&lt;h2&gt;&lt;a href=&quot;https://lqez.github.io/blog/hangul-typo-on-web.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;웹 사이트들의 한글 타이포그래피, 2018.9.5&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;한글이 주로 사용되는 사이트들의 타이포그래피를 비교 분석한 글&lt;br&gt;
+다음은 비교한 사이트들을 나열한 것.&lt;br&gt;
+다음 뉴스, 네이버 뉴스, 네이트 뉴스, 브런치, 퍼블리, 핀치, 인디포스트, 미디엄, 페이스북 노트, 리디북스, 페이스북, 트위터&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;특별히 통계를 내거나 결론을 낼 만큼 많이 조사하지 않았지만, 한글을 주로 사용하는 웹 사이트들이 주로 어떻게 구성되어 있는지 알아보는 시간이 되었다.&lt;br&gt;
+본문 크기는 17px 또는 유사한 값을 많이 사용한다.
+본문 색상은 #333과 근처 색상을 많이 사용한다.
+인터넷 익스플로러가 주로 사용되던 시절보다는 좁은 자간을 특별히 선호하지는 않는다.
+word-break: keep-all을 예상했던 것 만큼 많이 사용하지는 않는다.
+Noto Sans 계열은 확실히 널리 쓰인다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=1emZgLiGE4s&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;페이스북과 쿠키의 상관관계? Cookie 기초개념 잡아드림., 노마드 코더, 2019.7.25&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;쿠키에 대한 간단한 설명과 페이스북이 쿠키를 사용해서 사용자를 추적하는 방법에 대한 추측을 담고 있다.
+이 추측이란, 쿠키는 한 도메인에 대해서만 교환이 이루어지는데, 다른 사이트에 간 것도 페이스북이 알 수 있는 이유는 그런 사이트에 페이스북의 좋아요 버튼들이 있기 때문이다. 이런 버튼을 만들기 위한 JS코드가 동작하면 페이스북 페이지에 접속한 게 아니라도 페이스북 서버에 요청을 하기 때문에 쿠키가 전송되기 때문.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[위장]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/위장/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/위장/</guid><pubDate>Mon, 16 Sep 2019 03:39:32 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다.&lt;/p&gt;
 &lt;p&gt;예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면 다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.&lt;/p&gt;
 &lt;table&gt;
