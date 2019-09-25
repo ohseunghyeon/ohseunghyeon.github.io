@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{231:function(e,t,a){"use strict";a.r(t),a.d(t,"pageQuery",(function(){return o}));var n=a(0),l=a.n(n),r=a(223),i=a(224);t.default=function(e){var t=e.location,a=e.data;return l.a.createElement(r.a,{location:t,title:a.site.siteMetadata.title},l.a.createElement(i.a,{title:"About"}),l.a.createElement("h1",null,"About Me"),l.a.createElement("p",null,"안녕하세요 제 블로그에 오신 것을 환영합니다."))};var o="1097489062"}}]);
+//# sourceMappingURL=component---src-pages-about-js-331c7784bc6fc09f1fe6.js.map
