@@ -1,4 +1,64 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 25 Sep 2019 14:02:28 GMT</lastBuildDate><item><title><![CDATA[참을 수 없는 고통]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/essay/참을-수-없는-고통/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/essay/참을-수-없는-고통/</guid><pubDate>Wed, 25 Sep 2019 09:24:31 GMT</pubDate><content:encoded>&lt;p&gt;눈을 떴다&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 26 Sep 2019 05:10:53 GMT</lastBuildDate><item><title><![CDATA[H-index]]></title><description><![CDATA[문제 링크 문제 설명 H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다. 위키백과1에 따르면, H-Index는 다음과 같이 구합니다. 어떤 과학자가 발표한 논문 n…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/h-index/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/h-index/</guid><pubDate>Thu, 26 Sep 2019 03:35:34 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42747&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다. 위키백과1에 따르면, H-Index는 다음과 같이 구합니다.&lt;/p&gt;
+&lt;p&gt;어떤 과학자가 발표한 논문 n편 중, h번 이상 인용된 논문이 h편 이상이고 나머지 논문이 h번 이하 인용되었다면 h가 이 과학자의 H-Index입니다.&lt;/p&gt;
+&lt;p&gt;어떤 과학자가 발표한 논문의 인용 횟수를 담은 배열 citations가 매개변수로 주어질 때, 이 과학자의 H-Index를 return 하도록 solution 함수를 작성해주세요.&lt;/p&gt;
+&lt;h2&gt;제한사항&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;과학자가 발표한 논문의 수는 1편 이상 1,000편 이하입니다.&lt;/li&gt;
+&lt;li&gt;논문별 인용 횟수는 0회 이상 10,000회 이하입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;입출력 예&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;citations&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[3, 0, 6, 1, 5]&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;입출력 예 설명&lt;/h2&gt;
+&lt;p&gt;이 과학자가 발표한 논문의 수는 5편이고, 그중 3편의 논문은 3회 이상 인용되었습니다. 그리고 나머지 2편의 논문은 3회 이하 인용되었기 때문에 이 과학자의 H-Index는 3입니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&quot;https://en.wikipedia.org/wiki/H-index&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://en.wikipedia.org/wiki/H-index&lt;/a&gt; 위키백과 ↩&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2&gt;풀이&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;내림차순으로 정렬한 후에&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;처음 index부터 세어간다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1개의 논문의 citation이 1 이상&lt;/li&gt;
+&lt;li&gt;2개의 논문의 citation이 2 이상&lt;/li&gt;
+&lt;li&gt;3개의 논문의 citation이 3 이상&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;citations&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    citations&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;a&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt;b&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; b &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; a&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; h &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;h &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; citations&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;h&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        h&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; h&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 4째주]]></title><description><![CDATA[An Introduction to JavaScript’s queueMicrotask, 2019.9.8 queueMicrotask 라는 새로운 browserAPI…]]></description><link>https://ohseunghyeon.github.io/report/2019-9-4/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-9-4/</guid><pubDate>Thu, 26 Sep 2019 03:05:08 GMT</pubDate><content:encoded>&lt;h2&gt;&lt;a href=&quot;https://www.freecodecamp.org/news/queuemicrotask/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;An Introduction to JavaScript’s queueMicrotask, 2019.9.8&lt;/a&gt;&lt;/h2&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token function&quot;&gt;queueMicrotask&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    consolo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;hello world&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;queueMicrotask 라는 새로운 browserAPI를 소개하고 있다. 사용법은 첫 번째 파라미터로 실행할 함수를 넘겨주면 된다. callback function은 queueMicrotask의 실행 문맥이 끝난 후 이벤트 루프가 실행되기 전에 실행된다.&lt;/p&gt;
+&lt;h2&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=M6N7gEZ-IUQ&amp;#x26;t=346s&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Why LocalStorage is Vulnerable to XSS (and cookies are too), 2019.9.23&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;XSS는 결과적으로 공격자가 원하는 reqeust를 보내는 것이다. LocalStorage가 탈취하여 공격자의 위치에서 사용할 수도 있지만, 탈취의 과정 없이 공격 받은 client에서 곧바로 server로 request만 보내서 cookie를 사용할 수도 있는 것이다.&lt;/p&gt;
+&lt;p&gt;결국 XSS가 발생했다는 것 자체로 이미 보안에 구멍이 생긴 것이며, 이는 Access Token을 저장하는 방법을 고려하는 것은 보안에 대한 효과가 미미함을 의미한다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[참을 수 없는 고통]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/essay/참을-수-없는-고통/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/essay/참을-수-없는-고통/</guid><pubDate>Wed, 25 Sep 2019 09:24:31 GMT</pubDate><content:encoded>&lt;p&gt;눈을 떴다&lt;/p&gt;
 &lt;p&gt;새벽. 누군가에겐 하루가 시작될 시간이지만 아직은 해가 뜨기 전. 나는 잠에서 깨어나 생각했다.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;왜 깬 거지?&lt;/p&gt;
@@ -439,7 +499,21 @@
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; Math&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;floor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;answer &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; jobLength&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;참고&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/trekhleb/javascript-algorithms/tree/master/src/data-structures/heap&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Heap (data-structure)&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Gatsby 블로그에 Draft 기능 추가하기]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/blogging/add-draft-feature/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/add-draft-feature/</guid><pubDate>Thu, 19 Sep 2019 11:39:03 GMT</pubDate><content:encoded>&lt;h2&gt;발단&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/trekhleb/javascript-algorithms/tree/master/src/data-structures/heap&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Heap (data-structure)&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 3째주]]></title><description><![CDATA[웹 사이트들의 한글 타이포그래피, 2018.9.…]]></description><link>https://ohseunghyeon.github.io/report/2019-9-3/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-9-3/</guid><pubDate>Fri, 20 Sep 2019 07:16:07 GMT</pubDate><content:encoded>&lt;h2&gt;&lt;a href=&quot;https://lqez.github.io/blog/hangul-typo-on-web.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;웹 사이트들의 한글 타이포그래피, 2018.9.5&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;한글이 주로 사용되는 사이트들의 타이포그래피를 비교 분석한 글&lt;br&gt;
+다음은 비교한 사이트들을 나열한 것.&lt;br&gt;
+다음 뉴스, 네이버 뉴스, 네이트 뉴스, 브런치, 퍼블리, 핀치, 인디포스트, 미디엄, 페이스북 노트, 리디북스, 페이스북, 트위터&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;특별히 통계를 내거나 결론을 낼 만큼 많이 조사하지 않았지만, 한글을 주로 사용하는 웹 사이트들이 주로 어떻게 구성되어 있는지 알아보는 시간이 되었다.&lt;br&gt;
+본문 크기는 17px 또는 유사한 값을 많이 사용한다.
+본문 색상은 #333과 근처 색상을 많이 사용한다.
+인터넷 익스플로러가 주로 사용되던 시절보다는 좁은 자간을 특별히 선호하지는 않는다.
+word-break: keep-all을 예상했던 것 만큼 많이 사용하지는 않는다.
+Noto Sans 계열은 확실히 널리 쓰인다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=1emZgLiGE4s&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;페이스북과 쿠키의 상관관계? Cookie 기초개념 잡아드림., 노마드 코더, 2019.7.25&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;쿠키에 대한 간단한 설명과 페이스북이 쿠키를 사용해서 사용자를 추적하는 방법에 대한 추측을 담고 있다.
+이 추측이란, 쿠키는 한 도메인에 대해서만 교환이 이루어지는데, 다른 사이트에 간 것도 페이스북이 알 수 있는 이유는 그런 사이트에 페이스북의 좋아요 버튼들이 있기 때문이다. 이런 버튼을 만들기 위한 JS코드가 동작하면 페이스북 페이지에 접속한 게 아니라도 페이스북 서버에 요청을 하기 때문에 쿠키가 전송되기 때문.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Gatsby 블로그에 Draft 기능 추가하기]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/blogging/add-draft-feature/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/add-draft-feature/</guid><pubDate>Thu, 19 Sep 2019 11:39:03 GMT</pubDate><content:encoded>&lt;h2&gt;발단&lt;/h2&gt;
 &lt;p&gt;나는 새로운 글을 쓸 때 파일을 만들어 놓고 나중에 쓰곤 한다. 파일을 만들어 놓는 건 일종의 습관인데, 대학에 다니던 시절에 과제가 생기면 일단 파일부터 만들곤 했다. 그리고 어떤 방향으로 갈지, 어떤 내용을 적을지 생각하고 메모하고, 한 번에 다 하지 않고 조금씩 조금씩 나눠서 적었었다.&lt;/p&gt;
 &lt;p&gt;블로그 글도 무의식적으로 그렇게 하려고 했는데, 빈 글이 제목만 가지고 빌드가 되었다. 그래서 파일은 일단 지워두고 폴더까지만 두고 draft라고 인식했다. 하지만 이는 상당히 귀찮은 작업이다.&lt;/p&gt;
 &lt;p&gt;그래서 마크다운 frontematter에 draft 플래그를 넣고 걔네는 빌드가 안 되게 할 수 없을까 생각했다.&lt;/p&gt;
@@ -1007,21 +1081,7 @@
 &lt;li&gt;&lt;a href=&quot;https://css-tricks.com/introducing-github-actions/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;css tricks - Introducing GitHub Actions&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://heowc.dev/2019/02/03/deploy-gh-page-with-github-action/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;허원철의 개발 블로그 - GitHub Action을 활용한 GitHub Page 배포&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&quot;https://lannonbr.com/blog/2019-08-17-gh-actions-js-actions/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;GitHub Actions v2: JS Actions&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 3째주]]></title><description><![CDATA[웹 사이트들의 한글 타이포그래피, 2018.9.…]]></description><link>https://ohseunghyeon.github.io/report/2019-9-3/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-9-3/</guid><pubDate>Mon, 16 Sep 2019 07:16:07 GMT</pubDate><content:encoded>&lt;h2&gt;&lt;a href=&quot;https://lqez.github.io/blog/hangul-typo-on-web.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;웹 사이트들의 한글 타이포그래피, 2018.9.5&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;한글이 주로 사용되는 사이트들의 타이포그래피를 비교 분석한 글&lt;br&gt;
-다음은 비교한 사이트들을 나열한 것.&lt;br&gt;
-다음 뉴스, 네이버 뉴스, 네이트 뉴스, 브런치, 퍼블리, 핀치, 인디포스트, 미디엄, 페이스북 노트, 리디북스, 페이스북, 트위터&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;특별히 통계를 내거나 결론을 낼 만큼 많이 조사하지 않았지만, 한글을 주로 사용하는 웹 사이트들이 주로 어떻게 구성되어 있는지 알아보는 시간이 되었다.&lt;br&gt;
-본문 크기는 17px 또는 유사한 값을 많이 사용한다.
-본문 색상은 #333과 근처 색상을 많이 사용한다.
-인터넷 익스플로러가 주로 사용되던 시절보다는 좁은 자간을 특별히 선호하지는 않는다.
-word-break: keep-all을 예상했던 것 만큼 많이 사용하지는 않는다.
-Noto Sans 계열은 확실히 널리 쓰인다.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=1emZgLiGE4s&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;페이스북과 쿠키의 상관관계? Cookie 기초개념 잡아드림., 노마드 코더, 2019.7.25&lt;/a&gt;&lt;/h2&gt;
-&lt;p&gt;쿠키에 대한 간단한 설명과 페이스북이 쿠키를 사용해서 사용자를 추적하는 방법에 대한 추측을 담고 있다.
-이 추측이란, 쿠키는 한 도메인에 대해서만 교환이 이루어지는데, 다른 사이트에 간 것도 페이스북이 알 수 있는 이유는 그런 사이트에 페이스북의 좋아요 버튼들이 있기 때문이다. 이런 버튼을 만들기 위한 JS코드가 동작하면 페이스북 페이지에 접속한 게 아니라도 페이스북 서버에 요청을 하기 때문에 쿠키가 전송되기 때문.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[위장]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/위장/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/위장/</guid><pubDate>Mon, 16 Sep 2019 03:39:32 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[위장]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/위장/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/위장/</guid><pubDate>Mon, 16 Sep 2019 03:39:32 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다.&lt;/p&gt;
 &lt;p&gt;예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면 다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.&lt;/p&gt;
 &lt;table&gt;
@@ -1238,7 +1298,7 @@ face에 해당하는 의상이 crowmask, bluesunglasses, smoky_makeup이므로 �
 그리고 다양하게 아는 것이 다른 것을 배울 때 연관점 또는 유사점을 찾아서 더 쉽고 빠르게 배울 수 있게 도와준다고 한다.
 이런 관점에서 저자는 자신의 학습법이 넓이 우선 탐색과 같다고 말한다.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;https://www.freecodecamp.org/news/http-and-everything-you-need-to-know-about-it/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;An introduction to HTTP: everything you need to know 2019.9.11&lt;/a&gt;&lt;/h3&gt;
-&lt;p&gt;Http에 대한 기본적인 개념들&lt;/p&gt;</content:encoded></item><item><title><![CDATA[About 페이지 만들기]]></title><description><![CDATA[Docs에 따르면, Gatsby에서 페이지를 만드는 방법은 3가지가 있다. In your site’s gatsby-node.js by implementing the API createPages Gatsby core automatically turns…]]></description><link>https://ohseunghyeon.github.io/blogging/making-about-pages/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/making-about-pages/</guid><pubDate>Tue, 10 Sep 2019 08:15:51 GMT</pubDate><content:encoded>&lt;p&gt;Docs에 따르면, Gatsby에서 페이지를 만드는 방법은 3가지가 있다.&lt;/p&gt;
+&lt;p&gt;Http에 대한 기본적인 개념들&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Gatsby Blog에 About 페이지 만들기]]></title><description><![CDATA[Docs에 따르면, Gatsby에서 페이지를 만드는 방법은 3가지가 있다. In your site’s gatsby-node.js by implementing the API createPages Gatsby core automatically turns…]]></description><link>https://ohseunghyeon.github.io/blogging/making-about-pages/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/making-about-pages/</guid><pubDate>Tue, 10 Sep 2019 08:15:51 GMT</pubDate><content:encoded>&lt;p&gt;Docs에 따르면, Gatsby에서 페이지를 만드는 방법은 3가지가 있다.&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;In your site’s gatsby-node.js by implementing the API createPages&lt;/li&gt;
 &lt;li&gt;Gatsby core automatically turns React components in src/pages into pages&lt;/li&gt;
@@ -1714,9 +1774,9 @@ D를 익히려면 B가 필요하다는 정보를 담은 해쉬맵을 만들고&l
 &lt;li&gt;스킬 트리를 순회하며&lt;/li&gt;
 &lt;li&gt;정규표현식으로 선행 스킬과 관련이 없는 스킬은 지우고&lt;/li&gt;
 &lt;li&gt;선행 스킬과 관련된 애들만 가지고 그 순서를 indexOf로 체크한다&lt;/li&gt;
-&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[github 저장소에 now 적용기]]></title><description><![CDATA[발단 난 블로그를 이쁘게 만들고 싶다. 그래서 남의 것들을 훔치려고 돌아다니고 있다.
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[github 저장소에 now 적용기]]></title><description><![CDATA[발단 난 블로그를 이쁘게 만들고 싶다. 그래서 다른 Gatsby 블로그들을 참고하려고 서핑하고 있었다.
 그러다가 Dan Abramov의 블로그 overreacted.io 깃헙 저장소를 보게 됐다.  now 라는 bot이 쓴 댓글를 보면 Now…]]></description><link>https://ohseunghyeon.github.io/blogging/now/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/now/</guid><pubDate>Thu, 05 Sep 2019 07:34:55 GMT</pubDate><content:encoded>&lt;h2&gt;발단&lt;/h2&gt;
-&lt;p&gt;난 블로그를 이쁘게 만들고 싶다. 그래서 남의 것들을 훔치려고 돌아다니고 있다.
+&lt;p&gt;난 블로그를 이쁘게 만들고 싶다. 그래서 다른 Gatsby 블로그들을 참고하려고 서핑하고 있었다.
 그러다가 Dan Abramov의 블로그 &lt;a href=&quot;https://overreacted.io/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;overreacted.io&lt;/a&gt; &lt;a href=&quot;https://github.com/gaearon/overreacted.io&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;깃헙 저장소&lt;/a&gt;를 보게 됐다.&lt;/p&gt;
 &lt;p&gt;&lt;span
       class=&quot;gatsby-resp-image-wrapper&quot;
@@ -2608,7 +2668,7 @@ arrangement의 여는 괄호와 닫는 괄호는 항상 쌍을 이룹니다.
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 카테고리 넣기&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 홈의 글 리스트는 보여주고 싶은 글만 표시하자&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; Light/Dark Theme 넣기&lt;/li&gt;
-&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 댓글 달기&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 댓글 달기 - &lt;a href=&quot;https://utteranc.es/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://utteranc.es/&lt;/a&gt;&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 방문자수 ?&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 글 목록 lazy load&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 글 내의 목차&lt;/li&gt;
