@@ -1,4 +1,142 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Thu, 26 Sep 2019 05:10:53 GMT</lastBuildDate><item><title><![CDATA[H-index]]></title><description><![CDATA[문제 링크 문제 설명 H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다. 위키백과1에 따르면, H-Index는 다음과 같이 구합니다. 어떤 과학자가 발표한 논문 n…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/h-index/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/h-index/</guid><pubDate>Thu, 26 Sep 2019 03:35:34 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42747&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 29 Sep 2019 01:27:37 GMT</lastBuildDate><item><title><![CDATA[2019년 10월 첫째 주]]></title><description><![CDATA[Why I’m better Developer than You, 2019.8.4 무엇이 자신을 괜찮은 개발자로 만들어주는지 그가 스스로 생각한 점을 얘기해준다. vim을 사용 (vimtutor) Knowing data structures and…]]></description><link>https://ohseunghyeon.github.io/report/2019-10-1/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-10-1/</guid><pubDate>Sun, 29 Sep 2019 01:12:02 GMT</pubDate><content:encoded>&lt;h2&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=4WTV6ZCY4qo&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Why I’m better Developer than You, 2019.8.4&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;무엇이 자신을 괜찮은 개발자로 만들어주는지 그가 스스로 생각한 점을 얘기해준다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;vim을 사용 (vimtutor)&lt;/li&gt;
+&lt;li&gt;Knowing data structures and algorithm (coursera, mit open courseware, sphere online judge)&lt;/li&gt;
+&lt;li&gt;sleep enough&lt;/li&gt;
+&lt;/ol&gt;</content:encoded></item><item><title><![CDATA[프로그래머스 웹개발자 잡페어 코딩테스트]]></title><description><![CDATA[문제 설명 n 개의 상품을 k…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/웹개발자-잡페어-코딩테스트/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/웹개발자-잡페어-코딩테스트/</guid><pubDate>Sat, 28 Sep 2019 01:01:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;n 개의 상품을 k개의 상자에 담아 포장하려고 합니다. 상품을 담을 때는, 상품의 크기보다 크거나 같은 상자에만 담을 수 있으며, 상자 하나에는 한가지 상품만 담아야 합니다. 각 상품의 크기와 상자의 크기는 자연수로 나타냅니다.&lt;/p&gt;
+&lt;p&gt;예를 들어, 상품 3개의 크기에 대한 정보가 담긴 배열 [5,3,7]이 주어졌을 때, 첫 번째 상품의 크기는 5, 두 번째 상품의 크기는 3, 세 번째 상품의 크기는 7입니다. 마찬가지로, 상자 3개의 크기가 담긴 정보가 담긴 배열 [3,7,6]이 주어졌을 때, 첫 번째 상자의 크기는 3, 두 번째 상자의 크기는 7, 세 번째 상자의 크기는 6입니다.&lt;/p&gt;
+&lt;p&gt;상품의 크기 goods = [5,3,7] 와 상자의 크기 boxes = [3,7,6] 일 때, 상품을 상자에 담는 방법의 하나는 다음과 같습니다.&lt;/p&gt;
+&lt;p&gt;크기가 5인 첫 번째 상품을 크기가 7인 두 번째 상자에 담습니다.
+크기가 3인 두 번째 상품을 크기가 3인 첫 번째 상자에 담습니다.
+크기가 7인 세 번째 상품은 남은 상자 하나의 크기가 6이므로 담을 수 없습니다.
+이 상품들을 다음과 같은 방식으로 상자에 담으면, 모든 상품을 상자에 담아 포장할 수 있습니다.&lt;/p&gt;
+&lt;p&gt;크기가 5인 첫 번째 상품을 크기가 6인 세 번째 상자에 담습니다.
+크기가 3인 두 번째 상품을 크기가 3인 첫 번째 상자에 담습니다.
+크기가 7인 세 번째 상품을 크기가 7인 두 번째 상자에 담습니다.
+이처럼 어떤 방식으로 상품을 상자에 담느냐에 따라 담을 수 있는 상품의 개수가 달라집니다. 이때 최대한 많은 상품을 상자에 담아 포장하려고 합니다.&lt;/p&gt;
+&lt;p&gt;상품들의 크기가 들어있는 배열 goods와 상자의 크기가 들어있는 배열 boxes가 매개변수로 주어질 때, 상자에 넣을 수 있는 상품 개수의 최댓값을 return 하도록 solution 함수를 완성해주세요.&lt;/p&gt;
+&lt;h2&gt;제한사항&lt;/h2&gt;
+&lt;p&gt;배열 goods의 길이(상품의 개수 n)는 1 이상 100,000 이하의 자연수입니다.
+각 상품의 크기는 1 이상 200,000,000 이하의 자연수입니다.
+배열 boxes의 길이(상자의 개수 k)는 1 이상 100,000 이하의 자연수입니다.
+각 상자의 크기는 1 이상 200,000,000 이하의 자연수입니다.
+입출력 예&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;goods&lt;/th&gt;
+&lt;th&gt;boxes&lt;/th&gt;
+&lt;th&gt;answer&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[5,3,7]&lt;/td&gt;
+&lt;td&gt;[3,7,6]&lt;/td&gt;
+&lt;td&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[1,2]&lt;/td&gt;
+&lt;td&gt;[2,3,1]&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[3,8,6]&lt;/td&gt;
+&lt;td&gt;[5,6,4]&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;입출력 예 설명&lt;/h2&gt;
+&lt;h3&gt;입출력 예 #1&lt;/h3&gt;
+&lt;p&gt;문제의 예시와 같습니다.&lt;/p&gt;
+&lt;h3&gt;입출력 예 #2&lt;/h3&gt;
+&lt;p&gt;가능한 방법의 하나는 다음과 같으며, 최대 2개의 상품을 상자에 담을 수 있습니다.&lt;/p&gt;
+&lt;p&gt;첫 번째 상품은 세 번째 상자에 담습니다.
+두 번째 상품은 첫 번째 상자에 담습니다.&lt;/p&gt;
+&lt;h3&gt;입출력 예 #3&lt;/h3&gt;
+&lt;p&gt;가능한 방법의 하나는 다음과 같으며, 최대 2개의 상품을 상자에 담을 수 있습니다.&lt;/p&gt;
+&lt;p&gt;첫 번째 상품은 세 번째 상자에 담습니다.
+두 번째 상품은 담을 수 없습니다.
+세 번째 상품은 두 번째 상자에 담습니다.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;체스에서 비숍(Bishop)은 아래 그림과 같이 대각선 방향으로 몇 칸이든 한 번에 이동할 수 있습니다. 만약, 한 번에 이동 가능한 칸에 체스 말이 놓여있다면 그 체스 말을 잡을 수 있습니다.&lt;/p&gt;
+&lt;p&gt;bishop1.png&lt;/p&gt;
+&lt;p&gt;8 x 8 크기의 체스판 위에 여러 개의 비숍(Bishop)이 놓여있습니다. 이때, 비숍(Bishop)들에게 한 번에 잡히지 않도록 새로운 말을 놓을 수 있는 빈칸의 개수를 구하려고 합니다.&lt;/p&gt;
+&lt;p&gt;위 그림에서 원이 그려진 칸은 비숍에게 한 번에 잡히는 칸들이며, 따라서 체스 말을 놓을 수 있는 빈칸 개수는 50개입니다.&lt;/p&gt;
+&lt;p&gt;8 x 8 체스판에 놓인 비숍의 위치 bishops가 매개변수로 주어질 때, 비숍에게 한 번에 잡히지 않도록 새로운 체스 말을 놓을 수 있는 빈칸 개수를 return 하도록 solution 함수를 완성해주세요.&lt;/p&gt;
+&lt;h2&gt;제한 조건&lt;/h2&gt;
+&lt;p&gt;체스판에 놓인 비숍의 위치 bishops가 solution 함수의 매개변수로 주어집니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;bishops는 비숍의 위치가 문자열 형태로 들어있는 배열입니다.&lt;/li&gt;
+&lt;li&gt;bishops의 길이는 1 이상 64 이하입니다.&lt;/li&gt;
+&lt;li&gt;비숍이 놓인 위치는 알파벳 대문자와 숫자로 표기합니다.&lt;/li&gt;
+&lt;li&gt;알파벳 대문자는 가로 방향, 숫자는 세로 방향 좌표를 나타냅니다.&lt;/li&gt;
+&lt;li&gt;예를 들어 위 그림에서 비숍이 있는 칸은 D5라고 표현합니다.&lt;/li&gt;
+&lt;li&gt;한 칸에 여러 비숍이 놓이거나, 잘못된 위치가 주어지는 경우는 없습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;입출력 예&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;bishops&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[D5]&lt;/td&gt;
+&lt;td&gt;50&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[D5, E8, G2]&lt;/td&gt;
+&lt;td&gt;42&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;입출력 예 설명&lt;/h2&gt;
+&lt;h3&gt;입출력 예 #1&lt;/h3&gt;
+&lt;p&gt;문제에 나온 예시와 같습니다.&lt;/p&gt;
+&lt;h3&gt;입출력 예 #2&lt;/h3&gt;
+&lt;p&gt;bishop2.png&lt;/p&gt;
+&lt;p&gt;그림과 같이 원이 그려진 칸은 비숍에게 한 번에 잡히는 칸들이며, 따라서 체스 말을 놓을 수 있는 빈칸 개수는 42개입니다.&lt;/p&gt;
+&lt;p&gt;—&lt;/p&gt;
+&lt;p&gt;다음 그림과 같이 숫자가 적혀있는 스티커가 한 줄로 붙어있습니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://s3.ap-northeast-2.amazonaws.com/grepp-cloudfront/programmers_imgs/challengeable-imgs/20180131229stk_img_hcdsd8.jpg&quot; alt=&quot;img&quot;&gt;&lt;/p&gt;
+&lt;p&gt;한 줄로 붙어있는 스티커를 가위로 잘라 하나씩 보관하고 싶습니다. 그러나 스티커 한 개를 깨끗하게 자르려면 인접해 있는 스티커들을 가위로 잘라야 합니다. 예를 들어 위 그림에서 80이 적혀있는 스티커를 깨끗하게 자르고 싶으면 먼저 양쪽의 12와 14가 적힌 스티커의 점선 부분을 가위로 잘라낸 후 80이 적힌 스티커의 가장자리를 다듬어야 합니다. 이때 12와 14가 적힌 스티커는 못 쓰게 됩니다.&lt;/p&gt;
+&lt;p&gt;스티커에 적힌 숫자가 배열 sticker로 주어질 때, 깨끗하게 잘린 스티커에 적힌 숫자의 합이 최대가 되도록 숫자의 합을 반환하는 함수를 완성해 주세요.&lt;/p&gt;
+&lt;h2&gt;제한사항&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;스티커의 길이는 1이상 100,000 이하입니다.&lt;/li&gt;
+&lt;li&gt;스티커에 적힌 숫자는 10,000 이하의 자연수 입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;입출력 예&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;sticker&lt;/th&gt;
+&lt;th&gt;result&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[12, 12, 12, 12, 12]&lt;/td&gt;
+&lt;td&gt;36&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;[12, 80, 14, 22, 100]&lt;/td&gt;
+&lt;td&gt;180&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2&gt;입출력 예 설명&lt;/h2&gt;
+&lt;h3&gt;입출력 예 #1&lt;/h3&gt;
+&lt;p&gt;스티커에 적힌 숫자가 [12, 12, 12, 12, 12] 인 경우 첫 번째, 세 번째, 다섯 번째의 12가 적힌 스티커 3개를 깨끗하게 자르면 합이 36으로 최대가 됩니다.&lt;/p&gt;
+&lt;h3&gt;입출력 예 #2&lt;/h3&gt;
+&lt;p&gt;스티커에 적힌 숫자가 [12, 80, 14, 22, 100] 인 경우 80과 100이 적힌 스티커를 깨끗하게 자르면 합이 180으로 최대가 됩니다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[H-index]]></title><description><![CDATA[문제 링크 문제 설명 H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다. 위키백과1에 따르면, H-Index는 다음과 같이 구합니다. 어떤 과학자가 발표한 논문 n…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/h-index/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/h-index/</guid><pubDate>Thu, 26 Sep 2019 03:35:34 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42747&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
 &lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;H-Index는 과학자의 생산성과 영향력을 나타내는 지표입니다. 어느 과학자의 H-Index를 나타내는 값인 h를 구하려고 합니다. 위키백과1에 따르면, H-Index는 다음과 같이 구합니다.&lt;/p&gt;
 &lt;p&gt;어떤 과학자가 발표한 논문 n편 중, h번 이상 인용된 논문이 h편 이상이고 나머지 논문이 h번 이하 인용되었다면 h가 이 과학자의 H-Index입니다.&lt;/p&gt;
@@ -49,7 +187,7 @@
     &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
     &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; h&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 4째주]]></title><description><![CDATA[An Introduction to JavaScript’s queueMicrotask, 2019.9.8 queueMicrotask 라는 새로운 browserAPI…]]></description><link>https://ohseunghyeon.github.io/report/2019-9-4/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-9-4/</guid><pubDate>Thu, 26 Sep 2019 03:05:08 GMT</pubDate><content:encoded>&lt;h2&gt;&lt;a href=&quot;https://www.freecodecamp.org/news/queuemicrotask/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;An Introduction to JavaScript’s queueMicrotask, 2019.9.8&lt;/a&gt;&lt;/h2&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 넷째 주]]></title><description><![CDATA[An Introduction to JavaScript’s queueMicrotask, 2019.9.8 queueMicrotask 라는 새로운 browserAPI…]]></description><link>https://ohseunghyeon.github.io/report/2019-9-4/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-9-4/</guid><pubDate>Thu, 26 Sep 2019 03:05:08 GMT</pubDate><content:encoded>&lt;h2&gt;&lt;a href=&quot;https://www.freecodecamp.org/news/queuemicrotask/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;An Introduction to JavaScript’s queueMicrotask, 2019.9.8&lt;/a&gt;&lt;/h2&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token function&quot;&gt;queueMicrotask&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;
   &lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
     consolo&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;log&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;hello world&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
@@ -499,7 +637,7 @@
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; Math&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;floor&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;answer &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; jobLength&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;참고&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&quot;https://github.com/trekhleb/javascript-algorithms/tree/master/src/data-structures/heap&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Heap (data-structure)&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 3째주]]></title><description><![CDATA[웹 사이트들의 한글 타이포그래피, 2018.9.…]]></description><link>https://ohseunghyeon.github.io/report/2019-9-3/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-9-3/</guid><pubDate>Fri, 20 Sep 2019 07:16:07 GMT</pubDate><content:encoded>&lt;h2&gt;&lt;a href=&quot;https://lqez.github.io/blog/hangul-typo-on-web.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;웹 사이트들의 한글 타이포그래피, 2018.9.5&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&quot;https://github.com/trekhleb/javascript-algorithms/tree/master/src/data-structures/heap&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Heap (data-structure)&lt;/a&gt;&lt;/p&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 셋째 주]]></title><description><![CDATA[웹 사이트들의 한글 타이포그래피, 2018.9.…]]></description><link>https://ohseunghyeon.github.io/report/2019-9-3/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-9-3/</guid><pubDate>Fri, 20 Sep 2019 07:16:07 GMT</pubDate><content:encoded>&lt;h2&gt;&lt;a href=&quot;https://lqez.github.io/blog/hangul-typo-on-web.html&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;웹 사이트들의 한글 타이포그래피, 2018.9.5&lt;/a&gt;&lt;/h2&gt;
 &lt;p&gt;한글이 주로 사용되는 사이트들의 타이포그래피를 비교 분석한 글&lt;br&gt;
 다음은 비교한 사이트들을 나열한 것.&lt;br&gt;
 다음 뉴스, 네이버 뉴스, 네이트 뉴스, 브런치, 퍼블리, 핀치, 인디포스트, 미디엄, 페이스북 노트, 리디북스, 페이스북, 트위터&lt;/p&gt;
@@ -1272,7 +1410,7 @@ face에 해당하는 의상이 crowmask, bluesunglasses, smoky_makeup이므로 �
   - 라운드 + none
   - none + 청바지
   - none + none&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;총 6가지 경우가 나오고 이 때 &lt;strong&gt;- 1&lt;/strong&gt; 로 &lt;strong&gt;none + none&lt;/strong&gt;을 빼주면 위의 경우와 같은 경우의 수가 도출된다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 2째주]]></title><description><![CDATA[How to enable Safari Reader on your site? - 2010.6.10 사파리 리더를 동작하게 만드는 알고리즘에 대한 기사. 컨텐츠의 경우 p가 아닌 wrapper 엘리먼트가 필요하고, 하나의 문단은 최소 10…]]></description><link>https://ohseunghyeon.github.io/report/2019-9-2/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-9-2/</guid><pubDate>Mon, 16 Sep 2019 03:31:40 GMT</pubDate><content:encoded>&lt;h3&gt;&lt;a href=&quot;https://mathiasbynens.be/notes/safari-reader&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;How to enable Safari Reader on your site? - 2010.6.10&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;총 6가지 경우가 나오고 이 때 &lt;strong&gt;- 1&lt;/strong&gt; 로 &lt;strong&gt;none + none&lt;/strong&gt;을 빼주면 위의 경우와 같은 경우의 수가 도출된다.&lt;/p&gt;</content:encoded></item><item><title><![CDATA[2019년 9월 둘째 주]]></title><description><![CDATA[How to enable Safari Reader on your site? - 2010.6.10 사파리 리더를 동작하게 만드는 알고리즘에 대한 기사. 컨텐츠의 경우 p가 아닌 wrapper 엘리먼트가 필요하고, 하나의 문단은 최소 10…]]></description><link>https://ohseunghyeon.github.io/report/2019-9-2/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-9-2/</guid><pubDate>Mon, 16 Sep 2019 03:31:40 GMT</pubDate><content:encoded>&lt;h3&gt;&lt;a href=&quot;https://mathiasbynens.be/notes/safari-reader&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;How to enable Safari Reader on your site? - 2010.6.10&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;사파리 리더를 동작하게 만드는 알고리즘에 대한 기사.&lt;br&gt;
 컨텐츠의 경우 p가 아닌 wrapper 엘리먼트가 필요하고, 하나의 문단은 최소 100글자가 되어야 한다. 그리고 올바른 마크업을 사용하라.&lt;/p&gt;
 &lt;h3&gt;&lt;a href=&quot;https://github.com/icepeng/articles/blob/master/monad-in-typescript.md&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;모나드 - 2019.8.11&lt;/a&gt;&lt;/h3&gt;
