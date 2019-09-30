@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{237:function(t,e,a){"use strict";a.r(e),a.d(e,"pageQuery",(function(){return i}));var n=a(0),o=a.n(n),l=a(233),r=a(232);e.default=function(t){var e=t.data.site.siteMetadata.title;return o.a.createElement(l.a,{location:t.location,title:e},o.a.createElement(r.a,{title:"404: Not Found"}),o.a.createElement("h1",null,"Not Found"),o.a.createElement("p",null,"잘못 찾아오셨어요. 어디로 가고 싶으셨죠?"))};var i="1097489062"}}]);
+//# sourceMappingURL=component---src-pages-404-js-278fc56ce8b263617a1b.js.map
