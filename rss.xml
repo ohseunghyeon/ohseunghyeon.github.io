@@ -1,4 +1,60 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Wed, 02 Oct 2019 14:53:38 GMT</lastBuildDate><item><title><![CDATA[숫자 야구]]></title><description><![CDATA[문제 설명 숫자 야구 게임이란 2명이 서로가 생각한 숫자를 맞추는 게임입니다. 게임해보기 각자 서로 다른 1~9까지 3자리 임의의 숫자를 정한 뒤 서로에게…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/숫자-야구/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/숫자-야구/</guid><pubDate>Tue, 01 Oct 2019 03:14:35 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 04 Oct 2019 04:00:03 GMT</lastBuildDate><item><title><![CDATA[카펫]]></title><description><![CDATA[문제 링크 문제 설명 Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 빨간색으로 칠해져 있고 모서리는 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다. example Leo…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/카펫/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/카펫/</guid><pubDate>Fri, 04 Oct 2019 03:53:35 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42842&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 빨간색으로 칠해져 있고 모서리는 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://grepp-programmers.s3.amazonaws.com/files/ybm/7c94563a35/2ff27ac9-97d0-43a9-9cf8-a344b8e7912e.png&quot; alt=&quot;example&quot;&gt;&lt;/p&gt;
+&lt;p&gt;Leo는 집으로 돌아와서 아까 본 카펫의 빨간색과 갈색으로 색칠된 격자의 개수는 기억했지만, 전체 카펫의 크기는 기억하지 못했습니다.&lt;/p&gt;
+&lt;p&gt;Leo가 본 카펫에서 갈색 격자의 수 brown, 빨간색 격자의 수 red가 매개변수로 주어질 때 카펫의 가로, 세로 크기를 순서대로 배열에 담아 return 하도록 solution 함수를 작성해주세요.&lt;/p&gt;
+&lt;h2&gt;제한사항&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;갈색 격자의 수 brown은 8 이상 5,000 이하인 자연수입니다.&lt;/li&gt;
+&lt;li&gt;빨간색 격자의 수 red는 1 이상 2,000,000 이하인 자연수입니다.&lt;/li&gt;
+&lt;li&gt;카펫의 가로 길이는 세로 길이와 같거나, 세로 길이보다 깁니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;입출력 예&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;brown&lt;/th&gt;
+&lt;th&gt;red&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;10&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;td&gt;[4, 3]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;8&lt;/td&gt;
+&lt;td&gt;1&lt;/td&gt;
+&lt;td&gt;[3, 3]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;24&lt;/td&gt;
+&lt;td&gt;24&lt;/td&gt;
+&lt;td&gt;[8, 6]&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;a href=&quot;http://hsin.hr/coci/archive/2010_2011/contest4_tasks.pdf&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;출처&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;풀이&lt;/h2&gt;
+&lt;p&gt;가로와 세로를 모두 검토해서 가능한 수가 나올 경우 이를 반환하면 된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;brown&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; red&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; redHeight &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;redHeight &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; red&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;red &lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt; redHeight &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; redWidth &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; red &lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt; redHeight&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; calculatedBrown &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;redWidth &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;redHeight &lt;span class=&quot;token operator&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;calculatedBrown &lt;span class=&quot;token operator&quot;&gt;===&lt;/span&gt; brown&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;redWidth &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; redHeight &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+            &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+        redHeight&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[숫자 야구]]></title><description><![CDATA[문제 설명 숫자 야구 게임이란 2명이 서로가 생각한 숫자를 맞추는 게임입니다. 게임해보기 각자 서로 다른 1~9까지 3자리 임의의 숫자를 정한 뒤 서로에게…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/숫자-야구/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/숫자-야구/</guid><pubDate>Tue, 01 Oct 2019 03:14:35 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;숫자 야구 게임이란 2명이 서로가 생각한 숫자를 맞추는 게임입니다. 게임해보기&lt;/p&gt;
 &lt;p&gt;각자 서로 다른 1~9까지 3자리 임의의 숫자를 정한 뒤 서로에게 3자리의 숫자를 불러서 결과를 확인합니다. 그리고 그 결과를 토대로 상대가 정한 숫자를 예상한 뒤 맞힙니다.&lt;/p&gt;
 &lt;ul&gt;
@@ -2687,7 +2743,7 @@ Difficulty Easy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
       &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
       &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; h&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[쇠막대기]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/ironstick/</guid><pubDate>Thu, 05 Sep 2019 01:15:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[쇠막대기]]></title><description><![CDATA[…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/쇠막대기/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/쇠막대기/</guid><pubDate>Thu, 05 Sep 2019 01:15:00 GMT</pubDate><content:encoded>&lt;h2&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;여러 개의 쇠막대기를 레이저로 절단하려고 합니다. 효율적인 작업을 위해서 쇠막대기를 아래에서 위로 겹쳐 놓고, 레이저를 위에서 수직으로 발사하여 쇠막대기들을 자릅니다. 쇠막대기와 레이저의 배치는 다음 조건을 만족합니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;쇠막대기는 자신보다 긴 쇠막대기 위에만 놓일 수 있습니다.&lt;/li&gt;
@@ -2696,26 +2752,7 @@ Difficulty Easy&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;li&gt;레이저는 어떤 쇠막대기의 양 끝점과도 겹치지 않습니다.
 아래 그림은 위 조건을 만족하는 예를 보여줍니다. 수평으로 그려진 굵은 실선은 쇠막대기이고, 점은 레이저의 위치, 수직으로 그려진 점선 화살표는 레이저의 발사 방향입니다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;span
-      class=&quot;gatsby-resp-image-wrapper&quot;
-      style=&quot;position: relative; display: block; margin-left: auto; margin-right: auto;  max-width: 512px;&quot;
-    &gt;
-      &lt;span
-    class=&quot;gatsby-resp-image-background-image&quot;
-    style=&quot;padding-bottom: 55.46875%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAALCAYAAAB/Ca1DAAAACXBIWXMAABYlAAAWJQFJUiTwAAABlElEQVQoz52SR49iQQyE3///KQghLiQh0oEwgAQ3JDKInHMGL1/tNtrR3MaSn7vL3fXKdnur1cqm06nN53NbLBY/fDab/cgtl0th3CMPB/F0OpnX7XatVqsZsdfrydvttrxeryuSazQaijg451qtlvLNZlO+3W7N63Q6IsSez6ddr1fL5XJS8vVVNGdg+/3eTsejZbNZYY/HQzGfz4sM8y6Xi202G5GxxriIHQ6H9/el3G63E3a/31QiZPycyP52u+mcB8hhR4iSYDBo8Xjc/H6/SqFEn89nyWTyfXZr6/X6TXwXCYQIYv+N0MmHdDgcChsMBp+S+/3+P8Wmyxh3IXE/+BC6+iuVipRFo1FLpVIWiUQsnU5rHQ6HtU4kEhYIBKxarUoEREzdkYsQydjx3fDxeKzpTSYTlctweCKUDcbzYH0+nz/q4cBer9ffoZBk0rFYzDKZjNQ4VezxUCgkDKcCnKf0f38R5DEhVEGKgtFoZKVSSe+sXC5/HjcYPaW/xWJRGD2FpFAoCFfJfFyTnSH9t/YHwnEwZls+WZIAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
-  &gt;&lt;/span&gt;
-  &lt;img
-        class=&quot;gatsby-resp-image-image&quot;
-        alt=&quot;satisfied cut example&quot;
-        title=&quot;satisfied cut example&quot;
-        src=&quot;/static/745c46cd264c109c2ce14534179dcc1b/c5a17/example.png&quot;
-        srcset=&quot;/static/745c46cd264c109c2ce14534179dcc1b/cf440/example.png 148w,
-/static/745c46cd264c109c2ce14534179dcc1b/d2d38/example.png 295w,
-/static/745c46cd264c109c2ce14534179dcc1b/c5a17/example.png 512w&quot;
-        sizes=&quot;(max-width: 512px) 100vw, 512px&quot;
-        loading=&quot;lazy&quot;
-      /&gt;
-    &lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;https://grepp-programmers.s3.amazonaws.com/files/ybm/dbd166625b/d3ae656b-bb7b-421c-9f74-fa9ea800b860.png&quot; alt=&quot;satisfied cut example&quot;&gt;&lt;/p&gt;
 &lt;p&gt;이러한 레이저와 쇠막대기의 배치는 다음과 같이 괄호를 이용하여 왼쪽부터 순서대로 표현할 수 있습니다.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;(a) 레이저는 여는 괄호와 닫는 괄호의 인접한 쌍 ’()‘으로 표현합니다. 또한 모든 ’()‘는 반드시 레이저를 표현합니다.&lt;/li&gt;
