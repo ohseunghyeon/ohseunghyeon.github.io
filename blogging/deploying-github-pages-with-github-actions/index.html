@@ -4,7 +4,7 @@
 /* sc-component-id: Layout__Content-d8j8z5-1 */
 .gQQaxU{margin:0 auto;width:100%;max-width:768px;padding:0 1.21875rem 2.4375rem;} @media screen and (max-width:768px){.gQQaxU{padding-top:50px;}} @media screen and (min-width:768px) and (max-width:1024px){.gQQaxU{max-width:calc(100% - 228px);}}
 /* sc-component-id: PostFrontmatter__CategoryLink-sc-1f8onp1-0 */
-.lhSgLa{opacity:0.75;} .lhSgLa::before{content:" • ";} .lhSgLa br{display:none;} @media screen and (max-width:768px){.lhSgLa::before{display:none;}.lhSgLa br{display:inline;}}</style><link as="script" rel="preload" href="/app-66133c256cb0497c53ae.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-js-5c0bb0c995a7fc792243.js"/><link as="script" rel="preload" href="/styles-53b9a58c7f2919f00bbd.js"/><link as="script" rel="preload" href="/commons-4ebcec5fc241abd2172a.js"/><link as="script" rel="preload" href="/webpack-runtime-f475affdf74f8b252e05.js"/><link as="fetch" rel="preload" href="/page-data/blogging/deploying-github-pages-with-github-actions/page-data.json" crossorigin="anonymous"/></head><body><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><div class="Layout__Container-d8j8z5-0 eeStAm"><header class="header"><button class="nav-toggle"></button><a class="header-logo" href="/">Lazy Nyaong</a><nav class="nav" role="navigation"><ol class="nav-links"><li class="nav-link  "><a href="/algorithm">algorithm<small>(<!-- -->25<!-- -->)</small></a></li><li class="nav-link sub "><a href="/algorithm/hackerrank">hackerrank<small>(<!-- -->1<!-- -->)</small></a></li><li class="nav-link sub "><a href="/algorithm/programmers">programmers<small>(<!-- -->21<!-- -->)</small></a></li><li class="nav-link sub "><a href="/algorithm/reference">reference<small>(<!-- -->3<!-- -->)</small></a></li><li class="nav-link  current"><a href="/blogging">blogging<small>(<!-- -->8<!-- -->)</small></a></li><li class="nav-link  "><a href="/essay">essay<small>(<!-- -->2<!-- -->)</small></a></li><li class="nav-link  "><a href="/refernece">refernece<small>(<!-- -->1<!-- -->)</small></a></li><li class="nav-link  "><a href="/report">report<small>(<!-- -->4<!-- -->)</small></a></li><li class="nav-link  "><a href="/study">study<small>(<!-- -->2<!-- -->)</small></a></li></ol></nav></header><div class="Layout__Content-d8j8z5-1 gQQaxU"><main><article><header><h1 style="margin-top:3.25rem;margin-bottom:0">Github pages를 github actions로 자동 배포하기</h1><p style="font-size:0.87055rem;line-height:1.625rem;display:block;margin-bottom:1.625rem"> <!-- -->September 17, 2019<!-- --> • ☕️☕️ 11 min read<a class="PostFrontmatter__CategoryLink-sc-1f8onp1-0 lhSgLa" href="/blogging"><br/>blogging</a></p></header><section><p>나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다.</p>
+.lhSgLa{opacity:0.75;} .lhSgLa::before{content:" • ";} .lhSgLa br{display:none;} @media screen and (max-width:768px){.lhSgLa::before{display:none;}.lhSgLa br{display:inline;}}</style><link as="script" rel="preload" href="/app-fb6b8508d82056c498a6.js"/><link as="script" rel="preload" href="/component---src-templates-blog-post-js-5c0bb0c995a7fc792243.js"/><link as="script" rel="preload" href="/styles-e30b97e77fd821b328bf.js"/><link as="script" rel="preload" href="/commons-4ebcec5fc241abd2172a.js"/><link as="script" rel="preload" href="/webpack-runtime-f475affdf74f8b252e05.js"/><link as="fetch" rel="preload" href="/page-data/blogging/deploying-github-pages-with-github-actions/page-data.json" crossorigin="anonymous"/></head><body><noscript id="gatsby-noscript">This app works best with JavaScript enabled.</noscript><div id="___gatsby"><div style="outline:none" tabindex="-1" role="group" id="gatsby-focus-wrapper"><div class="Layout__Container-d8j8z5-0 eeStAm"><header class="header"><button class="nav-toggle"></button><a class="header-logo" href="/">Lazy Nyaong</a><nav class="nav" role="navigation"><ol class="nav-links"><li class="nav-link  "><a href="/algorithm">algorithm<small>(<!-- -->25<!-- -->)</small></a></li><li class="nav-link sub "><a href="/algorithm/hackerrank">hackerrank<small>(<!-- -->1<!-- -->)</small></a></li><li class="nav-link sub "><a href="/algorithm/programmers">programmers<small>(<!-- -->21<!-- -->)</small></a></li><li class="nav-link sub "><a href="/algorithm/reference">reference<small>(<!-- -->3<!-- -->)</small></a></li><li class="nav-link  current"><a href="/blogging">blogging<small>(<!-- -->8<!-- -->)</small></a></li><li class="nav-link  "><a href="/essay">essay<small>(<!-- -->2<!-- -->)</small></a></li><li class="nav-link  "><a href="/refernece">refernece<small>(<!-- -->1<!-- -->)</small></a></li><li class="nav-link  "><a href="/report">report<small>(<!-- -->4<!-- -->)</small></a></li><li class="nav-link  "><a href="/study">study<small>(<!-- -->2<!-- -->)</small></a></li></ol></nav></header><div class="Layout__Content-d8j8z5-1 gQQaxU"><main><article><header><h1 style="margin-top:3.25rem;margin-bottom:0">Github pages를 github actions로 자동 배포하기</h1><p style="font-size:0.87055rem;line-height:1.625rem;display:block;margin-bottom:1.625rem"> <!-- -->September 17, 2019<!-- --> • ☕️☕️ 11 min read<a class="PostFrontmatter__CategoryLink-sc-1f8onp1-0 lhSgLa" href="/blogging"><br/>blogging</a></p></header><section><p>나는 Github pages를 운영하기 위해서 다음과 같이 두 개의 저장소를 사용하고 있다.</p>
 <div class="gatsby-highlight" data-language="text"><pre class="language-text"><code class="language-text">- username.github.io 저장소 (static files)
 - 블로그 생성기 저장소 (gatsby - static site generater)</code></pre></div>
 <p>수동으로 블로그를 배포하기 위해서 블로그의 정적 파일들을 생성하고, 이를 <strong>username.github.io</strong> 저장소에 푸쉬해 왔다.<br>
@@ -20,7 +20,7 @@
 <h3>Github Actions</h3>
 <p><span
       class="gatsby-resp-image-wrapper"
-      style="position: relative; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10px; max-width: 657px;"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10px; max-width: 650px;"
     >
       <span
     class="gatsby-resp-image-background-image"
@@ -30,11 +30,12 @@
         class="gatsby-resp-image-image"
         alt="sign"
         title="sign"
-        src="/static/f52a1abea7a6b432697f7c5f4c309a77/702f6/signup.png"
-        srcset="/static/f52a1abea7a6b432697f7c5f4c309a77/72cd8/signup.png 192w,
-/static/f52a1abea7a6b432697f7c5f4c309a77/45483/signup.png 384w,
+        src="/static/f52a1abea7a6b432697f7c5f4c309a77/dbb61/signup.png"
+        srcset="/static/f52a1abea7a6b432697f7c5f4c309a77/19bd1/signup.png 163w,
+/static/f52a1abea7a6b432697f7c5f4c309a77/d3bcb/signup.png 325w,
+/static/f52a1abea7a6b432697f7c5f4c309a77/dbb61/signup.png 650w,
 /static/f52a1abea7a6b432697f7c5f4c309a77/702f6/signup.png 657w"
-        sizes="(max-width: 657px) 100vw, 657px"
+        sizes="(max-width: 650px) 100vw, 650px"
         loading="lazy"
       />
     </span></p>
@@ -82,8 +83,8 @@
         alt="actions button"
         title="actions button"
         src="/static/90f5198d4c3c5ebe80e482f779aef2c1/e82b9/actions_button.png"
-        srcset="/static/90f5198d4c3c5ebe80e482f779aef2c1/72cd8/actions_button.png 192w,
-/static/90f5198d4c3c5ebe80e482f779aef2c1/45483/actions_button.png 384w,
+        srcset="/static/90f5198d4c3c5ebe80e482f779aef2c1/19bd1/actions_button.png 163w,
+/static/90f5198d4c3c5ebe80e482f779aef2c1/d3bcb/actions_button.png 325w,
 /static/90f5198d4c3c5ebe80e482f779aef2c1/e82b9/actions_button.png 430w"
         sizes="(max-width: 430px) 100vw, 430px"
         loading="lazy"
@@ -289,7 +290,7 @@
 <p>Key가 준비되었다면 다음과 같이 저장소에 접근하기 위해 Deploy keys에 생성한 public key를 입력하고, 이 때 <strong>Allow write access</strong>를 꼭 체크해야 한다.</p>
 <p><span
       class="gatsby-resp-image-wrapper"
-      style="position: relative; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10px; max-width: 768px;"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10px; max-width: 650px;"
     >
       <span
     class="gatsby-resp-image-background-image"
@@ -299,12 +300,13 @@
         class="gatsby-resp-image-image"
         alt="deploy key"
         title="deploy key"
-        src="/static/facba1d91f1cdda8999de22b3551f563/5cc77/deploy_key.png"
-        srcset="/static/facba1d91f1cdda8999de22b3551f563/72cd8/deploy_key.png 192w,
-/static/facba1d91f1cdda8999de22b3551f563/45483/deploy_key.png 384w,
-/static/facba1d91f1cdda8999de22b3551f563/5cc77/deploy_key.png 768w,
+        src="/static/facba1d91f1cdda8999de22b3551f563/dbb61/deploy_key.png"
+        srcset="/static/facba1d91f1cdda8999de22b3551f563/19bd1/deploy_key.png 163w,
+/static/facba1d91f1cdda8999de22b3551f563/d3bcb/deploy_key.png 325w,
+/static/facba1d91f1cdda8999de22b3551f563/dbb61/deploy_key.png 650w,
+/static/facba1d91f1cdda8999de22b3551f563/6b691/deploy_key.png 975w,
 /static/facba1d91f1cdda8999de22b3551f563/e8f76/deploy_key.png 1022w"
-        sizes="(max-width: 768px) 100vw, 768px"
+        sizes="(max-width: 650px) 100vw, 650px"
         loading="lazy"
       />
     </span></p>
@@ -312,7 +314,7 @@
 <p>secrets는 저장소의 settings에서 설정 가능한데, private key를 secret에 추가하여 리눅스 가상환경에 가져가 파일로 생성하는 것이다.</p>
 <p><span
       class="gatsby-resp-image-wrapper"
-      style="position: relative; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10px; max-width: 768px;"
+      style="position: relative; display: block; margin-left: auto; margin-right: auto; margin-bottom: 10px; max-width: 650px;"
     >
       <span
     class="gatsby-resp-image-background-image"
@@ -322,12 +324,13 @@
         class="gatsby-resp-image-image"
         alt="secrets 설정"
         title="secrets 설정"
-        src="/static/691d92de7831d7019ab09ed71acea147/5cc77/secret.png"
-        srcset="/static/691d92de7831d7019ab09ed71acea147/72cd8/secret.png 192w,
-/static/691d92de7831d7019ab09ed71acea147/45483/secret.png 384w,
-/static/691d92de7831d7019ab09ed71acea147/5cc77/secret.png 768w,
+        src="/static/691d92de7831d7019ab09ed71acea147/dbb61/secret.png"
+        srcset="/static/691d92de7831d7019ab09ed71acea147/19bd1/secret.png 163w,
+/static/691d92de7831d7019ab09ed71acea147/d3bcb/secret.png 325w,
+/static/691d92de7831d7019ab09ed71acea147/dbb61/secret.png 650w,
+/static/691d92de7831d7019ab09ed71acea147/6b691/secret.png 975w,
 /static/691d92de7831d7019ab09ed71acea147/9c15e/secret.png 998w"
-        sizes="(max-width: 768px) 100vw, 768px"
+        sizes="(max-width: 650px) 100vw, 650px"
         loading="lazy"
       />
     </span></p>
@@ -391,4 +394,4 @@
       
       
       
-      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/blogging/deploying-github-pages-with-github-actions/";window.webpackCompilationHash="aa1ddf5b7bf9cb9d61c8";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-66133c256cb0497c53ae.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-7f803ab9f0d1c468b569.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-5c0bb0c995a7fc792243.js"],"component---src-templates-category-page-js":["/component---src-templates-category-page-js-1033f286a3e7d00c0265.js"],"component---src-pages-404-js":["/component---src-pages-404-js-331987efa0895fc308ff.js"],"component---src-pages-about-js":["/component---src-pages-about-js-286c512bee5fc3c00d09.js"],"component---src-pages-index-js":["/component---src-pages-index-js-e80e8e851d89945903a3.js"]};/*]]>*/</script><script src="/webpack-runtime-f475affdf74f8b252e05.js" async=""></script><script src="/commons-4ebcec5fc241abd2172a.js" async=""></script><script src="/styles-53b9a58c7f2919f00bbd.js" async=""></script><script src="/component---src-templates-blog-post-js-5c0bb0c995a7fc792243.js" async=""></script><script src="/app-66133c256cb0497c53ae.js" async=""></script></body></html>
+      }</script><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/blogging/deploying-github-pages-with-github-actions/";window.webpackCompilationHash="5661a1dffc6832e7b75f";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"app":["/app-fb6b8508d82056c498a6.js"],"component---node-modules-gatsby-plugin-offline-app-shell-js":["/component---node-modules-gatsby-plugin-offline-app-shell-js-7f803ab9f0d1c468b569.js"],"component---src-templates-blog-post-js":["/component---src-templates-blog-post-js-5c0bb0c995a7fc792243.js"],"component---src-templates-category-page-js":["/component---src-templates-category-page-js-1033f286a3e7d00c0265.js"],"component---src-pages-404-js":["/component---src-pages-404-js-331987efa0895fc308ff.js"],"component---src-pages-about-js":["/component---src-pages-about-js-286c512bee5fc3c00d09.js"],"component---src-pages-index-js":["/component---src-pages-index-js-e80e8e851d89945903a3.js"]};/*]]>*/</script><script src="/webpack-runtime-f475affdf74f8b252e05.js" async=""></script><script src="/commons-4ebcec5fc241abd2172a.js" async=""></script><script src="/styles-e30b97e77fd821b328bf.js" async=""></script><script src="/component---src-templates-blog-post-js-5c0bb0c995a7fc792243.js" async=""></script><script src="/app-fb6b8508d82056c498a6.js" async=""></script></body></html>
