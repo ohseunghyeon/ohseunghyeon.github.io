@@ -1,4 +1,62 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 14 Oct 2019 11:31:42 GMT</lastBuildDate><item><title><![CDATA[2019-10-3]]></title><description><![CDATA[Videos Readings 13 Tips to Write Faster, Better-Optimized JavaScript Remove Unnecessary Features - 필요 없는 기능이라면 제거해라 Avoid Unnecessary Steps…]]></description><link>https://ohseunghyeon.github.io/report/2019-10-3/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-10-3/</guid><pubDate>Mon, 14 Oct 2019 11:19:21 GMT</pubDate><content:encoded>&lt;h2&gt;Videos&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 14 Oct 2019 12:43:49 GMT</lastBuildDate><item><title><![CDATA[Gatsby 블로그에 Dark mode 넣기]]></title><description><![CDATA[Dark mode 최근 윈도우나 맥OS, 심지어 내가 사용하는 아이폰의 IOS까지 Dark mode이 도입됐다. Dark mode는 말 그대로 전반적인 인터페이스의 색상이 어둡다. 그래서 어두운 환경에서 눈의 피로를 감소시켜준다. dark mode…]]></description><link>https://ohseunghyeon.github.io/blogging/applying-dark-mode-on-gatsby-blog/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/applying-dark-mode-on-gatsby-blog/</guid><pubDate>Mon, 14 Oct 2019 11:40:40 GMT</pubDate><content:encoded>&lt;h2&gt;Dark mode&lt;/h2&gt;
+&lt;p&gt;최근 윈도우나 맥OS, 심지어 내가 사용하는 아이폰의 IOS까지 Dark mode이 도입됐다. Dark mode는 말 그대로 전반적인 인터페이스의 색상이 어둡다. 그래서 어두운 환경에서 눈의 피로를 감소시켜준다.&lt;/p&gt;
+&lt;h2&gt;dark mode in CSS&lt;/h2&gt;
+&lt;p&gt;CSS에도 dark mode에 대응하기 위한 기능이 추가되었는데, &lt;code class=&quot;language-text&quot;&gt;prefers-color-scheme&lt;/code&gt;이라는 media query이다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token atrule&quot;&gt;&lt;span class=&quot;token rule&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token property&quot;&gt;prefers-color-scheme&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; dark&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 쿼리를 사용하면 dark 모드가 설정된 os와 아닌 os에서의 css 결과가 달라질 것이다.&lt;/p&gt;
+&lt;p&gt;아래와 같은 경우 dark모드인 경우 배경과 글의 색이 역전된다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; white&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; black&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token atrule&quot;&gt;&lt;span class=&quot;token rule&quot;&gt;@media&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token property&quot;&gt;prefers-color-scheme&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; dark&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token selector&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; black&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token property&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; white&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;여기에 javascript를 사용해서 query를 실시간으로 확인하여 특정 동작을 할 수도 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; darkQuery &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; window&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;matchMedia&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&apos;(prefers-color-scheme: dark)&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+darkQuery&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addListener&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token function&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;e&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;matches &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;dark mode&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;light mode&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;그러나 이 방법으로만 구현하게 되면 light 모드를 사용하는 사용자는 dark mode를 사용할 수 없다. 그러므로 switch를 두고 toggle을 하여 mode를 바꾸는 방법을 사용하였다.&lt;/p&gt;
+&lt;h2&gt;CSS Variables&lt;/h2&gt;
+&lt;p&gt;CSS 변수는 다음과 같이 사용할 수 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;// 변수의 선언
+element&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;--main-bg-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; brown&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token selector&quot;&gt;// 변수의 사용
+element&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;--main-bg-color&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;그리고 switch는 css class의 변경을 활용하여 다음과 같이 적용할 수 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;body.light&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;--main-bg-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; white&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token selector&quot;&gt;body.dark&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;--main-bg-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; black&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token selector&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token property&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;--main-bg-color&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이런 접근법으로 switch를 만들고 body의 class를 변경해주면 색상이 변경된다.&lt;/p&gt;
+&lt;h2&gt;추가적인 고려 사항&lt;/h2&gt;
+&lt;p&gt;단순히 색상만 바꾸는 것으로는 다크 모드를 이쁘게 구현했다고 볼 수 없다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://stuffandnonsense.co.uk/blog/redesigning-your-product-and-website-for-dark-mode&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Andy Clarke의 글&lt;/a&gt;을 참고하면, 색상을 선택하는 것부터, 타이포그래피, 이미지에 필터를 적용하는 것 등 다양한 것들을 고려하여 구현할 수 있음을 알 수 있다.&lt;/p&gt;
+&lt;h2&gt;참고&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Create A Dark/Light Mode Switch with CSS Variables, Ananya Neogi, 2019.4.10&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://css-tricks.com/dark-modes-with-css/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Dark Mode in CSS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;https://stuffandnonsense.co.uk/blog/redesigning-your-product-and-website-for-dark-mode&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Redesigning your product and website for dark mode&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</content:encoded></item><item><title><![CDATA[2019년 10월 셋째 주]]></title><description><![CDATA[Videos Readings 13 Tips to Write Faster, Better-Optimized JavaScript Remove Unnecessary Features - 필요 없는 기능이라면 제거해라 Avoid Unnecessary Steps…]]></description><link>https://ohseunghyeon.github.io/report/2019-10-3/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-10-3/</guid><pubDate>Mon, 14 Oct 2019 11:19:21 GMT</pubDate><content:encoded>&lt;h2&gt;Videos&lt;/h2&gt;
 &lt;h2&gt;Readings&lt;/h2&gt;
 &lt;h3&gt;&lt;a href=&quot;https://medium.com/@bretcameron/13-tips-to-write-faster-better-optimized-javascript-dc1f9ab063d8&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;13 Tips to Write Faster, Better-Optimized JavaScript&lt;/a&gt;&lt;/h3&gt;
 &lt;ol&gt;
@@ -310,7 +368,7 @@ name인자로 들어온 알파벳을 ‘AAA’로 만들어도 똑같은 조이�
   &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
 
   &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; movement&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
-&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[2019-10-2]]></title><description><![CDATA[Videos Should you Implement Authentication Yourself?, Ben Awad, 2019.10.7 인증을 직접 구현해야 할까? 에 대한 내용 정리 직접 만들며 배울 수 있다 vs…]]></description><link>https://ohseunghyeon.github.io/report/2019-10-2/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-10-2/</guid><pubDate>Tue, 08 Oct 2019 03:47:53 GMT</pubDate><content:encoded>&lt;h2&gt;Videos&lt;/h2&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[2019년 10월 둘째 주]]></title><description><![CDATA[Videos Should you Implement Authentication Yourself?, Ben Awad, 2019.10.7 인증을 직접 구현해야 할까? 에 대한 내용 정리 직접 만들며 배울 수 있다 vs…]]></description><link>https://ohseunghyeon.github.io/report/2019-10-2/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/2019-10-2/</guid><pubDate>Tue, 08 Oct 2019 03:47:53 GMT</pubDate><content:encoded>&lt;h2&gt;Videos&lt;/h2&gt;
 &lt;h3&gt;&lt;a href=&quot;https://www.youtube.com/watch?v=Hh_kiZTTBr0&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Should you Implement Authentication Yourself?, Ben Awad, 2019.10.7&lt;/a&gt;&lt;/h3&gt;
 &lt;p&gt;인증을 직접 구현해야 할까? 에 대한 내용 정리&lt;/p&gt;
 &lt;ol&gt;
@@ -4179,13 +4237,13 @@ arrangement의 여는 괄호와 닫는 괄호는 항상 쌍을 이룹니다.
   /products/3156
   /movies/127/times&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
-&lt;li&gt;The Bad: Inconsistency &lt;/li&gt;
+&lt;li&gt;The Bad: Inconsistency&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;  /users/22445
   /reviews/3156  &amp;lt;== Not review or time id&amp;#39;s
   /times/127&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;ul&gt;
-&lt;li&gt;The Ugly: &lt;/li&gt;
+&lt;li&gt;The Ugly:&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;  GET /remove  &amp;lt;==used GET method to delete something&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;Payloads&lt;/h2&gt;
@@ -4453,7 +4511,7 @@ arrangement의 여는 괄호와 닫는 괄호는 항상 쌍을 이룹니다.
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; &lt;a href=&quot;/blogging/add-reading-time-of-post&quot;&gt;몇 분짜리 글인지 표시&lt;/a&gt; - &lt;a href=&quot;https://www.gatsbyjs.org/packages/gatsby-remark-reading-time&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;gatsby-remark-reading-time&lt;/a&gt;&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; &lt;a href=&quot;/blogging/making-category-page/&quot;&gt;카테고리 넣기&lt;/a&gt;&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; 댓글 달기 - &lt;a href=&quot;https://utteranc.es/&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;https://utteranc.es/&lt;/a&gt;&lt;/li&gt;
-&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; Light/Dark Theme 넣기&lt;/li&gt;
+&lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; checked disabled&gt; &lt;a href=&quot;/blogging/applying-dark-mode-on-gatsby-blog/&quot;&gt;Light/Dark Theme 넣기&lt;/a&gt;&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 글 목록 lazy load&lt;/li&gt;
 &lt;li class=&quot;task-list-item&quot;&gt;&lt;input type=&quot;checkbox&quot; disabled&gt; 글 내의 목차&lt;/li&gt;
 &lt;/ul&gt;</content:encoded></item><item><title><![CDATA[124 나라의 숫자]]></title><description><![CDATA[출처 프로그래머스 문제 설명 124 나라가 있습니다. 124 나라에서는 10진법이 아닌 다음과 같은 자신들만의 규칙으로 수를 표현합니다. 124 나라에는 자연수만 존재합니다.
