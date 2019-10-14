@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 14 Oct 2019 12:43:49 GMT</lastBuildDate><item><title><![CDATA[Gatsby 블로그에 Dark mode 넣기]]></title><description><![CDATA[Dark mode 최근 윈도우나 맥OS, 심지어 내가 사용하는 아이폰의 IOS까지 Dark mode이 도입됐다. Dark mode는 말 그대로 전반적인 인터페이스의 색상이 어둡다. 그래서 어두운 환경에서 눈의 피로를 감소시켜준다. dark mode…]]></description><link>https://ohseunghyeon.github.io/blogging/applying-dark-mode-on-gatsby-blog/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/applying-dark-mode-on-gatsby-blog/</guid><pubDate>Mon, 14 Oct 2019 11:40:40 GMT</pubDate><content:encoded>&lt;h2&gt;Dark mode&lt;/h2&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Mon, 14 Oct 2019 17:28:10 GMT</lastBuildDate><item><title><![CDATA[Gatsby 블로그에 Dark mode 넣기]]></title><description><![CDATA[Dark mode 최근 윈도우나 맥OS, 심지어 내가 사용하는 아이폰의 IOS까지 Dark mode이 도입됐다. Dark mode는 말 그대로 전반적인 인터페이스의 색상이 어둡다. 그래서 어두운 환경에서 눈의 피로를 감소시켜준다. dark mode…]]></description><link>https://ohseunghyeon.github.io/blogging/applying-dark-mode-on-gatsby-blog/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/blogging/applying-dark-mode-on-gatsby-blog/</guid><pubDate>Mon, 14 Oct 2019 11:40:40 GMT</pubDate><content:encoded>&lt;h2&gt;Dark mode&lt;/h2&gt;
 &lt;p&gt;최근 윈도우나 맥OS, 심지어 내가 사용하는 아이폰의 IOS까지 Dark mode이 도입됐다. Dark mode는 말 그대로 전반적인 인터페이스의 색상이 어둡다. 그래서 어두운 환경에서 눈의 피로를 감소시켜준다.&lt;/p&gt;
 &lt;h2&gt;dark mode in CSS&lt;/h2&gt;
 &lt;p&gt;CSS에도 dark mode에 대응하기 위한 기능이 추가되었는데, &lt;code class=&quot;language-text&quot;&gt;prefers-color-scheme&lt;/code&gt;이라는 media query이다.&lt;/p&gt;
@@ -23,9 +23,12 @@
 darkQuery&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;addListener&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token function&quot;&gt;alert&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;e&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;matches &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;dark mode&apos;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&apos;light mode&apos;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;그러나 이 방법으로만 구현하게 되면 light 모드를 사용하는 사용자는 dark mode를 사용할 수 없다. 그러므로 switch를 두고 toggle을 하여 mode를 바꾸는 방법을 사용하였다.&lt;/p&gt;
+&lt;p&gt;그러나 이 방법으로만 구현하게 되면 OS에서 dark  모드를 사용하지 않는 사용자는 웹에서 dark mode를 사용할 수 없다.&lt;/p&gt;
 &lt;h2&gt;CSS Variables&lt;/h2&gt;
-&lt;p&gt;CSS 변수는 다음과 같이 사용할 수 있다.&lt;/p&gt;
+&lt;p&gt;switch를 두고 toggle을 하여 mode를 바꾸는 방법은 어떨까?&lt;/p&gt;
+&lt;p&gt;switch에 따라 .light 또는 .dark 클래스를 적용하여 사이트의 전체적인 css를 변경하는 것이다.&lt;/p&gt;
+&lt;p&gt;그러기 위해서는 변수와 같은 것이 필요하다.&lt;/p&gt;
+&lt;p&gt;CSS에도 변수가 있으며 다음과 같이 사용할 수 있다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;// 변수의 선언
 element&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;--main-bg-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; brown&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
@@ -35,7 +38,7 @@ element&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&
 element&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;--main-bg-color&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;그리고 switch는 css class의 변경을 활용하여 다음과 같이 적용할 수 있다.&lt;/p&gt;
+&lt;p&gt;이 변수를 활용하면, 다음과 같이 모드에 따라 변수의 값을 바꾸어 사이트 전체의 css에 적용되게 할 수 있다.&lt;/p&gt;
 &lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;css&quot;&gt;&lt;pre class=&quot;language-css&quot;&gt;&lt;code class=&quot;language-css&quot;&gt;&lt;span class=&quot;token selector&quot;&gt;body.light&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;--main-bg-color&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; white&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
@@ -47,7 +50,6 @@ element&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&
 &lt;span class=&quot;token selector&quot;&gt;body&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;token property&quot;&gt;background&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;var&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;--main-bg-color&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;이런 접근법으로 switch를 만들고 body의 class를 변경해주면 색상이 변경된다.&lt;/p&gt;
 &lt;h2&gt;추가적인 고려 사항&lt;/h2&gt;
 &lt;p&gt;단순히 색상만 바꾸는 것으로는 다크 모드를 이쁘게 구현했다고 볼 수 없다.&lt;/p&gt;
 &lt;p&gt;&lt;a href=&quot;https://stuffandnonsense.co.uk/blog/redesigning-your-product-and-website-for-dark-mode&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;Andy Clarke의 글&lt;/a&gt;을 참고하면, 색상을 선택하는 것부터, 타이포그래피, 이미지에 필터를 적용하는 것 등 다양한 것들을 고려하여 구현할 수 있음을 알 수 있다.&lt;/p&gt;
