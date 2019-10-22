@@ -1,4 +1,88 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Fri, 18 Oct 2019 12:26:32 GMT</lastBuildDate><item><title><![CDATA[섬 연결하기]]></title><description><![CDATA[문제 링크 문제 설명 n개의 섬 사이에 다리를 건설하는 비용(costs)이 주어질 때, 최소의 비용으로 모든 섬이 서로 통행 가능하도록 만들 때 필요한 최소 비용을 return 하도록 solution…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/섬-연결하기/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/섬-연결하기/</guid><pubDate>Wed, 16 Oct 2019 04:10:39 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42861&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 22 Oct 2019 04:59:51 GMT</lastBuildDate><item><title><![CDATA[단속카메라]]></title><description><![CDATA[문제 링크 문제 설명 고속도로를 이동하는 모든 차량이 고속도로를 이용하면서 단속용 카메라를 한 번은 만나도록 카메라를 설치하려고 합니다. 고속도로를 이동하는 차량의 경로 routes…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/단속카메라/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/단속카메라/</guid><pubDate>Tue, 22 Oct 2019 03:53:11 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42884&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;문제-설명&quot;&gt;&lt;a href=&quot;#%EB%AC%B8%EC%A0%9C-%EC%84%A4%EB%AA%85&quot; aria-label=&quot;문제 설명 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;문제 설명&lt;/h2&gt;
+&lt;p&gt;고속도로를 이동하는 모든 차량이 고속도로를 이용하면서 단속용 카메라를 한 번은 만나도록 카메라를 설치하려고 합니다.&lt;/p&gt;
+&lt;p&gt;고속도로를 이동하는 차량의 경로 routes가 매개변수로 주어질 때, 모든 차량이 한 번은 단속용 카메라를 만나도록 하려면 최소 몇 대의 카메라를 설치해야 하는지를 return 하도록 solution 함수를 완성하세요.&lt;/p&gt;
+&lt;h2 id=&quot;제한사항&quot;&gt;&lt;a href=&quot;#%EC%A0%9C%ED%95%9C%EC%82%AC%ED%95%AD&quot; aria-label=&quot;제한사항 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;제한사항&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;차량의 대수는 1대 이상 10,000대 이하입니다.&lt;/li&gt;
+&lt;li&gt;routes에는 차량의 이동 경로가 포함되어 있으며 routes[i][0]에는 i번째 차량이 고속도로에 진입한 지점, routes[i][1]에는 i번째 차량이 - 고속도로에서 나간 지점이 적혀 있습니다.&lt;/li&gt;
+&lt;li&gt;차량의 진입/진출 지점에 카메라가 설치되어 있어도 카메라를 만난것으로 간주합니다.&lt;/li&gt;
+&lt;li&gt;차량의 진입 지점, 진출 지점은 -30,000 이상 30,000 이하입니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;입출력-예&quot;&gt;&lt;a href=&quot;#%EC%9E%85%EC%B6%9C%EB%A0%A5-%EC%98%88&quot; aria-label=&quot;입출력 예 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;입출력 예&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;routes&lt;/th&gt;
+&lt;th&gt;return&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;[[-20,15], [-14,-5], [-18,-13], [-5,-3]]&lt;/td&gt;
+&lt;td&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&quot;입출력-예-설명&quot;&gt;&lt;a href=&quot;#%EC%9E%85%EC%B6%9C%EB%A0%A5-%EC%98%88-%EC%84%A4%EB%AA%85&quot; aria-label=&quot;입출력 예 설명 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;입출력 예 설명&lt;/h2&gt;
+&lt;p&gt;-5 지점에 카메라를 설치하면 두 번째, 네 번째 차량이 카메라를 만납니다.&lt;/p&gt;
+&lt;p&gt;-15 지점에 카메라를 설치하면 첫 번째, 세 번째 차량이 카메라를 만납니다.&lt;/p&gt;
+&lt;h2 id=&quot;풀이&quot;&gt;&lt;a href=&quot;#%ED%92%80%EC%9D%B4&quot; aria-label=&quot;풀이 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;풀이&lt;/h2&gt;
+&lt;p&gt;나는 이 문제를 스스로 풀지 못했다. 다른 사람의 답을 베꼈으며, 이해를 바탕으로 풀이를 기술한다.&lt;/p&gt;
+&lt;p&gt;차량들의 진입, 진출 지점이 있다.&lt;/p&gt;
+&lt;p&gt;위의 입출력 예를 도식화하면 다음과 같다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;-20 ------------------------------------ 15
+        -14 ------ -5
+    -18 ---- -13
+                  -5 ---- -3&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 차량의 경로들을 가지고 카메라 설치 위치를 어떻게 구할까?&lt;/p&gt;
+&lt;p&gt;나의 경우 진입 지점을 오름차순으로 정렬하여 어떻게 구할지 한참 생각하다가 포기했다.&lt;/p&gt;
+&lt;p&gt;그러나 진출 지점을 오름차순으로 정렬할 경우 한결 생각하기 쉽다.&lt;/p&gt;
+&lt;p&gt;이에 대한 로직은 다음과 같다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;차량 경로들을 진출 지점에 대한 오름차순으로 정렬한다.&lt;/li&gt;
+&lt;li&gt;카메라가 하나도 없는 상태에서는 첫 번째 경로의 진출 지점에 카메라를 설치한다.&lt;/li&gt;
+&lt;li&gt;각 차량을 순회하며 설치된 각각의 카메라에 대해 &lt;strong&gt;다음 차량 경로의 진입 지점 &amp;#x3C;= 카메라 &amp;#x3C;= 진출 지점&lt;/strong&gt; 이 false 경우 해당 진출 지점에 카메라를 추가 설치한다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;이 로직을 바탕으로 카메라를 설치할 경우 다음과 같다&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;text&quot;&gt;&lt;pre class=&quot;language-text&quot;&gt;&lt;code class=&quot;language-text&quot;&gt;    -18 ---- -13
+        -14 ------ -5
+                  -5 ---- -3
+-20 ------------------------------------ 15
+             (cam)       (cam)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;이 로직을 구현하기 위해서, 카메라 배열을 만들고 매 차량 경로에 대해서 카메라 배열을 순회하며 확인하는 방법도 있다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;const&lt;/span&gt; cameras &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+routes&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;진입&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; 진출&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  cameras&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;cam&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;진입 &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; cam &lt;span class=&quot;token operator&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; cam &lt;span class=&quot;token operator&quot;&gt;&amp;lt;=&lt;/span&gt; 진출&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+      cameras&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;진출&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; cameras&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;length&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;그러나 이 경우 routes의 순회가 후반부를 향할 수록 camera에 대해 불필요한 초반부 순회가 이뤄짐을 알 수 있다.&lt;/p&gt;
+&lt;p&gt;즉 위의 경우 네 번째 route를 돌 때는 첫 번째 카메라를 순회할 필요가 없다.&lt;/p&gt;
+&lt;p&gt;다르게 생각하면, 카메라의 개수만 따로 합산하고, 마지막 카메라의 위치만 알고 있어도 된다는 뜻이다.&lt;/p&gt;
+&lt;p&gt;이를 구현하면 다음과 같다.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot; data-language=&quot;javascript&quot;&gt;&lt;pre class=&quot;language-javascript&quot;&gt;&lt;code class=&quot;language-javascript&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;function&lt;/span&gt; &lt;span class=&quot;token function&quot;&gt;solution&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;routes&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; answer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    routes&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;sort&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;a&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; a&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;-&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;let&lt;/span&gt; min &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Number&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token constant&quot;&gt;MIN_SAFE_INTEGER&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+
+    routes&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token function&quot;&gt;forEach&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token parameter&quot;&gt;&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;enter&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; out&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;min &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; enter&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            min &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; out&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+            answer&lt;span class=&quot;token operator&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;return&lt;/span&gt; answer&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content:encoded></item><item><title><![CDATA[섬 연결하기]]></title><description><![CDATA[문제 링크 문제 설명 n개의 섬 사이에 다리를 건설하는 비용(costs)이 주어질 때, 최소의 비용으로 모든 섬이 서로 통행 가능하도록 만들 때 필요한 최소 비용을 return 하도록 solution…]]></description><link>https://ohseunghyeon.github.io/algorithm/programmers/섬-연결하기/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/algorithm/programmers/섬-연결하기/</guid><pubDate>Wed, 16 Oct 2019 04:10:39 GMT</pubDate><content:encoded>&lt;p&gt;&lt;a href=&quot;https://programmers.co.kr/learn/courses/30/lessons/42861&quot; target=&quot;_blank&quot; rel=&quot;nofollow noopener noreferrer&quot;&gt;문제 링크&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&quot;문제-설명&quot;&gt;&lt;a href=&quot;#%EB%AC%B8%EC%A0%9C-%EC%84%A4%EB%AA%85&quot; aria-label=&quot;문제 설명 permalink&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;문제 설명&lt;/h2&gt;
 &lt;p&gt;n개의 섬 사이에 다리를 건설하는 비용(costs)이 주어질 때, 최소의 비용으로 모든 섬이 서로 통행 가능하도록 만들 때 필요한 최소 비용을 return 하도록 solution을 완성하세요.&lt;/p&gt;
 &lt;p&gt;다리를 여러 번 건너더라도, 도달할 수만 있으면 통행 가능하다고 봅니다. 예를 들어 A 섬과 B 섬 사이에 다리가 있고, B 섬과 C 섬 사이에 다리가 있으면 A 섬과 C 섬은 서로 통행 가능합니다.&lt;/p&gt;
