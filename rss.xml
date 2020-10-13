@@ -1,4 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Sun, 27 Sep 2020 12:07:17 GMT</lastBuildDate><item><title><![CDATA[Mastering Chaos - A Netflix Guide to Microservices]]></title><description><![CDATA[Before moving to MSA Monolithic code base - took one week for troubleshooting
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Lazy Nyaong]]></title><description><![CDATA[Code, Lazy, Cat]]></description><link>https://ohseunghyeon.github.io</link><generator>GatsbyJS</generator><lastBuildDate>Tue, 13 Oct 2020 14:09:03 GMT</lastBuildDate><item><title><![CDATA[Intro to Object Oriented Programming - Crash Course]]></title><description><![CDATA[4 principles of OOP encapsulation access or manipulation to the attribute should be done by method abstraction Abstraction allows the…]]></description><link>https://ohseunghyeon.github.io/report/intro-to-object-oriented-programming---crash-course/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/intro-to-object-oriented-programming---crash-course/</guid><pubDate>Tue, 13 Oct 2020 13:03:22 GMT</pubDate><content:encoded>&lt;h2 id=&quot;4-principles-of-oop&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#4-principles-of-oop&quot; aria-label=&quot;4 principles of oop permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;4 principles of OOP&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;encapsulation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;access or manipulation to the attribute should be done by method&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;abstraction&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Abstraction allows the program to be worked on incrementally and prevents it from becoming entangled and complex&lt;/p&gt;
+&lt;p&gt;Determine specific points of contact that can act as an interface between classes, and only worry about the implementation when coding it&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Inheritance&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;class hierarchy&lt;/p&gt;
+&lt;p&gt;access modifiers&lt;/p&gt;
+&lt;p&gt;public, private, protected&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;polymorphism&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;dynamic polymorphism occurs during the runtime of the program&lt;/p&gt;
+&lt;p&gt;static polymorphism occurs during compile-time - overloading (methods of the same name but different number of parameters, different types of parameters, different order of parameters)&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Mastering Chaos - A Netflix Guide to Microservices]]></title><description><![CDATA[Before moving to MSA Monolithic code base - took one week for troubleshooting
 Monolithic database - if this DB goes down, everything goes…]]></description><link>https://ohseunghyeon.github.io/report/mastering-chaos---a-netflix-guide-to-microservices/</link><guid isPermaLink="false">https://ohseunghyeon.github.io/report/mastering-chaos---a-netflix-guide-to-microservices/</guid><pubDate>Mon, 14 Sep 2020 14:24:54 GMT</pubDate><content:encoded>&lt;h2 id=&quot;before-moving-to-msa&quot; style=&quot;position:relative;&quot;&gt;&lt;a href=&quot;#before-moving-to-msa&quot; aria-label=&quot;before moving to msa permalink&quot; class=&quot;anchor before&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; focusable=&quot;false&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Before moving to MSA&lt;/h2&gt;
 &lt;p&gt;Monolithic code base - took one week for troubleshooting
 Monolithic database - if this DB goes down, everything goes down. to add a column to a table was a big cross-functional project.&lt;/p&gt;
