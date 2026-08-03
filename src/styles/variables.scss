@@ -1,4 +1,0 @@
-// SCSS 변수만 둔다. Header 계열 .scss들이 @import로 가져다 쓴다.
-// rhythm 커스텀 프로퍼티는 global.scss에 있다 — 여기 두면 @import마다
-// :root 블록이 중복 출력된다.
-$border-color: #d6d9dc;
