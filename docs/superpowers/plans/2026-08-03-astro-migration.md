@@ -95,8 +95,10 @@
 현재 값은 `echo "Write tests! ..." && exit 1`이다. 다음으로 바꾼다.
 
 ```json
-"test": "node --test src/**/*.test.js"
+"test": "node --test"
 ```
+
+인자 없는 `node --test`는 Node 22가 `**/*.test.js`를 자동 탐색한다. 글롭을 직접 넘기면 npm이 스크립트를 `sh`로 실행하므로 `**`가 재귀 확장되지 않아 깊은 경로의 테스트를 조용히 놓친다.
 
 - [ ] **Step 2: 실패하는 테스트 작성**
 
@@ -228,7 +230,7 @@ entry.id는 glob 로더가 소문자로 정규화하므로 filePath에서
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "test": "node --test src/**/*.test.js",
+    "test": "node --test",
     "verify:urls": "node scripts/verify-urls.mjs",
     "post": "node scripts/new-post.mjs"
   },
@@ -241,6 +243,7 @@ entry.id는 glob 로더가 소문자로 정규화하므로 filePath에서
     "medium-zoom": "^1.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-toggle": "^4.1.3",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-external-links": "^3.0.0",
     "rehype-slug": "^6.0.0",
@@ -256,7 +259,7 @@ entry.id는 glob 로더가 소문자로 정규화하므로 filePath에서
 
 `@astrojs/react`·`@astrojs/rss`·`@astrojs/sitemap`의 버전 범위는 설치 시점의 Astro 7 호환 버전을 따른다. 설치 후 경고가 나오면 `npm install @astrojs/react@latest` 등으로 맞춘다.
 
-`react-toggle`은 제거하고 Task 7에서 직접 구현한다 — 의존성 하나를 위해 유지할 만큼 복잡하지 않고, 이 프로젝트가 고장난 원인이 방치된 의존성이었다.
+`react-toggle`은 **유지한다.** 순수 React 패키지라 네이티브 빌드가 없어 이 프로젝트를 고장낸 유형(`node-sass`, 구버전 `sharp`)이 아니고, 유지하면 `Toggle.scss`를 손대지 않아도 되어 생김새가 정확히 보존된다. React 18 peer 경고가 나올 수 있으나 동작에는 지장이 없다 — 경고가 설치를 막으면 `npm install --legacy-peer-deps` 대신 `npm install react-toggle --force`로 처리하고 그 사실을 보고한다.
 
 - [ ] **Step 2: `.nvmrc` 생성**
 
@@ -911,66 +914,78 @@ deprecated된 addListener를 addEventListener로 교체했다."
 
 ### Task 7: Header React 아일랜드
 
-인터랙티브 컴포넌트 4개를 React 아일랜드로 옮긴다. GraphQL과 `gatsby`의 `Link`를 제거하고, `react-toggle`은 직접 구현한다.
+인터랙티브 컴포넌트 4개를 React 아일랜드로 옮긴다. GraphQL과 `gatsby`의 `Link`를 제거한다. `react-toggle`은 유지해 토글 생김새를 정확히 보존한다.
 
 **Files:**
 - Create: `src/components/Header/Header.jsx`, `HeaderNav.jsx`, `HeaderHamburger.jsx`, `Toggle.jsx`
-- Keep: `src/components/Header/index.scss`, `HeaderNav.scss`, `HeaderHamburger.scss`, `Toggle.scss`
+- Keep (수정 없음): `src/components/Header/index.scss`, `HeaderNav.scss`, `HeaderHamburger.scss`, `Toggle.scss`
 - Delete: `src/components/Header/index.js`, `HeaderNav.js`, `HeaderHamburger.js`, `Toggle.js`
 
 **Interfaces:**
 - Consumes: `BaseLayout`이 넘기는 props (Task 6)
 - Produces: `Header({ title, pathname, categories })`. `categories`는 `{ slug, cat, count, depth }[]`
 
-- [ ] **Step 1: `Toggle.jsx` — `react-toggle` 직접 구현**
+- [ ] **Step 1: `Toggle.jsx` — 확장자만 바꿔 그대로 이동**
 
-원본은 `react-toggle`의 `icons`/`checked`/`onChange`만 사용한다. 체크박스 하나로 대체한다.
+`react-toggle`을 유지하므로 원본 로직을 바꾸지 않는다. `.scss` 파일도 손대지 않는다. `react-toggle`의 기본 CSS import가 원본에 없었다면 추가하지 않는다 — 기존 동작을 그대로 유지한다.
 
 ```jsx
 import { useState, useEffect } from 'react'
+import ReactToggle from 'react-toggle'
+
 import sun from '../../assets/sun.png'
 import moon from '../../assets/moon.png'
+
 import './Toggle.scss'
 
 const Toggle = () => {
-  const [theme, setTheme] = useState(undefined)
+  const [theme, setTheme] = useState()
 
   useEffect(() => {
     setTheme(window.__theme)
-    window.__onThemeChange = () => setTheme(window.__theme)
+    window.__onThemeChange = () => {
+      setTheme(window.__theme)
+    }
   }, [])
 
-  const checked = theme === 'dark'
-
   return (
-    <label className={`theme-toggle ${checked ? 'checked' : ''}`}>
-      <input
-        type="checkbox"
-        checked={checked}
-        aria-label="다크 모드 전환"
-        onChange={e => window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')}
-      />
-      <span className="theme-toggle-track">
-        <span className="theme-toggle-icon unchecked">
-          <img src={sun.src ?? sun} width="16" height="16" alt="" />
-        </span>
-        <span className="theme-toggle-icon checked">
-          <img src={moon.src ?? moon} width="16" height="16" alt="" />
-        </span>
-        <span className="theme-toggle-thumb" />
-      </span>
-    </label>
+    <ReactToggle
+      icons={{
+        checked: (
+          <img
+            src={moon.src ?? moon}
+            width="16"
+            height="16"
+            alt="presentation"
+            style={{ pointerEvents: 'none' }}
+          />
+        ),
+        unchecked: (
+          <img
+            src={sun.src ?? sun}
+            width="16"
+            height="16"
+            alt="presentation"
+            style={{ pointerEvents: 'none' }}
+          />
+        ),
+      }}
+      checked={theme === 'dark'}
+      onChange={e =>
+        window.__setPreferredTheme(e.target.checked ? 'dark' : 'light')
+      }
+    />
   )
 }
 
 export default Toggle
 ```
 
-`sun.src ?? sun`은 Astro의 이미지 import가 객체(`{ src, width, height }`)를 반환하는 경우와 문자열을 반환하는 경우를 모두 처리한다.
+원본과의 유일한 차이는 `sun.src ?? sun`이다. Astro의 이미지 import는 문자열이 아니라 `{ src, width, height }` 객체를 반환하므로, 두 경우를 모두 처리한다.
 
-- [ ] **Step 2: `Toggle.scss`를 새 마크업에 맞게 수정**
+- [ ] **Step 2: `Toggle.scss`가 그대로 동작하는지 확인**
 
-기존 `Toggle.scss`는 `react-toggle`의 클래스명(`.react-toggle*`)을 전제한다. 위 마크업의 클래스명(`.theme-toggle`, `.theme-toggle-track`, `.theme-toggle-thumb`, `.theme-toggle-icon`)으로 선택자를 바꾼다. 기존 파일의 색상·크기 값은 그대로 유지한다. `input`은 `position: absolute; opacity: 0;`으로 숨긴다.
+`react-toggle`을 유지하므로 `.react-toggle*` 선택자가 그대로 유효하다. **이 파일은 수정하지 않는다.** Step 7의 시각 확인에서 토글 모양이 라이브 사이트와 같은지 대조한다.
 
 - [ ] **Step 3: `HeaderHamburger.jsx` — 거의 그대로 이동**
 
@@ -1101,9 +1116,9 @@ git add -A src/components/Header src/pages/index.astro
 git commit -m "Header를 React 아일랜드로 전환
 
 GraphQL useStaticQuery를 제거하고 카테고리 데이터를 props로 받는다.
-react-toggle 의존성을 직접 구현으로 대체했다.
 카테고리 현재 위치 판정을 부분 문자열에서 접두사 매칭으로 고쳐
-reference와 algorithm/reference의 교차 매칭을 없앴다."
+reference와 algorithm/reference의 교차 매칭을 없앴다.
+Toggle은 react-toggle과 Toggle.scss를 그대로 유지한다."
 ```
 
 ---
@@ -2171,9 +2186,12 @@ gatsby-plugin-offline이 등록한 SW가 방문자 브라우저에 남아
 
 원본 `gatsby-plugin-feed`의 필터(`algorithm`·`report` 제외)와 출력 경로(`/rss.xml`)를 유지한다.
 
+원본 `gatsby-plugin-feed`는 `content:encoded`에 본문 HTML 전체를 넣었다. 구독자 경험을 보존하기 위해 이를 유지한다.
+
 ```ts
 import rss from '@astrojs/rss'
 import { getCollection } from 'astro:content'
+import { experimental_AstroContainer as AstroContainer } from 'astro/container'
 import { slugFromFilePath } from '../utils/posts.js'
 
 const EXCLUDED_PREFIXES = ['algorithm', 'report']
@@ -2183,21 +2201,39 @@ export async function GET(context) {
     .filter(p => !EXCLUDED_PREFIXES.some(prefix => p.data.category.startsWith(prefix)))
     .sort((a, b) => b.data.date - a.data.date)
 
-  return rss({
-    title: 'Lazy Nyaong',
-    description: 'Code, Lazy, Cat',
-    site: context.site,
-    items: posts.map(post => ({
+  // 본문 HTML을 얻으려면 각 글을 렌더링해야 한다.
+  // gatsby-plugin-feed의 content:encoded 동작을 보존한다.
+  const container = await AstroContainer.create()
+
+  const items = []
+  for (const post of posts) {
+    const { Content } = await post.render()
+    const html = await container.renderToString(Content)
+    items.push({
       title: post.data.title,
       pubDate: post.data.date,
       description: post.data.description ?? '',
       link: `/${slugFromFilePath(post.filePath)}/`,
-    })),
+      content: html,
+    })
+  }
+
+  return rss({
+    title: 'Lazy Nyaong',
+    description: 'Code, Lazy, Cat',
+    site: context.site,
+    items,
   })
 }
 ```
 
-원본은 `content:encoded`에 본문 HTML 전체를 넣었다. 본문 HTML을 얻으려면 각 글을 `render()`해야 해 빌드가 느려진다. `description`만 제공하는 형태로 단순화한다 — 구독자에게 요약과 링크가 전달되는 것은 동일하다.
+`@astrojs/rss`의 `content` 필드가 `content:encoded`로 출력된다.
+
+**주의:** Astro 7에서 컬렉션 엔트리의 렌더링 API가 `post.render()`인지 `render(post)`(`astro:content`에서 import)인지 확인이 필요하다. Task 9에서 `[...slug].astro`가 쓴 형태와 **같은 API를 쓴다.** 두 곳이 달라지면 한쪽이 조용히 깨진다.
+
+`AstroContainer` API가 이 버전에서 동작하지 않으면 대안은 두 가지다.
+1. `container.renderToString()` 대신 `@astrojs/rss`의 `compiledContent()` 지원 여부 확인
+2. 그래도 안 되면 `content` 필드를 빼고 `description`만 제공하되, **그 사실을 보고하고 사용자 판단을 받는다** — 조용히 축소하지 않는다.
 
 - [ ] **Step 2: 확인**
 
@@ -2209,15 +2245,17 @@ Expected: `algorithm`·`report`를 제외한 글 수 (113 − 28 − 10 − 4 �
 Run: `grep -o '<link>[^<]*</link>' dist/rss.xml | head -3`
 Expected: `algorithm/`이나 `report/`로 시작하는 링크가 없다
 
+Run: `grep -c 'content:encoded' dist/rss.xml`
+Expected: `<item>` 개수와 같다 — 본문 전문이 모든 항목에 들어갔다는 확인
+
 - [ ] **Step 3: 커밋**
 
 ```bash
 git add src/pages/rss.xml.ts
 git commit -m "RSS 피드 추가
 
-algorithm과 report 카테고리를 제외하는 기존 필터를 유지한다.
-본문 HTML 전체(content:encoded)는 빌드 비용 대비 이득이 적어
-description만 제공하는 형태로 단순화했다."
+algorithm과 report 카테고리를 제외하는 기존 필터와
+content:encoded 본문 전문 제공을 모두 유지한다."
 ```
 
 ---
