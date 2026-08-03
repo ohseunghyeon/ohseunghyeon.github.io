@@ -70,13 +70,43 @@ Actions 실행 기록은 보존 기간이 지나 삭제되어 CI 로그로는 �
 - 한글 그대로 (인코딩 없음)
 - `index.md`는 디렉터리 URL로 축약
 
-**⚠️ 최우선 검증 항목**: 이 설계는 Astro Content Collections의 `id`가 파일 경로에서 파생되어 위 규칙과 1:1로 맞아떨어진다는 가정 위에 서 있다. 이 가정은 **아직 실제로 확인하지 않았다.** 구현 1단계의 가장 첫 작업으로 최소 스캐폴딩을 만들어 다음 세 가지를 확인해야 한다.
+### 3-1-1. Astro id 매핑 검증 결과 (Astro 7.1.6, Node 22.13.1로 실측)
 
-1. 대소문자 보존 — `study/APIs-The-Good-The-Bad-The-Ugly`
-2. `index.md`의 디렉터리 URL 축약 — `study/APIs-.../index.md` → `/study/APIs-.../`
-3. 한글 경로 처리 — `algorithm/programmers/큰-수-만들기`
+최소 스캐폴딩을 만들어 세 가지 케이스를 실제로 빌드해 확인했다.
 
-세 가지 중 하나라도 어긋나면 `getStaticPaths()`에서 `id`를 직접 가공해 URL을 맞춰야 하며, 그 경우 8-1 검증이 이를 잡아낸다. 가정이 크게 깨지는 경우(예: Astro가 슬러그를 강제로 정규화) 설계를 재검토해야 하므로 **다른 작업보다 먼저 확인한다.**
+| 케이스 | `entry.id` 사용 시 | 판정 |
+|---|---|---|
+| `lavender/1-year.md` | `/lavender/1-year/` | ✅ |
+| `study/APIs-The-Good-The-Bad-The-Ugly/index.md` | `/study/apis-the-good-the-bad-the-ugly/` | ❌ **소문자화됨** |
+| `algorithm/programmers/큰-수-만들기.md` | `/algorithm/programmers/큰-수-만들기/` | ✅ 한글 보존 |
+
+**glob 로더는 `id`를 소문자로 정규화한다.** `id`를 그대로 URL에 쓰면 대문자를 포함한 글 3개의 URL이 바뀌어 댓글이 떨어진다.
+
+**영향받는 글 3개**
+- `study/APIs-The-Good-The-Bad-The-Ugly/index.md`
+- `study/when-the-duplicates-are-created-on-postgreSQL-with-unique-index-by-null.md`
+- `algorithm/hackerrank/Utopian-Tree.md`
+
+**해결책 (검증 완료)**: `entry.id` 대신 대소문자를 보존하는 `entry.filePath`에서 슬러그를 파생한다.
+
+```js
+export function slugFromFilePath(filePath) {
+  return filePath
+    .replace(/^src\/content\/blog\//, '')
+    .replace(/\.md$/, '')
+    .replace(/\/index$/, '')
+}
+```
+
+이 함수로 재빌드한 결과 세 케이스 모두 현재 URL과 정확히 일치했다.
+
+```
+/lavender/1-year/
+/study/APIs-The-Good-The-Bad-The-Ugly/
+/algorithm/programmers/큰-수-만들기/
+```
+
+`index.md`의 디렉터리 축약과 한글 경로는 별도 처리 없이 동작한다. 이 함수는 `src/utils/posts.js`에 두고 URL을 만드는 모든 곳에서 단일 경로로 사용한다 — `id`를 URL에 직접 쓰는 코드가 한 곳이라도 남으면 조용히 소문자 URL이 생기므로, 8-1 검증이 최종 방어선이 된다.
 
 ### 3-2. 카테고리 페이지 URL은 별개 체계
 
