@@ -127,6 +127,12 @@ test('readingTime: 짧은 글도 최소 1분', () => {
   assert.equal(readingTime(''), 1)
 })
 
+test('readingTime: 본문이 없는 글도 처리한다', () => {
+  // report 카테고리의 북마크 글 6건은 본문이 없고 Astro가 body를 undefined로 둔다
+  assert.equal(readingTime(undefined), 1)
+  assert.equal(readingTime(null), 1)
+})
+
 test('readingTime: 한글은 글자당 0.56단어로 센다', () => {
   // 한글 500자 -> 280단어 -> round(280/265) = 1
   assert.equal(readingTime('가'.repeat(500)), 1)

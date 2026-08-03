@@ -1,0 +1,123 @@
+---
+import { getCollection, render } from 'astro:content'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Bio from '../components/Bio.astro'
+import PostFrontmatter from '../components/PostFrontmatter.astro'
+import PostFrontmatterTIL from '../components/PostFrontmatterTIL.astro'
+import PostTableOfContent from '../components/PostTableOfContent.astro'
+import PostComment from '../components/PostComment.astro'
+import {
+  slugFromFilePath,
+  groupByCategory,
+  siblingPosts,
+  readingTime,
+} from '../utils/posts.js'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  const grouped = groupByCategory(posts)
+  const paths = []
+
+  // prev/next는 카테고리 안에서 계산한다 (gatsby-node.js와 동일한 동작).
+  for (const items of grouped.values()) {
+    items.forEach((post, index) => {
+      const { previous, next } = siblingPosts(items, index)
+      paths.push({
+        // entry.id가 아니라 filePath에서 슬러그를 만든다 — 대소문자 보존.
+        params: { slug: slugFromFilePath(post.filePath) },
+        props: {
+          post,
+          previous: previous
+            ? { slug: slugFromFilePath(previous.filePath), title: previous.data.title }
+            : null,
+          next: next
+            ? { slug: slugFromFilePath(next.filePath), title: next.data.title }
+            : null,
+        },
+      })
+    })
+  }
+
+  return paths
+}
+
+const { post, previous, next } = Astro.props
+const { Content, headings } = await render(post)
+
+// Gatsby의 formatString: "MMMM DD, YYYY"와 같은 결과를 낸다.
+// timeZone: 'UTC'가 없으면 로컬 시간대에 따라 날짜가 하루 밀린다.
+const formattedDate = post.data.date.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: '2-digit',
+  timeZone: 'UTC',
+})
+const timeToRead = readingTime(post.body)
+const isReport = post.data.category === 'report'
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  pathname={Astro.url.pathname}
+>
+  <article itemscope itemtype="https://schema.org/Article">
+    <header>
+      <h1 itemprop="headline" class="post-title">{post.data.title}</h1>
+      {isReport ? (
+        <PostFrontmatterTIL
+          date={formattedDate}
+          category={post.data.category}
+          creator={post.data.creator}
+          created_at={post.data.created_at}
+          link={post.data.link}
+        />
+      ) : (
+        <PostFrontmatter
+          date={formattedDate}
+          timeToRead={timeToRead}
+          category={post.data.category}
+          isInPost={true}
+        />
+      )}
+    </header>
+
+    <PostTableOfContent headings={headings} />
+
+    <section itemprop="articleBody">
+      <Content />
+    </section>
+
+    <hr class="post-divider" />
+
+    <footer>
+      <Bio />
+    </footer>
+  </article>
+
+  <nav>
+    <ul class="post-nav">
+      <li>{previous && <a href={`/${previous.slug}/`} rel="prev">← {previous.title}</a>}</li>
+      <li>{next && <a href={`/${next.slug}/`} rel="next">{next.title} →</a>}</li>
+    </ul>
+  </nav>
+
+  <PostComment />
+</BaseLayout>
+
+<style>
+  .post-title {
+    margin-top: var(--rhythm-2);
+    margin-bottom: 0;
+  }
+  .post-divider {
+    margin-bottom: var(--rhythm-1);
+  }
+  .post-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    padding: 0;
+  }
+</style>

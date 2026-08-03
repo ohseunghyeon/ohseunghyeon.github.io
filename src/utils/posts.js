@@ -80,6 +80,10 @@ const HANGUL_WORD_RATIO = 0.56
  * 나머지는 최대 2분 차이다(대부분 1분).
  */
 export function readingTime(body) {
+  // report 카테고리의 북마크 글 6건은 프론트매터만 있고 본문이 없다.
+  // 이 경우 Astro는 entry.body를 undefined로 둔다.
+  if (!body) return 1
+
   const hangulCount = (body.match(HANGUL) || []).length
   const latinWords = (body.replace(HANGUL, ' ').match(/[A-Za-z0-9]+/g) || []).length
 
