@@ -1,6 +1,5 @@
 import { defineConfig } from 'astro/config'
 import react from '@astrojs/react'
-import sitemap from '@astrojs/sitemap'
 import { rehypeHeadingIds } from '@astrojs/markdown-remark'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeExternalLinks from 'rehype-external-links'
@@ -36,7 +35,8 @@ export default defineConfig({
   // 글 URL이 /카테고리/슬러그/ 형태였다. 기존 URL을 그대로 유지한다.
   trailingSlash: 'always',
   build: { format: 'directory' },
-  integrations: [react(), sitemap()],
+  // sitemap은 src/pages/sitemap.xml.ts에서 직접 만든다 (경로 보존 이유는 그 파일 참조)
+  integrations: [react()],
   markdown: {
     // gatsby-remark-prismjs 대체. prism-okaidia는 monokai 계열이다.
     shikiConfig: {
