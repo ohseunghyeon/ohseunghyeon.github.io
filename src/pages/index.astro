@@ -1,7 +1,54 @@
 ---
-// Task 10에서 실제 홈 페이지로 대체된다.
+import { getCollection } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
+import PostListTitle from '../components/PostListTitle.astro'
+import PostFrontmatter from '../components/PostFrontmatter.astro'
+import { slugFromFilePath, readingTime } from '../utils/posts.js'
+
+// 원본 GraphQL 필터 regex: "/^(?!algorithm|report)/" 를 옮긴 것
+const EXCLUDED_PREFIXES = ['algorithm', 'report']
+
+const posts = (await getCollection('blog'))
+  .filter(p => !EXCLUDED_PREFIXES.some(prefix => p.data.category.startsWith(prefix)))
+  .sort((a, b) => b.data.date - a.data.date)
+
+const fmt = d =>
+  d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+    timeZone: 'UTC',
+  })
 ---
+
 <BaseLayout title="All posts" pathname={Astro.url.pathname}>
-  <p>임시</p>
+  <PostListTitle title="All Posts" />
+  {posts.map(post => (
+    <article>
+      <header>
+        <h3 class="post-list-title">
+          <a href={`/${slugFromFilePath(post.filePath)}/`} itemprop="url">
+            <span itemprop="headline">{post.data.title}</span>
+          </a>
+        </h3>
+        <PostFrontmatter
+          date={fmt(post.data.date)}
+          timeToRead={readingTime(post.body)}
+          category={post.data.category}
+        />
+      </header>
+      <section>
+        <p itemprop="description" set:html={post.data.description ?? ''} />
+      </section>
+    </article>
+  ))}
 </BaseLayout>
+
+<style>
+  .post-list-title {
+    margin-bottom: var(--rhythm-quarter);
+  }
+  .post-list-title a {
+    box-shadow: none;
+  }
+</style>

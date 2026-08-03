@@ -1,0 +1,90 @@
+---
+import { getCollection } from 'astro:content'
+import BaseLayout from '../layouts/BaseLayout.astro'
+import PostListTitle from '../components/PostListTitle.astro'
+import PostFrontmatter from '../components/PostFrontmatter.astro'
+import {
+  slugFromFilePath,
+  groupByCategory,
+  categoryPaths,
+  readingTime,
+} from '../utils/posts.js'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  const grouped = groupByCategory(posts)
+
+  return categoryPaths(grouped.keys()).map(category => {
+    // 하위 카테고리 글까지 포함한다 (원본의 ^/category/ 정규식과 동일한 의도).
+    const items = posts
+      .filter(
+        p => p.data.category === category || p.data.category.startsWith(`${category}/`)
+      )
+      .sort((a, b) => b.data.date - a.data.date)
+
+    return { params: { category }, props: { category, items } }
+  })
+}
+
+const { category, items } = Astro.props
+
+// report는 read-list 레이아웃을 쓴다. 원본 read-list.js는 h4와 날짜만
+// 렌더링하며 설명 섹션도 카테고리 링크도 없다.
+const isReadList = category === 'report'
+
+const fmt = d =>
+  d.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+    timeZone: 'UTC',
+  })
+---
+
+<BaseLayout title={category} pathname={Astro.url.pathname}>
+  <PostListTitle title={category} />
+  {items.map(post => (
+    <article>
+      <header>
+        {isReadList ? (
+          <>
+            <h4 class="post-list-title">
+              <a href={`/${slugFromFilePath(post.filePath)}/`}>{post.data.title}</a>
+            </h4>
+            <section>
+              <p class="read-list-date">{fmt(post.data.date)}</p>
+            </section>
+          </>
+        ) : (
+          <>
+            <h3 class="post-list-title">
+              <a href={`/${slugFromFilePath(post.filePath)}/`}>{post.data.title}</a>
+            </h3>
+            <PostFrontmatter
+              date={fmt(post.data.date)}
+              timeToRead={readingTime(post.body)}
+            />
+          </>
+        )}
+      </header>
+      {!isReadList && (
+        <section>
+          <p set:html={post.data.description ?? ''} />
+        </section>
+      )}
+    </article>
+  ))}
+</BaseLayout>
+
+<style>
+  .post-list-title {
+    margin-bottom: var(--rhythm-quarter);
+  }
+  .post-list-title a {
+    box-shadow: none;
+  }
+  /* 원본이 rhythm(1/2)을 font-size로 쓴 결과. 의도한 코드는 아니지만 보존한다. */
+  .read-list-date {
+    font-size: var(--rhythm-half);
+  }
+</style>
