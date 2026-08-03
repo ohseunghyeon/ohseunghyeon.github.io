@@ -1,0 +1,106 @@
+// typography.js(typography-theme-github)의 rhythm 값을 굳힌 것.
+// baseLineHeight 1.625rem의 배수다. 의존성은 제거하고 값만 보존한다.
+// 원본에서 rhythm()을 호출했던 13곳이 이 변수들을 참조한다.
+:root {
+  --rhythm-quarter: 0.40625rem;
+  --rhythm-half: 0.8125rem;
+  --rhythm-three-quarter: 1.21875rem;
+  --rhythm-1: 1.625rem;
+  --rhythm-1-5: 2.4375rem;
+  --rhythm-2: 3.25rem;
+  --rhythm-2-5: 4.0625rem;
+}
+
+body {
+  --pink: rgb(255, 167, 196);
+  background-color: var(--bg);
+}
+
+body.light {
+  --bg: #ffffff;
+  --header: var(--pink);
+  --textNormal: #222;
+  --textTitle: #222;
+  --textLink: #4078c0;
+  --hr: hsla(0, 0%, 0%, 0.2);
+  --inlineCode-bg: rgba(255, 229, 100, 0.2);
+  --inlineCode-text: #1a1a1a;
+  --border-color: #d6d9dc;
+  --hamburgerColor: rgba(0,0,0,0.8);
+}
+
+body.dark {
+  -webkit-font-smoothing: antialiased;
+  --bg: #282c35;
+  --header: #ffffff;
+  --textNormal: rgba(255, 255, 255, 0.88);
+  --textTitle: #ffffff;
+  --textLink: var(--pink);
+  --hr: hsla(0, 0%, 100%, 0.2);
+  --inlineCode-bg: hsl(222, 14%, 25%);
+  --inlineCode-text: #e6e6e6;
+  --border-color: #43464d;
+  --hamburgerColor: #ffffff;
+}
+
+body:lang(ko) header,
+body:lang(ko) article {
+  word-break: keep-all;
+}
+
+/* 코드 블록.
+ * 원본은 gatsby-remark-prismjs가 만든 .gatsby-highlight 래퍼 div에
+ * 스타일을 걸었다. Shiki는 래퍼 없이 <pre class="astro-code">만 내므로
+ * 같은 값을 pre에 직접 적용한다. 음수 마진으로 본문 폭을 넘어 붙는
+ * 모양을 유지한다. */
+pre.astro-code {
+  margin-bottom: 1.75rem;
+  margin-left: -1.0125rem;
+  margin-right: -1.0125rem;
+  border-radius: 10px;
+  // prism-okaidia 테마가 pre에 주던 값. gatsby-browser.js에서 그 CSS를
+  // import하고 있었으므로 함께 이식한다.
+  padding: 1em;
+}
+
+@media screen and (max-width: 768px) {
+  pre.astro-code {
+    border-radius: 0;
+  }
+}
+
+/* 인라인 코드.
+ * 원본 선택자는 :not(pre) > code[class*='language-'] 였다. Prism이
+ * 인라인 코드에도 language-* 클래스를 붙였기 때문이다. Shiki는 붙이지
+ * 않으므로 클래스 조건을 뺀다. */
+:not(pre) > code {
+  border-radius: 0.3em;
+  background: var(--inlineCode-bg);
+  color: var(--inlineCode-text);
+  padding: 0.15em 0.2em 0.05em;
+  white-space: normal;
+}
+
+blockquote {
+  color: var(--inlineCode-text);
+  opacity: 0.53;
+}
+
+a {
+  color: var(--textLink);
+}
+// gatsby-remark-embed-video + gatsby-remark-responsive-iframe 대체.
+// 원본은 padding-bottom 비율 트릭을 썼다.
+.video-embed {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin-bottom: var(--rhythm-1);
+
+  iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+  }
+}

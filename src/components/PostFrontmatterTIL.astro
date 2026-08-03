@@ -1,0 +1,51 @@
+---
+// report 카테고리 글의 상세 페이지 전용.
+// 원본과 달리 timeToRead를 표시하지 않는 동작을 유지한다.
+const { date, category, creator, created_at, link } = Astro.props
+---
+<p class="frontmatter in-post">
+  {date}
+  {category && (
+    <a class="category-link" href={`/${category}/`}><br />{category}</a>
+  )}
+  <br />
+  {link && (
+    <span class="til-field">
+      link: <a href={link} target="_blank" rel="noopener noreferrer">{link}</a>
+    </span>
+  )}
+  {creator && <span class="til-field">creator: {creator}</span>}
+  {created_at && <span class="til-field">created_at: {created_at}</span>}
+</p>
+
+<style>
+  /* 원본의 scale(-1/5) 값 */
+  .in-post {
+    font-size: 0.87055rem;
+    line-height: 1.625rem;
+    display: block;
+    margin-bottom: var(--rhythm-1);
+  }
+  /* 원본은 <p> 안에 <div>를 넣어 유효하지 않은 HTML을 만들었다.
+     같은 시각 결과를 유지하면서 유효한 마크업으로 바꿨다. */
+  .til-field {
+    display: block;
+  }
+  .category-link {
+    opacity: 0.75;
+  }
+  .category-link::before {
+    content: ' • ';
+  }
+  .category-link br {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .category-link::before {
+      display: none;
+    }
+    .category-link br {
+      display: inline;
+    }
+  }
+</style>
