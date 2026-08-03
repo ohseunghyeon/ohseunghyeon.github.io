@@ -1,0 +1,33 @@
+---
+import { Image } from 'astro:assets'
+import profilePic from '../assets/profile-pic.png'
+
+const AUTHOR = 'Oh SeungHyeon'
+const GITHUB = 'ohseunghyeon'
+---
+<div class="bio">
+  <Image src={profilePic} alt={AUTHOR} width={50} height={50} class="bio-avatar" />
+  <p class="bio-text">
+    <span>Code, Lazy, Cat.</span>
+    <a href={`https://github.com/${GITHUB}`} target="_blank" rel="noopener noreferrer">
+      {AUTHOR}
+    </a>
+  </p>
+</div>
+
+<style>
+  .bio {
+    display: flex;
+    margin-bottom: var(--rhythm-2-5);
+  }
+  .bio-avatar {
+    margin-right: var(--rhythm-half);
+    margin-bottom: 0;
+    min-width: 50px;
+    border-radius: 50%;
+  }
+  .bio-text {
+    display: flex;
+    flex-direction: column;
+  }
+</style>

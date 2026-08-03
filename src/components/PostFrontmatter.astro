@@ -1,0 +1,40 @@
+---
+import { formatReadingTime } from '../utils/helpers.js'
+
+const { date, timeToRead, category, isInPost } = Astro.props
+const Wrapper = isInPost ? 'p' : 'small'
+---
+<Wrapper class:list={['frontmatter', { 'in-post': isInPost }]}>
+  {date}
+  {timeToRead && ` • ${formatReadingTime(timeToRead)}`}
+  {category && (
+    <a class="category-link" href={`/${category}/`}><br />{category}</a>
+  )}
+</Wrapper>
+
+<style>
+  /* 원본의 scale(-1/5) 값 */
+  .in-post {
+    font-size: 0.87055rem;
+    line-height: 1.625rem;
+    display: block;
+    margin-bottom: var(--rhythm-1);
+  }
+  .category-link {
+    opacity: 0.75;
+  }
+  .category-link::before {
+    content: ' • ';
+  }
+  .category-link br {
+    display: none;
+  }
+  @media screen and (max-width: 768px) {
+    .category-link::before {
+      display: none;
+    }
+    .category-link br {
+      display: inline;
+    }
+  }
+</style>

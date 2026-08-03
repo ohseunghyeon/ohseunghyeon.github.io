@@ -1,0 +1,50 @@
+---
+// Gatsby의 tableOfContents(HTML 문자열) 대신 Astro의 headings 배열로 만든다.
+// h2, h3만 표시한다 — Gatsby tableOfContents의 기본 동작과 같다.
+const { headings } = Astro.props
+const items = headings.filter(h => h.depth >= 2 && h.depth <= 3)
+---
+{items.length > 0 && (
+  <div class="toc">
+    <ul>
+      {items.map(h => (
+        <li class={`depth-${h.depth}`}>
+          <a href={`#${h.slug}`}>{h.text}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+)}
+
+<style>
+  .toc {
+    display: none;
+    position: fixed;
+    top: 3.25rem;
+    right: 10px;
+    white-space: nowrap;
+    font-size: 0.9em;
+    width: calc((100vw - 228px - 49rem) / 2 - 2.03125rem);
+    overflow: hidden;
+    border-left: 5px solid var(--border-color);
+  }
+  @media screen and (min-width: 1278px) {
+    .toc {
+      display: block;
+    }
+  }
+  .toc ul {
+    list-style: none;
+    margin-left: 1.015625rem;
+    margin-bottom: 0;
+  }
+  .toc li {
+    margin-bottom: 0.2em;
+  }
+  .toc li.depth-3 {
+    margin-left: 1.015625rem;
+  }
+  .toc a {
+    color: inherit;
+  }
+</style>

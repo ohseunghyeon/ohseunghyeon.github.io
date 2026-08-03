@@ -1,0 +1,17 @@
+<div id="utterances-container"></div>
+
+<script is:inline>
+  ;(function () {
+    var container = document.getElementById('utterances-container')
+    if (!container || container.childElementCount > 0) return
+
+    var script = document.createElement('script')
+    script.src = 'https://utteranc.es/client.js'
+    // repo와 issue-term은 기존 댓글이 매달린 좌표다. 바꾸면 댓글이 사라진다.
+    script.setAttribute('repo', 'ohseunghyeon/ohseunghyeon.github.io')
+    script.setAttribute('issue-term', 'pathname')
+    script.setAttribute('crossorigin', 'anonymous')
+    script.async = true
+    container.appendChild(script)
+  })()
+</script>
