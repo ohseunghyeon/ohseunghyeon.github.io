@@ -1,3 +1,16 @@
+// typography.js(typography-theme-github)의 rhythm 값을 굳힌 것.
+// baseLineHeight 1.625rem의 배수다. 의존성은 제거하고 값만 보존한다.
+// 원본에서 rhythm()을 호출했던 13곳이 이 변수들을 참조한다.
+:root {
+  --rhythm-quarter: 0.40625rem;
+  --rhythm-half: 0.8125rem;
+  --rhythm-three-quarter: 1.21875rem;
+  --rhythm-1: 1.625rem;
+  --rhythm-1-5: 2.4375rem;
+  --rhythm-2: 3.25rem;
+  --rhythm-2-5: 4.0625rem;
+}
+
 body {
   --pink: rgb(255, 167, 196);
   background-color: var(--bg);
