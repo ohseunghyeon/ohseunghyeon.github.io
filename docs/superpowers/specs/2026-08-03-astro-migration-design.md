@@ -136,18 +136,35 @@ export function slugFromFilePath(filePath) {
 
 글 113개, 이미지 등 첨부 파일 53개.
 
-### 프론트매터 스키마 (전수 조사)
+### 프론트매터 스키마 (YAML 파서 전수 조사)
 
-| 키 | 빈도 | 비고 |
+**초기 조사는 틀렸다.** 정규식으로 `^키:` 패턴만 셌더니 `description:`처럼 값이 빈 줄을 "존재"로 계산했다. YAML은 빈 값을 `null`로 파싱하므로 `z.string().optional()`은 이를 거부한다. gray-matter로 113개를 다시 파싱한 실제 분포는 다음과 같다.
+
+| 키 | 타입 분포 | Zod |
 |---|---|---|
-| `title` | 113 | 필수 |
-| `date` | 113 | 필수, ISO 8601 |
-| `category` | 113 | 필수 |
-| `description` | 112 | **선택** — 1개 글에 없음 |
-| `creator` | 11 | `report` 카테고리 전용 |
-| `created_at` | 11 | `report` 카테고리 전용 |
-| `link` | 11 | `report` 카테고리 전용 |
-| `todo` | 1 | 선택, boolean |
+| `title` | string 113 | `z.string()` |
+| `date` | **Date 89, string 24** | `z.coerce.date()` — 인용부호 유무에 따라 YAML이 다르게 파싱한다 |
+| `category` | string 113 | `z.string()` |
+| `description` | **string 100, null 12** | `z.string().nullish()` |
+| `creator` | **string 10, null 1** | `z.string().nullish()` |
+| `created_at` | **string 8, Date 3** | 아래 참조 |
+| `link` | string 11 | `z.string().nullish()` |
+| `todo` | boolean 1 | `z.boolean().optional()` |
+
+### `created_at` — 형식이 뒤죽박죽인 필드
+
+원본 값이 통일돼 있지 않다: `2021. 3. 31.`, `2019.10.24`, `2020. 11. 09`, `2020-09-01`, 그리고 `goldfiglabs`(creator 값을 잘못 넣은 오기입) 1건.
+
+YAML은 ISO 형태 3건만 `Date`로 파싱한다. Gatsby는 이 필드를 String으로 추론했고, Date로 파싱된 값은 `toISOString()` 결과가 그대로 출력됐다 — **라이브 사이트에서 실제 확인:** `/report/mastering-chaos---a-netflix-guide-to-microservices/`가 `created_at: 2017-02-22T00:00:00.000Z`를 표시한다.
+
+이 동작을 재현하려면 union + transform으로 소비자에게 항상 string을 넘긴다.
+
+```ts
+const looseDateString = z.union([
+  z.string(),
+  z.date().transform(d => d.toISOString()),
+])
+```
 
 ### 카테고리 분포
 

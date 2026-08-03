@@ -1430,7 +1430,7 @@ import PostFrontmatter from '../components/PostFrontmatter.astro'
 import PostFrontmatterTIL from '../components/PostFrontmatterTIL.astro'
 import PostTableOfContent from '../components/PostTableOfContent.astro'
 import PostComment from '../components/PostComment.astro'
-import { slugFromFilePath, groupByCategory, siblingPosts } from '../utils/posts.js'
+import { slugFromFilePath, groupByCategory, siblingPosts, readingTime } from '../utils/posts.js'
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog')
@@ -1461,7 +1461,7 @@ export async function getStaticPaths() {
 }
 
 const { post, previous, next } = Astro.props
-const { Content, headings, remarkPluginFrontmatter } = await render(post)
+const { Content, headings } = await render(post)
 
 const formattedDate = post.data.date.toLocaleDateString('en-US', {
   year: 'numeric',
@@ -1469,7 +1469,7 @@ const formattedDate = post.data.date.toLocaleDateString('en-US', {
   day: '2-digit',
   timeZone: 'UTC',
 })
-const timeToRead = remarkPluginFrontmatter?.minutesRead
+const timeToRead = readingTime(post.body)
 const isReport = post.data.category === 'report'
 ---
 
@@ -1542,7 +1542,7 @@ const isReport = post.data.category === 'report'
 
 날짜 형식은 Gatsby의 `formatString: "MMMM DD, YYYY"`와 같은 결과(`July 08, 2021`)를 내야 한다. `timeZone: 'UTC'`가 중요하다 — 없으면 로컬 시간대에 따라 날짜가 하루 밀린다.
 
-`remarkPluginFrontmatter.minutesRead`는 Task 13에서 붙일 reading-time 플러그인이 제공한다. 그때까지 `undefined`이고 `PostFrontmatter`가 조건부 렌더링하므로 빌드는 깨지지 않는다.
+`readingTime`은 Task 3에서 구현한 순수 함수다. `post.body`만 필요해 `render()` 결과에 의존하지 않으므로 목록 페이지에서도 같은 값을 쓸 수 있다.
 
 - [ ] **Step 2: 빌드 후 URL 확인**
 
@@ -1590,7 +1590,7 @@ import { getCollection } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PostListTitle from '../components/PostListTitle.astro'
 import PostFrontmatter from '../components/PostFrontmatter.astro'
-import { slugFromFilePath } from '../utils/posts.js'
+import { slugFromFilePath, readingTime } from '../utils/posts.js'
 
 const EXCLUDED_PREFIXES = ['algorithm', 'report']
 
@@ -1613,6 +1613,7 @@ const posts = (await getCollection('blog'))
           date={post.data.date.toLocaleDateString('en-US', {
             year: 'numeric', month: 'long', day: '2-digit', timeZone: 'UTC',
           })}
+          timeToRead={readingTime(post.body)}
           category={post.data.category}
         />
       </header>
@@ -1690,7 +1691,34 @@ GraphQL 부정 전방탐색 정규식 필터를 startsWith 기반 JS 필터로
 
 - [ ] **Step 1: 페이지 작성**
 
-`report`는 `read-list` 레이아웃을 쓴다. 원본 `read-list.js`가 `PostFrontmatterTIL`을 쓰고 나머지는 `PostFrontmatter`를 쓰는 차이다.
+**⚠️ 이 태스크의 초안은 틀렸다.** 원본 `read-list.js`와 라이브 마크업을 대조해 확정한 실제 구조는 다음과 같다.
+
+**일반 카테고리** (`category-page.js`) — `PostFrontmatter`에 `date`와 `timeToRead`만 넘긴다. **`category`를 넘기지 않으므로 카테고리 링크가 없다.**
+
+```html
+<article><header>
+  <h3 style="margin-bottom:0.40625rem">
+    <a style="box-shadow:none" href="/lavender/1-year/">1 year</a>
+  </h3>
+  <small>April 14, 2021 • ☕️ 1 min read</small>
+</header>
+<section><p>설명</p></section></article>
+```
+
+**`report` 카테고리** (`read-list.js`) — `PostFrontmatter`도 `PostFrontmatterTIL`도 쓰지 않는다. `h4`와 날짜 하나뿐이고, 설명 섹션도 카테고리 링크도 없다. `creator`/`created_at`/`link`는 목록에 나오지 않는다.
+
+```html
+<article><header>
+  <h4 style="margin-bottom:0.40625rem">
+    <a style="box-shadow:none" href="/report/slug/">제목</a>
+  </h4>
+  <section><p style="font-size:0.8125rem">June 14, 2021</p></section>
+</header></article>
+```
+
+`font-size:0.8125rem`은 원본이 `rhythm(1/2)`을 font-size로 쓴 결과다. 의도한 코드는 아니겠지만 그대로 보존한다.
+
+`PostFrontmatterTIL`은 **글 상세 페이지에서만** 쓰인다.
 
 ```astro
 ---
@@ -1698,8 +1726,7 @@ import { getCollection } from 'astro:content'
 import BaseLayout from '../layouts/BaseLayout.astro'
 import PostListTitle from '../components/PostListTitle.astro'
 import PostFrontmatter from '../components/PostFrontmatter.astro'
-import PostFrontmatterTIL from '../components/PostFrontmatterTIL.astro'
-import { slugFromFilePath, groupByCategory, categoryPaths } from '../utils/posts.js'
+import { slugFromFilePath, groupByCategory, categoryPaths, readingTime } from '../utils/posts.js'
 
 export async function getStaticPaths() {
   const posts = await getCollection('blog')
@@ -1716,7 +1743,8 @@ export async function getStaticPaths() {
 }
 
 const { category, items } = Astro.props
-const isReport = category === 'report'
+// report는 read-list 레이아웃을 쓴다. h4와 날짜만 있고 설명도 카테고리 링크도 없다.
+const isReadList = category === 'report'
 
 const fmt = d => d.toLocaleDateString('en-US', {
   year: 'numeric', month: 'long', day: '2-digit', timeZone: 'UTC',
@@ -1728,26 +1756,27 @@ const fmt = d => d.toLocaleDateString('en-US', {
   {items.map(post => (
     <article>
       <header>
-        <h3 class="post-list-title">
-          <a href={`/${slugFromFilePath(post.filePath)}/`} itemprop="url">
-            <span itemprop="headline">{post.data.title}</span>
-          </a>
-        </h3>
-        {isReport ? (
-          <PostFrontmatterTIL
-            date={fmt(post.data.date)}
-            category={post.data.category}
-            creator={post.data.creator}
-            created_at={post.data.created_at}
-            link={post.data.link}
-          />
+        {isReadList ? (
+          <>
+            <h4 class="post-list-title">
+              <a href={`/${slugFromFilePath(post.filePath)}/`}>{post.data.title}</a>
+            </h4>
+            <section>
+              <p class="read-list-date">{fmt(post.data.date)}</p>
+            </section>
+          </>
         ) : (
-          <PostFrontmatter date={fmt(post.data.date)} category={post.data.category} />
+          <h3 class="post-list-title">
+            <a href={`/${slugFromFilePath(post.filePath)}/`}>{post.data.title}</a>
+          </h3>
+        )}
+        {!isReadList && (
+          <PostFrontmatter date={fmt(post.data.date)} timeToRead={readingTime(post.body)} />
         )}
       </header>
-      {post.data.description && (
+      {!isReadList && (
         <section>
-          <p itemprop="description" set:html={post.data.description} />
+          <p set:html={post.data.description ?? ''} />
         </section>
       )}
     </article>
@@ -1761,8 +1790,14 @@ const fmt = d => d.toLocaleDateString('en-US', {
   .post-list-title a {
     box-shadow: none;
   }
+  /* 원본이 rhythm(1/2)을 font-size로 쓴 결과. 의도한 코드는 아니지만 보존한다. */
+  .read-list-date {
+    font-size: var(--rhythm-half);
+  }
 </style>
 ```
+
+`PostFrontmatter`에 `category`를 넘기지 않는 것이 중요하다. 넘기면 원본에 없는 카테고리 링크가 생긴다.
 
 - [ ] **Step 2: 빌드하고 라우트 충돌 여부 확인**
 
@@ -1861,38 +1896,17 @@ URL 검증에서 refernece 오타 관련 2건만 남았다."
 
 **Files:**
 - Modify: `astro.config.mjs`
-- Create: `src/plugins/remark-reading-time.mjs`
 
 **Interfaces:**
-- Produces: `remarkPluginFrontmatter.minutesRead: number` — `[...slug].astro`(Task 9)가 소비한다
+- Consumes: `readingTime` (Task 3) — 이 태스크는 읽기 시간 관련 코드를 추가하지 않는다
 
-- [ ] **Step 1: reading-time 플러그인 작성**
+- [ ] **Step 1: reading-time은 이미 구현돼 있다 — 이 단계는 건너뛴다**
 
-`remark-reading-time` 패키지 대신 직접 만든다 — Gatsby의 `timeToRead`(분 단위 정수)와 같은 값을 내야 하고, 로직이 10줄이라 의존성을 추가할 이유가 없다.
+읽기 시간은 remark 플러그인이 아니라 `src/utils/posts.js`의 `readingTime(body)`로 처리한다 (Task 3에서 구현, 테스트 포함).
 
-`src/plugins/remark-reading-time.mjs`:
+플러그인 대신 순수 함수를 쓰는 이유: 목록 페이지(홈·카테고리)도 읽기 시간을 표시하는데, remark 플러그인의 결과는 `render()`를 거쳐야 얻을 수 있다. 목록마다 113개 글을 렌더링하는 대신 `post.body`에서 직접 계산한다. 상세 페이지와 목록 페이지가 같은 함수를 쓰므로 값이 어긋날 여지도 없다.
 
-```js
-/**
- * Gatsby transformer-remark의 timeToRead와 같은 값을 낸다.
- * 분당 265 단어 기준으로 올림한 정수 분.
- */
-const WORDS_PER_MINUTE = 265
-
-export function remarkReadingTime() {
-  return function (tree, file) {
-    const text = toText(tree)
-    const words = text.split(/\s+/).filter(Boolean).length
-    file.data.astro.frontmatter.minutesRead = Math.max(1, Math.round(words / WORDS_PER_MINUTE))
-  }
-}
-
-function toText(node) {
-  if (node.value) return node.value
-  if (!node.children) return ''
-  return node.children.map(toText).join(' ')
-}
-```
+Gatsby의 `timeToRead`는 재현하지 않는다. 원본이 `sanitizeHTML(html, { allowTags: [] })`를 쓰는데 sanitize-html의 실제 옵션명은 `allowedTags`라서 인자가 무시되고, 태그 이름과 속성까지 단어로 계산됐다. 그 수치는 Gatsby가 만든 HTML 마크업(Prism의 token span 더미 등)에 의존하므로 마크다운 파이프라인이 다른 Astro에서는 재현 대상이 아니다. 라이브 실측값 81건 대비 65건 일치, 최대 2분 차이로 확인했다.
 
 - [ ] **Step 2: `astro.config.mjs`에 플러그인 배선**
 
@@ -1904,7 +1918,6 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import rehypeExternalLinks from 'rehype-external-links'
 import { remarkSmartypants } from 'remark-smartypants'
-import { remarkReadingTime } from './src/plugins/remark-reading-time.mjs'
 
 export default defineConfig({
   site: 'https://ohseunghyeon.github.io',
@@ -1918,7 +1931,7 @@ export default defineConfig({
       theme: 'github-dark',
       wrap: false,
     },
-    remarkPlugins: [remarkReadingTime, remarkSmartypants],
+    remarkPlugins: [remarkSmartypants],
     rehypePlugins: [
       rehypeSlug,
       // gatsby-remark-autolink-headers 대체. 헤딩 앞에 앵커를 붙인다.
@@ -2720,6 +2733,6 @@ Task 20 Step 4의 삭제 대상 목록은 병합 시점의 실제 파일 목록�
 - `PostFrontmatter` props `{ date, timeToRead?, category, isInPost? }` — Task 8 정의, Task 9·10·11에서 사용
 - `PostTableOfContent` props `{ headings }` — Task 8 정의, Task 9에서 사용
 - `window.__theme` / `__setPreferredTheme` / `__onThemeChange` — Task 6이 정의, Task 7 `Toggle.jsx`가 소비
-- `remarkPluginFrontmatter.minutesRead` — Task 13이 생성, Task 9가 소비
+- `readingTime(body) => number` — Task 3 정의, Task 9·10·11에서 사용
 
 불일치 없음.
