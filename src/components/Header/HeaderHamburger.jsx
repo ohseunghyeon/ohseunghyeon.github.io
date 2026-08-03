@@ -1,12 +1,12 @@
-import React, { useCallback, useRef } from "react"
+import { useCallback, useRef } from 'react'
 
-import "./HeaderHamburger.scss"
+import './HeaderHamburger.scss'
 
 const NavToggle = () => {
   const refButton = useRef(null)
   const handleToggle = useCallback(() => {
-    refButton.current.classList.toggle('active');
-  }, [refButton])
+    refButton.current.classList.toggle('active')
+  }, [])
 
   return (
     <button
@@ -18,4 +18,4 @@ const NavToggle = () => {
   )
 }
 
-export default NavToggle;
+export default NavToggle

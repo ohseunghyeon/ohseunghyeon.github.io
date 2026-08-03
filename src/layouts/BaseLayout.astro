@@ -1,0 +1,158 @@
+---
+/**
+ * Gatsby의 html.js + Layout.js + Seo.js를 하나로 합친 레이아웃.
+ *
+ * <body>의 인라인 스크립트는 페인트 전에 테마를 적용해 깜빡임을 막는다.
+ * is:inline이라 번들되지 않고 그대로 실려 나가므로 주석을 최소로 유지한다.
+ *
+ * 원본(src/html.js)에는 matchMedia 리스너 안에 alert(e.matches)가 남아 있어서,
+ * 방문자가 페이지를 열어둔 상태로 OS 테마를 바꾸면 경고창이 떴다. 제거했다.
+ * deprecated된 addListener도 addEventListener로 바꿨다.
+ *
+ * 이 스크립트가 정의하는 window.__theme / __setPreferredTheme / __onThemeChange는
+ * Toggle.jsx가 의존하는 전역 계약이다.
+ */
+import '../styles/typography.css'
+import '../styles/global.scss'
+import { getCollection } from 'astro:content'
+import Header from '../components/Header/Header.jsx'
+import { groupByCategory, categoryPaths } from '../utils/posts.js'
+
+const { title, description, pathname } = Astro.props
+
+const SITE_TITLE = 'Lazy Nyaong'
+const SITE_DESCRIPTION = 'Code, Lazy, Cat'
+const AUTHOR = 'Oh SeungHyeon'
+
+const metaDescription = description || SITE_DESCRIPTION
+const pageTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE
+
+// Header의 카테고리 내비 데이터.
+// Gatsby에서는 useStaticQuery의 group(field: frontmatter___category)가 하던 일이다.
+// 중첩 카테고리는 상위 단계에 하위 글 수를 누적한다.
+const posts = await getCollection('blog')
+const grouped = groupByCategory(posts)
+
+const counts = new Map()
+for (const [category, items] of grouped) {
+  let acc = ''
+  for (const chunk of category.split('/')) {
+    acc = acc ? `${acc}/${chunk}` : chunk
+    counts.set(acc, (counts.get(acc) || 0) + items.length)
+  }
+}
+
+const navCategories = categoryPaths(grouped.keys()).map(slug => ({
+  slug,
+  cat: slug.split('/').pop(),
+  count: counts.get(slug),
+  depth: slug.split('/').length - 1,
+}))
+---
+
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <meta property="og:title" content={title || SITE_TITLE} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content={AUTHOR} />
+    <meta name="twitter:title" content={title || SITE_TITLE} />
+    <meta name="twitter:description" content={metaDescription} />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site)} />
+    <link rel="alternate" type="application/rss+xml" title={SITE_TITLE} href="/rss.xml" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap"
+    />
+  </head>
+  <body class="light">
+    <script is:inline>
+      // 페인트 전에 테마를 적용해 깜빡임을 막는다. 자세한 배경은 이 파일 상단 주석 참조.
+      ;(function () {
+        window.__onThemeChange = function () {}
+
+        function setTheme(newTheme) {
+          window.__theme = newTheme
+          document.body.className = newTheme
+          window.__onThemeChange(newTheme)
+        }
+
+        var preferredTheme
+        try {
+          preferredTheme = localStorage.getItem('theme')
+        } catch (err) {}
+
+        window.__setPreferredTheme = function (newTheme) {
+          setTheme(newTheme)
+          try {
+            localStorage.setItem('theme', newTheme)
+          } catch (err) {}
+        }
+
+        var darkQuery = window.matchMedia('(prefers-color-scheme: dark)')
+        darkQuery.addEventListener('change', function (e) {
+          window.__setPreferredTheme(e.matches ? 'dark' : 'light')
+        })
+
+        setTheme(preferredTheme || (darkQuery.matches ? 'dark' : 'light'))
+      })()
+    </script>
+
+    <div class="layout-container">
+      <Header
+        title={SITE_TITLE}
+        pathname={pathname}
+        categories={navCategories}
+        client:load
+      />
+      <div class="layout-content">
+        <main>
+          <slot />
+        </main>
+        <footer></footer>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
+  .layout-container {
+    display: flex;
+    color: var(--textNormal);
+    background: var(--bg);
+    transition:
+      color 0.2s ease-out,
+      background 0.2s ease-out;
+  }
+  .layout-content {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 49rem;
+    padding: 0 var(--rhythm-three-quarter) var(--rhythm-1-5);
+  }
+  main {
+    position: relative;
+  }
+  @media screen and (max-width: 768px) {
+    .layout-container {
+      display: block;
+    }
+    .layout-content {
+      padding-top: 50px;
+    }
+  }
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .layout-content {
+      max-width: calc(100% - 228px);
+    }
+  }
+</style>
