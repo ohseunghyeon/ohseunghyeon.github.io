@@ -48,37 +48,37 @@ body:lang(ko) article {
   word-break: keep-all;
 }
 
-.gatsby-highlight {
+/* 코드 블록.
+ * 원본은 gatsby-remark-prismjs가 만든 .gatsby-highlight 래퍼 div에
+ * 스타일을 걸었다. Shiki는 래퍼 없이 <pre class="astro-code">만 내므로
+ * 같은 값을 pre에 직접 적용한다. 음수 마진으로 본문 폭을 넘어 붙는
+ * 모양을 유지한다. */
+pre.astro-code {
   margin-bottom: 1.75rem;
   margin-left: -1.0125rem;
   margin-right: -1.0125rem;
   border-radius: 10px;
+  // prism-okaidia 테마가 pre에 주던 값. gatsby-browser.js에서 그 CSS를
+  // import하고 있었으므로 함께 이식한다.
+  padding: 1em;
 }
 
 @media screen and (max-width: 768px) {
-  .gatsby-highlight pre {
-    border-radius: 0 !important;
+  pre.astro-code {
+    border-radius: 0;
   }
 }
 
-
-/* Inline code */
-:not(pre) > code[class*='language-'] {
+/* 인라인 코드.
+ * 원본 선택자는 :not(pre) > code[class*='language-'] 였다. Prism이
+ * 인라인 코드에도 language-* 클래스를 붙였기 때문이다. Shiki는 붙이지
+ * 않으므로 클래스 조건을 뺀다. */
+:not(pre) > code {
   border-radius: 0.3em;
   background: var(--inlineCode-bg);
   color: var(--inlineCode-text);
   padding: 0.15em 0.2em 0.05em;
   white-space: normal;
-}
-
-.gatsby-highlight-code-line {
-  background-color: #525445;
-  display: block;
-  margin-right: -1em;
-  margin-left: -1em;
-  padding-right: 1em;
-  padding-left: 0.75em;
-  border-left: 0.25em solid #f99;
 }
 
 blockquote {
