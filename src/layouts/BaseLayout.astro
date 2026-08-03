@@ -121,6 +121,13 @@ const navCategories = categoryPaths(grouped.keys()).map(slug => ({
         <footer></footer>
       </div>
     </div>
+
+    <script>
+      // gatsby-remark-images-medium-zoom 대체.
+      // 본문 이미지에만 적용한다 — 프로필 사진과 토글 아이콘은 제외.
+      import mediumZoom from 'medium-zoom'
+      mediumZoom('article section img', { background: 'var(--bg)' })
+    </script>
   </body>
 </html>
 
