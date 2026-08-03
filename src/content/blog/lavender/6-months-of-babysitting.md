@@ -49,4 +49,11 @@ category: lavender
 
 잘 크고 있어. 너무 이쁘게. 그래서 고맙다.
 
-`youtube:https://youtu.be/fcHfzN9XBHk`
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/fcHfzN9XBHk"
+    title="YouTube video player"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>

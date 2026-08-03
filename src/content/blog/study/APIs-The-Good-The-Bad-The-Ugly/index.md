@@ -5,7 +5,14 @@ description: "Techlahoma 200 OK 2019 행사에서 Michele Titolo의 발표"
 category: study
 ---
 
-`youtube:https://www.youtube.com/watch?v=t0nl5aUfAvY`
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/t0nl5aUfAvY"
+    title="YouTube video player"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
 
 APIs에 대하여 documentation, URLs, Payloads, Authentication, Authorization, Errors, Caching를 주제로 각각의 The good, The bad, The ugly 케이스를 얘기한다.
 

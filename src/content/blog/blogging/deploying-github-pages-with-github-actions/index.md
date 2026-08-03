@@ -31,7 +31,14 @@ category: blogging
 
 Github Actions는 2018년에 발표됐고, 현재는 beta 버전이다. 사용하기 위해서는 따로 [등록](https://github.com/features/actions)이 필요하며, 2019년 11월 13일부터 공개 버전으로 기본적인 기능으로 사용할 수 있다.
 
-`youtube:https://www.youtube.com/embed/E1OunoCyuhY`
+<div class="video-embed">
+  <iframe
+    src="https://www.youtube.com/embed/E1OunoCyuhY"
+    title="YouTube video player"
+    loading="lazy"
+    allowfullscreen
+  ></iframe>
+</div>
 
 Github Actions는 깃헙 저장소의 push, pull request 등 미리 정의된 이벤트에 의해 사용자가 원하는 행동을 취할 수 있다. 이미 존재하는 다른 CI/CD 도구들처럼 빌드, 테스트, 배포 등을 할 수 있다.
 

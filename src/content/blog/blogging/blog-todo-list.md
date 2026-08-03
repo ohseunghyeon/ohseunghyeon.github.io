@@ -13,7 +13,7 @@ category: blogging
 
 그래서 나는 고치고 싶은 부분들을 리스트로 정리해서 하나하나 하기로 했다.
 
-- [x] emoji 적용하기 :cat: - [gatsby-remark-emojis](https://www.gatsbyjs.org/packages/gatsby-remark-emojis/) 2019.9.3
+- [x] emoji 적용하기 🐱 - [gatsby-remark-emojis](https://www.gatsbyjs.org/packages/gatsby-remark-emojis/) 2019.9.3
 - [x] font 가독성 좋게 바꾸기
 - [x] now 연동해서 풀 리퀘스트 자동 배포하기
 - [x] [code block theme 설정](https://www.gatsbyjs.org/packages/gatsby-remark-prismjs/) - gatsby-browser.js - import "prismjs/themes/prism-tomorrow.css"
