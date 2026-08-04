@@ -35,6 +35,12 @@ export default defineConfig({
   // 글 URL이 /카테고리/슬러그/ 형태였다. 기존 URL을 그대로 유지한다.
   trailingSlash: 'always',
   build: { format: 'directory' },
+
+  // 반응형 이미지. 이걸 켜지 않으면 마크다운 이미지가 srcset 없이
+  // 원본 해상도 그대로 나간다 (3088px, 545KB). 구 사이트는
+  // gatsby-remark-images가 163~3088w의 srcset을 만들어 브라우저가
+  // 화면에 맞는 것을 골랐다.
+  image: { layout: 'constrained' },
   // sitemap은 src/pages/sitemap.xml.ts에서 직접 만든다 (경로 보존 이유는 그 파일 참조)
   integrations: [react()],
   markdown: {

@@ -48,6 +48,20 @@ body:lang(ko) article {
   word-break: keep-all;
 }
 
+/* 이미지 비율 유지.
+ *
+ * typography.css(굳힌 typography.js 출력)에는 img{max-width:100%}만 있고
+ * height:auto가 없다. Astro는 이미지에 width/height 속성을 실제 픽셀값으로
+ * 붙이므로(예: width="3088" height="2316"), 너비만 컨테이너에 맞춰 줄고
+ * 높이는 원본 픽셀값에 고정돼 세로로 늘어난다.
+ *
+ * Gatsby에서는 gatsby-remark-images가 이미지를 래퍼 span으로 감싸고
+ * padding-bottom 비율 트릭으로 크기를 잡았기 때문에 이 규칙이 없어도
+ * 문제가 없었다. 래퍼가 사라진 지금은 height:auto가 필요하다. */
+img {
+  height: auto;
+}
+
 /* 코드 블록.
  * 원본은 gatsby-remark-prismjs가 만든 .gatsby-highlight 래퍼 div에
  * 스타일을 걸었다. Shiki는 래퍼 없이 <pre class="astro-code">만 내므로

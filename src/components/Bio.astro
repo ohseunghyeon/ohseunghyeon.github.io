@@ -6,7 +6,20 @@ const AUTHOR = 'Oh SeungHyeon'
 const GITHUB = 'ohseunghyeon'
 ---
 <div class="bio">
-  <Image src={profilePic} alt={AUTHOR} width={50} height={50} class="bio-avatar" />
+  <!--
+    원본 profile-pic.png는 519x423이다. fit 없이 50x50을 요구하면 sharp가
+    두 축을 모두 맞추면서 이미지가 눌린다. Gatsby의 gatsby-image fixed는
+    cover로 잘라냈으므로 같은 동작을 지정한다.
+  -->
+  <Image
+    src={profilePic}
+    alt={AUTHOR}
+    width={50}
+    height={50}
+    fit="cover"
+    position="center"
+    class="bio-avatar"
+  />
   <p class="bio-text">
     <span>Code, Lazy, Cat.</span>
     <a href={`https://github.com/${GITHUB}`} target="_blank" rel="noopener noreferrer">
